@@ -15,7 +15,7 @@ id              | integer   | not null, primary key
 user_id         | integer   | not null, foreign key (references users), indexed
 listing_id      | integer   | not null, foreign key (references listings), indexed
 
-#listings
+## listings
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
@@ -29,7 +29,7 @@ bathrooms       | integer   | not null
 type            | string    | not null
 date_posted     | datetime  | not null, indexed
 
-# saved_searches
+## saved_searches
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
@@ -37,7 +37,7 @@ user_id         | integer   | not null, foreign key (references users), indexed
 search_id      | integer   | not null, foreign key (references searches), indexed
 
 
-#searches
+## searches
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
@@ -57,7 +57,7 @@ listing_age_max | integer   |
 requirements_id | integer   | not null, foreign key (references requirements), indexed
 sources_id      | integer   | not null, foreign key (references sources), indexed
 
-#requirements
+## requirements
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
@@ -69,7 +69,7 @@ dogs            | boolean   | not null
 no-fee          | boolean   | not null
 
 
-#sources
+## sources
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key

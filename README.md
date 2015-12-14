@@ -78,4 +78,4 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [phase-three]: ./docs/phases/phase3.md
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
-[phase-five]: ./docs/phases/phase6.md
+[phase-six]: ./docs/phases/phase6.md
