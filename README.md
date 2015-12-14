@@ -1,9 +1,8 @@
 # CribMapper
-CribMapper is a fullstack web application inspired by PadMapper http://example.com and implemented using Ruby on Rails and React.js
-
 #Heroku Link
 
 #Minimum Viable Product
+CribMapper is a fullstack web application inspired by <a href="http://padmapper.com">PadMapper</a> and implemented using Ruby on Rails and React.js
 
 #Wireframes
 
