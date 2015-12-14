@@ -74,7 +74,7 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 pad_lister      | boolean   | not null
-aparment_search | boolean   | not null
-airbnb          | boolean   | not null
+apartment_search | boolean   | not null
+air_bnb          | boolean   | not null
 for_rent        | boolean   | not null
 others          | boolean   | not null

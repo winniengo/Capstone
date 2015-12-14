@@ -1,4 +1,4 @@
-# Phase 1: User Authentication, Note Model and JSON API
+# Phase 1: Setting Up User Authentication, and GoogleMap API (1 day)
 
 ## Rails
 ### Models

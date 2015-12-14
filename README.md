@@ -30,9 +30,8 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 ##Implementation Timeline
 
 ### Phase 1: Setting Up User Authentication, and GoogleMap API (1 day)
-
+- Setup and render Google Maps as root homepage
 - Implement user signup and authentication (using BCrypt)
-- Setup and render Google Map to homepage
 
 [Details][phase-one]
 
@@ -59,14 +58,15 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [Details][phase-four]
 
 ### Phase 5: Search Mailer and Show Nearby (1.5 day)
-- Allow users to save search criteria and mail future results
+- Allow users to save search criteria and receive emails containing future matches
 - Allow users to show nearby restaurants, bars, shops, etc. on map
 
 [Details][phase-five]
 
-### Phase 6: Beautifying and Garbage Collection
+### Phase 6: Beautifying and Garbage Collection (2 days)
 - Beautify application
 - Multiple sessions
+- Debug
 
 [Details][phase-six]
 

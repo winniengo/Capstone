@@ -1,4 +1,4 @@
-# Phase 4: Allow Complex Styling in Notes (1 day)
+# Phase 6: Beautifying and Garbage Collection 
 
 ## Rails
 ### Models
@@ -14,5 +14,6 @@
 
 ### Actions
 
+### ApiUtil
+
 ## Gems/Libraries
-* react-quill (npm)

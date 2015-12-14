@@ -1,44 +1,34 @@
-# Phase 3: Notebooks and Tags (2 days)
+# Phase 2: Phase 3: Flux Architecture and Listing CRUD
 
 ## Rails
 ### Models
-* Notebook
-* Tag
-* Tagging
 
 ### Controllers
-* Api::NotebooksController (create, destroy, index, show, update)
 
 ### Views
-* notebooks/index.json.jbuilder
-* notebooks/show.json.jbuilder
-* tags/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NotebooksIndex
-  - NotebookIndexItem
-* NotebookForm
-* SearchIndex
+* ListingIndex
+* ListingIndexItem
+* ListingShow
 
 ### Stores
-* Notebook
+* Listing
 
 ### Actions
-* ApiActions.receiveAllNotebooks -> triggered by ApiUtil
-* ApiActions.receiveSingleNotebook
-* ApiActions.deleteNotebook
-* NotebookActions.fetchAllNotebooks -> triggers ApiUtil
-* NotebookActions.fetchSingleNotebook
-* NotebookActions.createNotebook
-* NotebookActions.editNotebook
-* NotebookActions.destroyNotebook
+* ApiActions.receiveMatchingListings
+* ApiActions.receiveSingleListing
+* ListingActions.fetchAllListing
+* ListingActions.fetchSingListing
+* ListingActions.destroyListing
 
 ### ApiUtil
-* ApiUtil.fetchAllNotebooks
-* ApiUtil.fetchSingleNotebook
-* ApiUtil.createNotebook
-* ApiUtil.editNotebook
-* ApiUtil.destroyNotebook
+* ApiActions.receiveMatchingListings
+* ApiActions.receiveSingleListing
+* NoteActions.fetchAllListing
+* NoteActions.fetchSingListing
+* NoteActions.destroyListing
 
 ## Gems/Libraries
+* Flux Dispatcher (npm)
