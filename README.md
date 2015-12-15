@@ -33,22 +33,20 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 - Setup and render Google Maps as root homepage
 - Implement user signup and authentication (using BCrypt)
 
-[Details][phase-one]
+<!-- [Details][phase-one] -->
 
 ### Phase 2: JSON API and Seeding (1.5 days)
-- Aggregate data from source sites and populate listings onto map
 - Seed database with selected listings for testing
 - Setup a full JSON API for listings
 
-
-[Details][phase-two]
+<!-- [Details][phase-two] -->
 
 ### Phase 3: Flux Architecture and Listing CRUD (2 days)
 - Setup Flux, the React Router and the React view structure for the main application
 - Implement Listing store and corresponding CRUD actions
 - Create views for Listing 'Index' and 'IndexItem'
 
-[Details][phase-three]
+<!-- [Details][phase-three] -->
 
 ### Phase 4: Listings and Searches (1.5 days)
 - Begin styling for Listing views
@@ -58,20 +56,20 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [Details][phase-four]
 
 ### Phase 5: Search Mailer and Show Nearby (1.5 day)
-- Allow users to save search criteria and receive emails containing future matches
 - Allow users to show nearby restaurants, bars, shops, etc. on map
+- Multiple sessions
 
 [Details][phase-five]
 
 ### Phase 6: Beautifying and Garbage Collection (2 days)
 - Beautify application
-- Multiple sessions
 - Debug
 
 [Details][phase-six]
 
 ### Bonus Features (TBD)
-
+- Aggregate data from source sites and populate listings onto map
+- Allow users to save search criteria and receive emails containing future matches
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

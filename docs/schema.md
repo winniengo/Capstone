@@ -26,8 +26,18 @@ link            | string    | not null
 rent            | float     | not null
 bedrooms        | integer   | not null
 bathrooms       | integer   | not null
+description     | string    | not null
 type            | string    | not null
 date_posted     | datetime  | not null, indexed
+available       | boolean   | not null
+
+## images
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+source_url      | string    | not null,
+listing_id      | integer   | not null, foreign key (references listings), indexed
+
 
 ## saved_searches
 column name     | data type | details
