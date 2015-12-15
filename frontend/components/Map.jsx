@@ -21,6 +21,14 @@ var Map = React.createClass({
         };
 
     this.map = new google.maps.Map(map, options);
+
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': 'US'}, function(results, status) {
+      // var northEast = results[0].geometry.viewport.getNorthEast();
+      // var southWest = results[0].geometry.viewport.getSouthWest();
+
+      this.map.fitBounds(results[0].geometry.viewport);
+    }.bind(this));
   },
 
   render: function() {
