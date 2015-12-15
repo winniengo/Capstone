@@ -24,7 +24,9 @@
 
 ## Gems/Libraries
 * [bcrypt-ruby][bcrypt]
+* [React][react]
 * [Google Maps JavaScript API][googleMaps]
 
 [bcrypt]: https://github.com/codahale/bcrypt-ruby
+[react]: https://facebook.github.io/react/
 [googleMaps]: https://developers.google.com/maps/documentation/javascript/

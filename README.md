@@ -36,10 +36,10 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [Details][phase-one]
 
 ### Phase 2: JSON API and Seeding (1.5 days)
-- Seed database with selected listings for testing
+- Seed database with listings for testing
 - Setup a full JSON API for listings
 
-<!-- [Details][phase-two] -->
+[Details][phase-two]
 
 ### Phase 3: Flux Architecture and Listing CRUD (2 days)
 - Setup Flux, the React Router and the React view structure for the main application
