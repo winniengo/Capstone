@@ -16,7 +16,6 @@
 ### ApiUtil
 
 ## Gems/Libraries
-PadLister
-ApartmentSearch
-AirBnb
-ForRent
+* [Faker][faker]
+
+[faker]: https://github.com/stympy/faker
