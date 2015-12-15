@@ -20,4 +20,4 @@
 * [Faker][faker]
 
 [faker]: https://github.com/stympy/faker
-[bootstrap]: http://v4-alpha.getbootstrap.com/
+[bootstrap]: http://v4-alpha.getbootstrap.com/getting-started/introduction/

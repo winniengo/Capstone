@@ -53,19 +53,19 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 - Allow users to input search filters and view results
 - Allow users to save and view favorite listings
 
-[Details][phase-four]
+<!-- [Details][phase-four] -->
 
 ### Phase 5: Search Mailer and Show Nearby (1.5 day)
 - Allow users to show nearby restaurants, bars, shops, etc. on map
 - Multiple sessions
 
-[Details][phase-five]
+<!-- [Details][phase-five] -->
 
 ### Phase 6: Beautifying and Garbage Collection (2 days)
 - Beautify application
 - Debug
 
-[Details][phase-six]
+<!-- [Details][phase-six] -->
 
 ### Bonus Features (TBD)
 - Aggregate data from source sites and populate listings onto map
