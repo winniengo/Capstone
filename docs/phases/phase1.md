@@ -17,6 +17,8 @@
 
 ## Flux
 ### Views (React Components)
+App
+Map
 
 ### Stores
 

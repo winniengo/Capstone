@@ -1,20 +1,19 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router').Router;
-var Route = require('react-router').Route;
-var IndexRoute = ReactRouter.IndexRoute;
+var React = require('react'),
+    ReactDOM = require('react-dom'),
+    ReactRouter = require('react-router'),
+    Router = ReactRouter.Router,
+    Route = ReactRouter.Route,
+    IndexRoute = ReactRouter.IndexRoute;
 
-var routes;
+var App = require('./components/App');
 
-var MyComponent = React.createClass({
-  render: function () {
-    return(
-      <div>Hello World</div>
-    );
-  }
-});
+var routes = (
+  <Route path="/" component={App}>
+
+  </Route>
+);
 
 document.addEventListener("DOMContentLoaded", function () {
   var content = document.querySelector('#content');
-  ReactDOM.render(<MyComponent/>, content);
+  ReactDOM.render(<Router>{routes}</Router>, content);
 });
