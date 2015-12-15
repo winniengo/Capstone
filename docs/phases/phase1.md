@@ -7,11 +7,13 @@
 ### Controllers
 * UsersController (create, new)
 * SessionsController (create, new, destroy)
+* StaticPagesController (root)
 
 ### Views
 * users/new.html.erb
 * user/show.html.erb
 * session/new.html.erb
+* static_pages/root.html.erb
 
 ## Flux
 ### Views (React Components)
