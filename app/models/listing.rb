@@ -5,6 +5,8 @@ class Listing < ActiveRecord::Base
   validates :lat, :lng, :rent, :bathrooms, numericality: true
   validates :bedrooms, numericality: { only_integer: true }
 
+  validates :type, inclusion: { in: ['lease', 'sublet'] }
+
   validates :lat, uniqueness: { scope: :lng }
   validates :address, :placeId, uniqueness: true
 end

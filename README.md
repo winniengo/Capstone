@@ -71,6 +71,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 ### Bonus Features (TBD)
 - Aggregate data from source sites and populate listings onto map
 - Allow users to save search criteria and receive emails containing future matches
+- Sublets
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

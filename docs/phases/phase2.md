@@ -3,6 +3,7 @@
 ### Models
 
 ### Controllers
+* Api::ListingsController (create, index, show)
 
 ### Views
 
@@ -16,7 +17,7 @@
 ### ApiUtil
 
 ## Gems/Libraries
-* [Bootstrap][bookstrap]
+* [Bootstrap][bootstrap]
 * [Faker][faker]
 
 [faker]: https://github.com/stympy/faker

@@ -8,7 +8,7 @@
 * UsersController (create, new)
 * SessionsController (create, new, destroy)
 * StaticPagesController (root)
-* Api::ListingsController (create, destroy, index, show, update)
+* Api::ListingsController (create, index, show)
 
 ### Views
 * users/new.html.erb
