@@ -5,6 +5,7 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 email           | string    | not null, indexed, unique
+name            | string    | not null
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 
@@ -29,7 +30,6 @@ bathrooms       | float     | not null
 description     | string    | not null
 type            | string    | not null
 date_posted     | datetime  | not null, indexed
-<!-- TODO available       | boolean   | not null -->
 
 ## images
 column name     | data type | details
