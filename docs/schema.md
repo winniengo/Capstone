@@ -28,8 +28,8 @@ rent            | float     | not null
 bedrooms        | integer   | not null
 bathrooms       | float     | not null
 description     | string    | not null
-type            | string    | not null
-date_posted     | datetime  | not null, indexed
+listing_type    | string    | not null
+date_posted     | date  | not null, indexed
 
 ## images
 column name     | data type | details

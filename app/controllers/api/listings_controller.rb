@@ -1,5 +1,6 @@
 class Api::ListingsController < ApplicationController
   def create
+    debugger
     listing = Listing.create!(listing_params)
     render json: listing
   end
@@ -20,7 +21,7 @@ class Api::ListingsController < ApplicationController
       :bedrooms,
       :bathrooms,
       :description,
-      :type,
+      :listing_type,
       :date_posted
     )
   end

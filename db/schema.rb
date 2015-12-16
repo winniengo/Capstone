@@ -11,24 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216005317) do
+ActiveRecord::Schema.define(version: 20151216182123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "listings", force: :cascade do |t|
-    t.string   "address",     null: false
-    t.float    "lat",         null: false
-    t.float    "lng",         null: false
-    t.string   "placeId",     null: false
-    t.float    "rent",        null: false
-    t.integer  "bedrooms",    null: false
-    t.float    "bathrooms",   null: false
-    t.string   "description", null: false
-    t.string   "type",        null: false
-    t.datetime "date_posted", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "address",      null: false
+    t.float    "lat",          null: false
+    t.float    "lng",          null: false
+    t.string   "placeId",      null: false
+    t.float    "rent",         null: false
+    t.integer  "bedrooms",     null: false
+    t.float    "bathrooms",    null: false
+    t.string   "description",  null: false
+    t.string   "listing_type", null: false
+    t.date     "date_posted",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "listings", ["address"], name: "index_listings_on_address", unique: true, using: :btree
