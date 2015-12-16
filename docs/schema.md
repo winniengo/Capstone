@@ -29,7 +29,7 @@ bedrooms        | integer   | not null
 bathrooms       | float     | not null
 description     | string    | not null
 listing_type    | string    | not null
-date_posted     | date  | not null, indexed
+date_posted     | date      | not null, indexed
 
 ## images
 column name     | data type | details

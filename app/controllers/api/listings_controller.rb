@@ -1,12 +1,15 @@
 class Api::ListingsController < ApplicationController
   def create
-    debugger
     listing = Listing.create!(listing_params)
     render json: listing
   end
 
   def index
     @listings = Listing.all
+  end
+
+  def show
+    @listing = Listing.find(params[:id])
   end
 
   private
