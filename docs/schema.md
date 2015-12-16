@@ -19,17 +19,17 @@ listing_id      | integer   | not null, foreign key (references listings), index
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-lng             | float     | not null
+address         | string    | not null,
 lat             | float     | not null
-source          | string    | not null
-link            | string    | not null
+lng             | float     | not null
+placeId         | string    | not null
 rent            | float     | not null
 bedrooms        | integer   | not null
-bathrooms       | integer   | not null
+bathrooms       | float     | not null
 description     | string    | not null
 type            | string    | not null
 date_posted     | datetime  | not null, indexed
-available       | boolean   | not null
+<!-- TODO available       | boolean   | not null -->
 
 ## images
 column name     | data type | details

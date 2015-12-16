@@ -1,4 +1,4 @@
-# Phase 1: Setting Up User Authentication, and GoogleMap API (1 day)
+# Phase 1: User Authentication, Listing Model, JSON API, GoogleMaps API  (1 day)
 
 ## Rails
 ### Models
@@ -8,12 +8,15 @@
 * UsersController (create, new)
 * SessionsController (create, new, destroy)
 * StaticPagesController (root)
+* Api::ListingsController (create, destroy, index, show, update)
 
 ### Views
 * users/new.html.erb
 * user/show.html.erb
 * session/new.html.erb
 * static_pages/root.html.erb
+* listings/index.json.jbuilder
+* listings/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
