@@ -54,10 +54,10 @@
 	var App = __webpack_require__(208);
 	
 	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(231);
+	    Util = __webpack_require__(231);
 	
 	window.ListingStore = ListingStore;
-	window.ApiUtil = ApiUtil;
+	window.Util = Util;
 	
 	var routes = React.createElement(Route, { path: '/', component: App });
 	
@@ -30921,7 +30921,7 @@
 
 	var ApiActions = __webpack_require__(232);
 	
-	var ApiUtil = {
+	var Util = {
 	  fetchListings: function () {
 	    $.get('api/listings', {}, function (listings) {
 	      ApiActions.receiveAllListings(listings);
@@ -30929,7 +30929,7 @@
 	  }
 	};
 	
-	module.exports = ApiUtil;
+	module.exports = Util;
 
 /***/ },
 /* 232 */

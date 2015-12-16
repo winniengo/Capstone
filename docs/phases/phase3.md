@@ -15,7 +15,6 @@
 * ListingShow
 
 ### Stores
-* Listing
 
 ### Actions
 * ApiActions.receiveMatchingListings
@@ -24,8 +23,8 @@
 * ListingActions.fetchSingListing
 * ListingActions.destroyListing
 
-### ApiUtil
-* ApiActions.receiveMatchingListings
+### Util
+
 * ApiActions.receiveSingleListing
 * NoteActions.fetchAllListing
 * NoteActions.fetchSingListing

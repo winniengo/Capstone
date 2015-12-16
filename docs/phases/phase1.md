@@ -25,7 +25,7 @@
 
 ### Actions
 
-### ApiUtil
+### Util
 
 ## Gems/Libraries
 * [bcrypt-ruby][bcrypt] (gem)

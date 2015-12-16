@@ -19,9 +19,9 @@ UserMailer
 * EmailActions.createEmail
 * EmailActions.destroyEmail
 
-### ApiUtil
-* ApiUtil.createEmail
-* ApiUtil.destroyEmail
+### Util
+* Util.createEmail
+* Util.destroyEmail
 
 ## Gems/Libraries
 Action Mailer

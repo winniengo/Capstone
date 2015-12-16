@@ -12,10 +12,13 @@
 * Map
 
 ### Stores
+* Listing
 
 ### Actions
+* ApiActions.receiveAllListings
 
-### ApiUtil
+### Util
+* ApiUtil.fetchListings
 
 ## Gems/Libraries
 * [Faker][faker]

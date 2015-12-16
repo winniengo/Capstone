@@ -24,10 +24,10 @@
 * SearchActions.editSearch
 * SearchActions.destroySearch
 
-### ApiUtil
-* ApiUtil.fetchSingleSearch
-* ApiUtil.createSearch
-* ApiUtil.editSearch
-* ApiUtil.destroySearch
+### Util
+* Util.fetchSingleSearch
+* Util.createSearch
+* Util.editSearch
+* Util.destroySearch
 
 ## Gems/Libraries

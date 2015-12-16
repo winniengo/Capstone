@@ -1,6 +1,6 @@
 var ApiActions = require('../actions/api_actions');
 
-var ApiUtil = {
+var Util = {
   fetchListings: function() {
     $.get('api/listings', {}, function(listings) {
       ApiActions.receiveAllListings(listings);
@@ -8,4 +8,4 @@ var ApiUtil = {
   },
 };
 
-module.exports = ApiUtil;
+module.exports = Util;

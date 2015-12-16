@@ -14,6 +14,6 @@
 
 ### Actions
 
-### ApiUtil
+### Util
 
 ## Gems/Libraries
