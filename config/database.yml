@@ -78,8 +78,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: CribMapper_production
-  username: CribMapper
-  password: <%= ENV['CRIBMAPPER_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: CribMapper_production
+#   username: CribMapper
+#   password: <%= ENV['CRIBMAPPER_DATABASE_PASSWORD'] %>
