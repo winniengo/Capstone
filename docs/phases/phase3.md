@@ -4,6 +4,7 @@
 ### Models
 
 ### Controllers
+* Api::ListingsController (destroy, update)
 
 ### Views
 
@@ -31,4 +32,3 @@
 * NoteActions.destroyListing
 
 ## Gems/Libraries
-* Flux Dispatcher (npm)

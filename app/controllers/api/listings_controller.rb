@@ -4,6 +4,10 @@ class Api::ListingsController < ApplicationController
     render json: listing
   end
 
+  def index
+    @listings = Listing.all
+  end
+
   private
 
   def listing_params

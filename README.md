@@ -29,25 +29,27 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 
 ##Implementation Timeline
 
-###Phase 1: User Authentication, Listing Model, JSON API, GoogleMaps API (1.5 days)
+###Phase 1: User Authentication, Listing Model, JSON API, GoogleMaps API  (1 day)
 
 - Implement user signup and authentication (using bcrypt)
 - Setup and render Google Maps as root homepage
-- Setup a full JSON API for Listings
+- Create a JSON API (create, index, show) for Listings
 
 [Details][phase-one]
 
-### Phase 2: Seeding and Bootstrap (1 day)
+### Phase 2: Seeding, Bootstrap, and Flux Architecture (1 day)
+- Setup Flux, the React Router and the React view structure for the main application
 - Seed database with listings for testing
+- Boootstrap project
 
 [Details][phase-two]
 
-### Phase 3: Flux Architecture and Listing CRUD (2 days)
-- Setup Flux, the React Router and the React view structure for the main application
+### Phase 3: Listing CRUD and JSON API (2 days)
 - Implement Listing store and corresponding CRUD actions
 - Create views for Listing 'Index' and 'IndexItem'
+- Complete JSON API (delete, update) for Listings
 
-<!-- [Details][phase-three] -->
+[Details][phase-three]
 
 ### Phase 4: Listings and Searches (1.5 days)
 - Begin styling for Listing views

@@ -20,8 +20,6 @@
 
 ## Flux
 ### Views (React Components)
-App
-Map
 
 ### Stores
 
@@ -32,10 +30,8 @@ Map
 ## Gems/Libraries
 * [bcrypt-ruby][bcrypt] (gem)
 * [React][react] (npm)
-* [Flux Dispatcher][dispatcher] (npm)
 * [Google Maps JavaScript API][googleMaps] (api)
 
 [bcrypt]: https://github.com/codahale/bcrypt-ruby
 [react]: https://facebook.github.io/react/
-[dispatcher]: https://facebook.github.io/flux/docs/dispatcher.html
 [googleMaps]: https://developers.google.com/maps/documentation/javascript/
