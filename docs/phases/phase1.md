@@ -1,4 +1,4 @@
-# Phase 1: User Authentication, Listing Model, JSON API, GoogleMaps API  (1 day)
+# Phase 1: User Authentication, JSON API, GoogleMaps API  (1 day)
 
 ## Rails
 ### Models

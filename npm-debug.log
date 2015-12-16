@@ -48,8 +48,8 @@
 34 verbose already installed skipping react-dom@^0.14.2 /Users/winniengo/Desktop/CribMapper
 35 verbose already installed skipping react-router@^1.0.0-rc4 /Users/winniengo/Desktop/CribMapper
 36 verbose already installed skipping babel-core@^6.2.0 /Users/winniengo/Desktop/CribMapper
-37 verbose already installed skipping babel-preset-react@^6.1.18 /Users/winniengo/Desktop/CribMapper
-38 verbose already installed skipping babel-loader@^6.2.0 /Users/winniengo/Desktop/CribMapper
+37 verbose already installed skipping babel-loader@^6.2.0 /Users/winniengo/Desktop/CribMapper
+38 verbose already installed skipping babel-preset-react@^6.1.18 /Users/winniengo/Desktop/CribMapper
 39 verbose already installed skipping webpack@^1.12.2 /Users/winniengo/Desktop/CribMapper
 40 verbose already installed skipping flux@^2.1.1 /Users/winniengo/Desktop/CribMapper
 41 verbose already installed skipping history@^1.13.0 /Users/winniengo/Desktop/CribMapper

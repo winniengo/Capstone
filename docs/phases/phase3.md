@@ -1,4 +1,4 @@
-# Phase 2: Phase 3: Flux Architecture and Listing CRUD
+# Phase 3: Listing CRUD and JSON API (2 days)
 
 ## Rails
 ### Models

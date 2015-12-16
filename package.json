@@ -21,13 +21,6 @@
     "url": "https://github.com/winniengo/CribMapper/issues"
   },
   "homepage": "https://github.com/winniengo/CribMapper#readme",
-  "engines": {
-    "node": "4.1.1",
-    "npm": "2.1.x"
-  },
-  "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
-  },
   "devDependencies": {
   },
   "dependencies": {
@@ -42,5 +35,12 @@
     "react-addons-linked-state-mixin": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-router": "^1.0.0-rc4"
+  },
+  "engines": {
+    "node": "4.1.1",
+    "npm": "2.1.x"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/.bin/webpack"
   }
 }
