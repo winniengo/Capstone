@@ -8,10 +8,10 @@ var React = require('react'),
 var App = require('./components/App');
 
 var ListingStore = require('./stores/listing'),
-    Util = require('./util/api_util');
+    ApiUtil = require('./util/api_util');
 
 window.ListingStore = ListingStore;
-window.Util = Util;
+window.ApiUtil = ApiUtil;
 
 var routes = (
   <Route path="/" component={App}>

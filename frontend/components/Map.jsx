@@ -3,6 +3,9 @@
 var React = require('react'),
     ReactDOM = require('react-dom');
 
+var ListingStore = require('../stores/listing'),
+    ApiUtil = require('../util/api_util');
+
 var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 
 function _getCoordsObj(latLng) {
@@ -30,6 +33,36 @@ var Map = React.createClass({
     //
     //   this.map.fitBounds(results[0].geometry.viewport);
     // }.bind(this));
+
+    this.listingListener = ListingStore.addListener(this._onChange);
+    this.listenForMove();
+  },
+
+  componentWillUnmount: function() {
+    this.listingListener.remove();
+  },
+
+  _onChange: function() {
+    var listings = ListingStore.all();
+    listings.forEach(this.addMarker);
+  },
+
+  addMarker: function(listing) {
+    var position = new google.maps.LatLng(listing.lat, listing.lng);
+    var marker = new google.maps.Marker({
+        position: position,
+        map: this.map,
+        animation: google.maps.Animation.DROP
+      });
+
+    // marker.setListener('click', ) TODO
+  },
+
+
+  listenForMove: function() {
+    google.maps.event.addListener(this.map, 'idle', function() {
+      ApiUtil.fetchListings();
+    });
   },
 
   render: function() {

@@ -1,12 +1,12 @@
 winnie = User.create({
-    email: 'winnengo@gmail.com',
+    email: 'winniengo@gmail.com',
     name: 'Winnie',
     password: 'password'
   })
 
-sklyer = User.create({
-    email: 'sklyercummins@gmail.com',
-    name: 'Sklyer',
+skyler = User.create({
+    email: 'skylercummins@gmail.com',
+    name: 'Skyler',
     password: 'password'
   })
 

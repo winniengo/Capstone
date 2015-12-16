@@ -54,10 +54,10 @@
 	var App = __webpack_require__(208);
 	
 	var ListingStore = __webpack_require__(210),
-	    Util = __webpack_require__(231);
+	    ApiUtil = __webpack_require__(231);
 	
 	window.ListingStore = ListingStore;
-	window.Util = Util;
+	window.ApiUtil = ApiUtil;
 	
 	var routes = React.createElement(Route, { path: '/', component: App });
 	
@@ -24108,7 +24108,8 @@
 
 	var React = __webpack_require__(1);
 	
-	var Map = __webpack_require__(209);
+	var Map = __webpack_require__(209),
+	    Index = __webpack_require__(234);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -24116,7 +24117,7 @@
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'app' },
 	      React.createElement(
 	        'header',
 	        null,
@@ -24127,6 +24128,7 @@
 	        )
 	      ),
 	      React.createElement(Map, null),
+	      React.createElement(Index, null),
 	      this.props.children
 	    );
 	  }
@@ -24142,6 +24144,9 @@
 	
 	var React = __webpack_require__(1),
 	    ReactDOM = __webpack_require__(158);
+	
+	var ListingStore = __webpack_require__(210),
+	    ApiUtil = __webpack_require__(231);
 	
 	var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 	
@@ -24172,6 +24177,35 @@
 	    //
 	    //   this.map.fitBounds(results[0].geometry.viewport);
 	    // }.bind(this));
+	
+	    this.listingListener = ListingStore.addListener(this._onChange);
+	    this.listenForMove();
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listingListener.remove();
+	  },
+	
+	  _onChange: function () {
+	    var listings = ListingStore.all();
+	    listings.forEach(this.addMarker);
+	  },
+	
+	  addMarker: function (listing) {
+	    var position = new google.maps.LatLng(listing.lat, listing.lng);
+	    var marker = new google.maps.Marker({
+	      position: position,
+	      map: this.map,
+	      animation: google.maps.Animation.DROP
+	    });
+	
+	    // marker.setListener('click', ) TODO
+	  },
+	
+	  listenForMove: function () {
+	    google.maps.event.addListener(this.map, 'idle', function () {
+	      ApiUtil.fetchListings();
+	    });
 	  },
 	
 	  render: function () {
@@ -30921,7 +30955,7 @@
 
 	var ApiActions = __webpack_require__(232);
 	
-	var Util = {
+	var ApiUtil = {
 	  fetchListings: function () {
 	    $.get('api/listings', {}, function (listings) {
 	      ApiActions.receiveAllListings(listings);
@@ -30929,7 +30963,7 @@
 	  }
 	};
 	
-	module.exports = Util;
+	module.exports = ApiUtil;
 
 /***/ },
 /* 232 */
@@ -30958,6 +30992,59 @@
 	};
 	
 	module.exports = ListingConstants;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ListingStore = __webpack_require__(210);
+	
+	var Index = React.createClass({
+	  displayName: 'Index',
+	
+	  getInitialState: function () {
+	    return {
+	      listings: ListingStore.all()
+	    };
+	  },
+	
+	  componentDidMount: function () {
+	    this.listingListener = ListingStore.addListener(this._onChange);
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listingListener.remove();
+	  },
+	
+	  _onChange: function () {
+	    this.setState({ listings: ListingStore.all() });
+	  },
+	
+	  handleItemClick: function (listing) {
+	    // this.props.history.pushState(null, "listings/" + listing.id);
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.state.listings.map(function (listing, i) {
+	          return React.createElement(
+	            'div',
+	            { key: i },
+	            listing.description
+	          );
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Index;
 
 /***/ }
 /******/ ]);
