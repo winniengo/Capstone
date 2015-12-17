@@ -3,9 +3,10 @@
   <%= button_to "Sign Out", session_url, method: :delete %>
 <% else %>
   <nav class="navbar navbar-default">
-   <ul class="nav navbar-nav">
-     <li><%= link_to "Sign In", new_session_url %></li>
-     <li><%= link_to "Register", new_user_url %></li>
-  </ul>
+    <ul class="nav navbar-nav">
+      <li><%= link_to "Home", root_url %></li>
+      <li><%= link_to "Sign In", new_session_url %></li>
+      <li><%= link_to "Register", new_user_url %></li>
+    </ul>
   </nav>
 <% end %>
