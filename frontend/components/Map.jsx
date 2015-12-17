@@ -4,7 +4,8 @@ var React = require('react'),
     ReactDOM = require('react-dom');
 
 var ListingStore = require('../stores/listing'),
-    ApiUtil = require('../util/api_util');
+    ApiUtil = require('../util/api_util'),
+    FilterActions = require('../actions/filter_actions');
 
 var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 
@@ -61,8 +62,17 @@ var Map = React.createClass({
 
   listenForMove: function() {
     google.maps.event.addListener(this.map, 'idle', function() {
+      var mapBounds = this.map.getBounds();
+      var northEast = _getCoordsObj(mapBounds.getNorthEast());
+      var southWest = _getCoordsObj(mapBounds.getSouthWest());
+
+      var bounds = {
+        northEast: northEast,
+        southWest: southWest
+      };
+      FilterActions.updateBounds(bounds);
       ApiUtil.fetchListings();
-    });
+    }.bind(this));
   },
 
   render: function() {

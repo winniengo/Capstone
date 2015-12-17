@@ -24146,7 +24146,8 @@
 	    ReactDOM = __webpack_require__(158);
 	
 	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(231);
+	    ApiUtil = __webpack_require__(231),
+	    FilterActions = __webpack_require__(238);
 	
 	var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 	
@@ -24203,9 +24204,18 @@
 	  },
 	
 	  listenForMove: function () {
-	    google.maps.event.addListener(this.map, 'idle', function () {
+	    google.maps.event.addListener(this.map, 'idle', (function () {
+	      var mapBounds = this.map.getBounds();
+	      var northEast = _getCoordsObj(mapBounds.getNorthEast());
+	      var southWest = _getCoordsObj(mapBounds.getSouthWest());
+	
+	      var bounds = {
+	        northEast: northEast,
+	        southWest: southWest
+	      };
+	      FilterActions.updateBounds(bounds);
 	      ApiUtil.fetchListings();
-	    });
+	    }).bind(this));
 	  },
 	
 	  render: function () {
@@ -30953,11 +30963,13 @@
 /* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ApiActions = __webpack_require__(232);
+	var ApiActions = __webpack_require__(232),
+	    FilterParamsStore = __webpack_require__(235);
 	
 	var ApiUtil = {
 	  fetchListings: function () {
-	    $.get('api/listings', {}, function (listings) {
+	    var params = FilterParamsStore.all();
+	    $.get('api/listings', params, function (listings) {
 	      ApiActions.receiveAllListings(listings);
 	    });
 	  }
@@ -31045,6 +31057,65 @@
 	});
 	
 	module.exports = Index;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(211).Store,
+	    AppDispatcher = __webpack_require__(228),
+	    FilterConstants = __webpack_require__(236);
+	
+	var FilterParamsStore = new Store(AppDispatcher);
+	var _params = { bounds: {} };
+	
+	FilterParamsStore.all = function () {
+	  return Object.assign({}, _params);
+	};
+	
+	var updateBoundFilter = function (bounds) {
+	  _params.bounds = bounds;
+	};
+	
+	FilterParamsStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case FilterConstants.BOUND_PARAMS_RECEIVED:
+	      updateBoundFilter(payload.bounds);
+	      FilterParamsStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = FilterParamsStore;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports) {
+
+	var FilterConstants = {
+	  BOUND_PARAMS_RECEIVED: "BOUND_PARAMS_RECEIVED"
+	};
+	
+	module.exports = FilterConstants;
+
+/***/ },
+/* 237 */,
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AppDispatcher = __webpack_require__(228),
+	    FilterConstants = __webpack_require__(236);
+	
+	var FilterActions = {
+	  updateBounds: function (bounds) {
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.BOUND_PARAMS_RECEIVED,
+	      bounds: bounds
+	    });
+	  }
+	};
+	
+	module.exports = FilterActions;
 
 /***/ }
 /******/ ]);
