@@ -42,6 +42,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 - Seed database with listings for testing
 - Setup Boootstrap
 - Implement Listing store and corresponding CRUD actions
+- Create FilterParams store and apply filters to Google Maps
 
 [Details][phase-two]
 

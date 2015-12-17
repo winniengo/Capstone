@@ -70,6 +70,7 @@ var Map = React.createClass({
         northEast: northEast,
         southWest: southWest
       };
+      
       FilterActions.updateBounds(bounds);
       ApiUtil.fetchListings();
     }.bind(this));

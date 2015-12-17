@@ -24213,6 +24213,7 @@
 	        northEast: northEast,
 	        southWest: southWest
 	      };
+	
 	      FilterActions.updateBounds(bounds);
 	      ApiUtil.fetchListings();
 	    }).bind(this));

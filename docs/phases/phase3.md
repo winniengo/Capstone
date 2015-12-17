@@ -10,7 +10,6 @@
 
 ## Flux
 ### Views (React Components)
-* ListingIndex
 * ListingIndexItem
 * ListingShow
 
