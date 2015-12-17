@@ -54,7 +54,7 @@
 	var App = __webpack_require__(208);
 	
 	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(231);
+	    ApiUtil = __webpack_require__(232);
 	
 	window.ListingStore = ListingStore;
 	window.ApiUtil = ApiUtil;
@@ -24109,7 +24109,7 @@
 	var React = __webpack_require__(1);
 	
 	var Map = __webpack_require__(209),
-	    Index = __webpack_require__(234);
+	    Index = __webpack_require__(237);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -24146,8 +24146,8 @@
 	    ReactDOM = __webpack_require__(158);
 	
 	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(231),
-	    FilterActions = __webpack_require__(238);
+	    ApiUtil = __webpack_require__(232),
+	    FilterActions = __webpack_require__(236);
 	
 	var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 	
@@ -24271,7 +24271,7 @@
 
 	var Store = __webpack_require__(211).Store,
 	    AppDispatcher = __webpack_require__(228),
-	    ListingConstants = __webpack_require__(233);
+	    ListingConstants = __webpack_require__(231);
 	
 	var ListingStore = new Store(AppDispatcher),
 	    _listings = [];
@@ -31001,10 +31001,20 @@
 
 /***/ },
 /* 231 */
+/***/ function(module, exports) {
+
+	var ListingConstants = {
+	  LISTINGS_RECEIVED: "LISTINGS_RECEIVED"
+	};
+	
+	module.exports = ListingConstants;
+
+/***/ },
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ApiActions = __webpack_require__(232),
-	    FilterParamsStore = __webpack_require__(235);
+	var ApiActions = __webpack_require__(233),
+	    FilterParamsStore = __webpack_require__(234);
 	
 	var ApiUtil = {
 	  fetchListings: function () {
@@ -31018,11 +31028,11 @@
 	module.exports = ApiUtil;
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var AppDispatcher = __webpack_require__(228),
-	    ListingConstants = __webpack_require__(233);
+	    ListingConstants = __webpack_require__(231);
 	
 	var ApiActions = {
 	  receiveAllListings: function (listings) {
@@ -31036,17 +31046,65 @@
 	module.exports = ApiActions;
 
 /***/ },
-/* 233 */
-/***/ function(module, exports) {
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var ListingConstants = {
-	  LISTINGS_RECEIVED: "LISTINGS_RECEIVED"
+	var Store = __webpack_require__(211).Store,
+	    AppDispatcher = __webpack_require__(228),
+	    FilterConstants = __webpack_require__(235);
+	
+	var FilterParamsStore = new Store(AppDispatcher);
+	var _params = { bounds: {} };
+	
+	FilterParamsStore.all = function () {
+	  return Object.assign({}, _params);
 	};
 	
-	module.exports = ListingConstants;
+	var updateBoundFilter = function (bounds) {
+	  _params.bounds = bounds;
+	};
+	
+	FilterParamsStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case FilterConstants.BOUND_PARAMS_RECEIVED:
+	      updateBoundFilter(payload.bounds);
+	      FilterParamsStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = FilterParamsStore;
 
 /***/ },
-/* 234 */
+/* 235 */
+/***/ function(module, exports) {
+
+	var FilterConstants = {
+	  BOUND_PARAMS_RECEIVED: "BOUND_PARAMS_RECEIVED"
+	};
+	
+	module.exports = FilterConstants;
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AppDispatcher = __webpack_require__(228),
+	    FilterConstants = __webpack_require__(235);
+	
+	var FilterActions = {
+	  updateBounds: function (bounds) {
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.BOUND_PARAMS_RECEIVED,
+	      bounds: bounds
+	    });
+	  }
+	};
+	
+	module.exports = FilterActions;
+
+/***/ },
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -31097,65 +31155,6 @@
 	});
 	
 	module.exports = Index;
-
-/***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(211).Store,
-	    AppDispatcher = __webpack_require__(228),
-	    FilterConstants = __webpack_require__(236);
-	
-	var FilterParamsStore = new Store(AppDispatcher);
-	var _params = { bounds: {} };
-	
-	FilterParamsStore.all = function () {
-	  return Object.assign({}, _params);
-	};
-	
-	var updateBoundFilter = function (bounds) {
-	  _params.bounds = bounds;
-	};
-	
-	FilterParamsStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case FilterConstants.BOUND_PARAMS_RECEIVED:
-	      updateBoundFilter(payload.bounds);
-	      FilterParamsStore.__emitChange();
-	      break;
-	  }
-	};
-	
-	module.exports = FilterParamsStore;
-
-/***/ },
-/* 236 */
-/***/ function(module, exports) {
-
-	var FilterConstants = {
-	  BOUND_PARAMS_RECEIVED: "BOUND_PARAMS_RECEIVED"
-	};
-	
-	module.exports = FilterConstants;
-
-/***/ },
-/* 237 */,
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var AppDispatcher = __webpack_require__(228),
-	    FilterConstants = __webpack_require__(236);
-	
-	var FilterActions = {
-	  updateBounds: function (bounds) {
-	    AppDispatcher.dispatch({
-	      actionType: FilterConstants.BOUND_PARAMS_RECEIVED,
-	      bounds: bounds
-	    });
-	  }
-	};
-	
-	module.exports = FilterActions;
 
 /***/ }
 /******/ ]);

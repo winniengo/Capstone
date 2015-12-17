@@ -26,12 +26,10 @@
 ## Gems/Libraries
 * [Faker][faker] (gem)
 * [Bootstrap][bootstrap] (gem)
-* [Figaro][figaro] (gem)
 * [Flux Util][util] (npm)
 * [Flux Dispatcher][dispatcher] (npm)
 
 [faker]: https://github.com/stympy/faker
 [bootstrap]: http://v4-alpha.getbootstrap.com/getting-started/introduction/
-[figaro]: https://github.com/laserlemon/figaro
 [util]: https://facebook.github.io/flux/docs/flux-utils.html#content
 [dispatcher]: https://facebook.github.io/flux/docs/dispatcher.html

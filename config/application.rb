@@ -24,3 +24,5 @@ module CribMapper
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+GOOGLE_KEY: "AIzaSyA_eInm7gNFczsqAF_GAS8xXIMEgqzDCnc"

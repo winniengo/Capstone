@@ -10,23 +10,15 @@
 
 ## Flux
 ### Views (React Components)
-* ListingIndexItem
 * ListingShow
 
 ### Stores
 
 ### Actions
-* ApiActions.receiveMatchingListings
-* ApiActions.receiveSingleListing
-* ListingActions.fetchAllListing
-* ListingActions.fetchSingListing
-* ListingActions.destroyListing
 
 ### Util
 
-* ApiActions.receiveSingleListing
-* NoteActions.fetchAllListing
-* NoteActions.fetchSingListing
-* NoteActions.destroyListing
-
 ## Gems/Libraries
+* [Figaro][figaro] (gem)
+
+[figaro]: https://github.com/laserlemon/figaro
