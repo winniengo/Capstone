@@ -21,10 +21,13 @@ var Map = React.createClass({
     var map = ReactDOM.findDOMNode(this.refs.map),
         options = {
           center: mapCenter,
-          zoom: 12
+          zoom: 13
         };
 
     this.map = new google.maps.Map(map, options);
+    this.listingListener = ListingStore.addListener(this._onChange);
+    this.listenForMove();
+    this.markers = [];
 
     // center os United States
     // var geocoder = new google.maps.Geocoder();
@@ -34,9 +37,10 @@ var Map = React.createClass({
     //
     //   this.map.fitBounds(results[0].geometry.viewport);
     // }.bind(this));
+  },
 
-    this.listingListener = ListingStore.addListener(this._onChange);
-    this.listenForMove();
+  componentDidUpdate: function () {
+    this._onChange();
   },
 
   componentWillUnmount: function() {
@@ -45,7 +49,28 @@ var Map = React.createClass({
 
   _onChange: function() {
     var listings = ListingStore.all();
-    listings.forEach(this.addMarker);
+    var toAdd = [],
+        toRemove = this.markers.slice(0);
+
+    listings.forEach(function(listing) {
+      var index = -1;
+      // check if listing is a marker on map
+      for (var i = 0; i < toRemove.length; i++) {
+        if (toRemove[i].listingId === listing.id) {
+          index = i;
+          break;
+        }
+      }
+
+      if (index === -1) { // not found, add marker
+        toAdd.push(listing);
+      } else { // found, keep marker
+        toRemove.splice(index, 1);
+      }
+    });
+
+    toAdd.forEach(this.addMarker);
+    toRemove.forEach(this.removeMarker);
   },
 
   addMarker: function(listing) {
@@ -53,12 +78,23 @@ var Map = React.createClass({
     var marker = new google.maps.Marker({
         position: position,
         map: this.map,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        listingId: listing.id
       });
 
+    this.markers.push(marker);
     // marker.setListener('click', ) TODO
   },
 
+  removeMarker: function(marker) {
+    for (var i = 0; i < this.markers.length; i++) {
+      if (this.markers[i].listingId === marker.listingId) {
+        this.markers[i].setMap(null);
+        this.markers.splice(i, 1);
+        break;
+      }
+    }
+  },
 
   listenForMove: function() {
     google.maps.event.addListener(this.map, 'idle', function() {
@@ -70,7 +106,7 @@ var Map = React.createClass({
         northEast: northEast,
         southWest: southWest
       };
-      
+
       FilterActions.updateBounds(bounds);
       ApiUtil.fetchListings();
     }.bind(this));
