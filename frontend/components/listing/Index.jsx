@@ -11,7 +11,8 @@ var ListingIndex = React.createClass({
     var handleItemClick = this.handleItemClick;
 
     return (
-      <div>
+      <div className="listing-index">
+        <h3>Listings</h3>
         <ul>
           {this.props.listings.map(function(listing) {
             var onClick = handleItemClick.bind(null, listing);

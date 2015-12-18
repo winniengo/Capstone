@@ -52,14 +52,16 @@ var Search = React.createClass({
           listings={listings}
           onMarkerClick={this.handleMarkerClick}
           />
-        <Filters
-          listings={listings}
-          filterParams={this.state.filterParams}
-          />
-        <ListingIndex
-          listings={listings}
-          history={this.props.history}
-          />
+        <div className="half">
+          <Filters
+            listings={listings}
+            filterParams={this.state.filterParams}
+            />
+          <ListingIndex
+            listings={listings}
+            history={this.props.history}
+            />
+        </div>
       </div>
     )
   }

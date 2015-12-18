@@ -22,11 +22,12 @@ class Listing < ActiveRecord::Base
         .where("lat > ?", params["bounds"]["southWest"]["lat"])
         .where("lng > ?", params["bounds"]["southWest"]["lng"])
         .where("lng < ?", params["bounds"]["northEast"]["lng"])
-        .where("rent >= ?", params["rent"]["min"].to_f)
-        .where("rent <= ?", params["rent"]["max"].to_f)
-        .where("bathrooms >= ?", params["bathrooms"]["min"].to_f)
-        .where("bathrooms <= ?", params["bathrooms"]["max"].to_f)
-        .where("bedrooms >= ?", params["bedrooms"]["min"].to_f)
-        .where("bedrooms <= ?", params["bedrooms"]["max"].to_f)
+        .where("rent >= ?", params["rent"]["min"])
+        .where("rent <= ?", params["rent"]["max"])
+        .where("bathrooms >= ?", params["bathrooms"]["min"])
+        .where("bathrooms <= ?", params["bathrooms"]["max"])
+        .where("bedrooms >= ?", params["bedrooms"]["min"])
+        .where("bedrooms <= ?", params["bedrooms"]["max"])
+        .where(listing_type: params["listing_type"])
   end
 end

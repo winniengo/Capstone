@@ -24328,11 +24328,17 @@
 	    });
 	  },
 	
-	  updateLeaseType: function (bool) {
+	  updateLeaseType: function () {
 	    console.log("update lease type");
 	    AppDispatcher.dispatch({
-	      actionType: FilterConstants.LEASE_TYPE_RECEIVED,
-	      lease_type: bool
+	      actionType: FilterConstants.LEASE_TYPE_RECEIVED
+	    });
+	  },
+	
+	  updateSubletType: function () {
+	    console.log("update sublet type");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.SUBLET_TYPE_RECEIVED
 	    });
 	  }
 	};
@@ -24666,7 +24672,8 @@
 	  MAX_BATHROOMS_RECEIVED: "MAX_BATHROOMS_RECEIVED",
 	  MIN_BEDROOMS_RECEIVED: "MIN_BEDROOMS_RECEIVED",
 	  MAX_BEDROOMS_RECEIVED: "MAX_BEDROOMS_RECEIVED",
-	  LISTING_PARAMS_RECEIVED: "LISTING_PARAMS_RECEIVED"
+	  LEASE_TYPE_RECEIVED: "LEASE_TYPE_RECEIVED",
+	  SUBLET_TYPE_RECEIVED: "SUBLET_TYPE_RECEIVED"
 	};
 	
 	module.exports = FilterConstants;
@@ -24732,14 +24739,18 @@
 	        listings: listings,
 	        onMarkerClick: this.handleMarkerClick
 	      }),
-	      React.createElement(Filters, {
-	        listings: listings,
-	        filterParams: this.state.filterParams
-	      }),
-	      React.createElement(ListingIndex, {
-	        listings: listings,
-	        history: this.props.history
-	      })
+	      React.createElement(
+	        'div',
+	        { className: 'half' },
+	        React.createElement(Filters, {
+	          listings: listings,
+	          filterParams: this.state.filterParams
+	        }),
+	        React.createElement(ListingIndex, {
+	          listings: listings,
+	          history: this.props.history
+	        })
+	      )
 	    );
 	  }
 	});
@@ -24756,7 +24767,7 @@
 	var ApiUtil = {
 	  fetchListings: function () {
 	    var params = FilterParamsStore.all();
-	    // console.log(params);
+	    console.log(params.listing_type);
 	    $.get('api/listings', params, function (listings) {
 	      ApiActions.receiveAllListings(listings);
 	    });
@@ -24807,11 +24818,22 @@
 	  rent: { min: 0, max: 10000 },
 	  bathrooms: { min: 0, max: 10 },
 	  bedrooms: { min: 0, max: 10 },
-	  listing_type: { lease: true, sublet: true }
+	  listing_type: { lease: false, sublet: false }
 	};
 	
 	FilterParamsStore.all = function () {
-	  return Object.assign({}, _params);
+	  var params = Object.assign({}, _params);
+	  params.listing_type = [];
+	
+	  if (_params.listing_type.lease) {
+	    params.listing_type.push('lease');
+	  }
+	
+	  if (_params.listing_type.sublet) {
+	    params.listing_type.push('sublet');
+	  }
+	
+	  return params;
 	};
 	
 	FilterParamsStore.__onDispatch = function (payload) {
@@ -24842,6 +24864,14 @@
 	      break;
 	    case FilterConstants.MAX_BATHROOMS_RECEIVED:
 	      _params.bathrooms.max = payload.maxBathrooms;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.LEASE_TYPE_RECEIVED:
+	      _params.listing_type.lease = !_params.listing_type.lease;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.SUBLET_TYPE_RECEIVED:
+	      _params.listing_type.sublet = !_params.listing_type.sublet;
 	      FilterParamsStore.__emitChange();
 	      break;
 	  }
@@ -31304,10 +31334,18 @@
 	    FilterActions.updateMaxBathrooms(e.target.value);
 	  },
 	
+	  leaseTypeChanged: function () {
+	    FilterActions.updateLeaseType();
+	  },
+	
+	  subletTypeChanged: function () {
+	    FilterActions.updateSubletType();
+	  },
+	
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'filters' },
 	      React.createElement(
 	        'h3',
 	        null,
@@ -31316,7 +31354,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Min: '
+	        'Min:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31326,7 +31364,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Max: '
+	        'Max:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31341,7 +31379,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Min: '
+	        'Min:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31351,7 +31389,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Max: '
+	        'Max:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31366,7 +31404,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Min: '
+	        'Min:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31376,7 +31414,7 @@
 	      React.createElement(
 	        'label',
 	        null,
-	        'Max: '
+	        'Max:'
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
@@ -31388,12 +31426,22 @@
 	        null,
 	        'Types'
 	      ),
-	      ' // TODO',
-	      React.createElement('label', null),
-	      listingTypes.map(function (type, i) {
-	        console.log(type);
-	        return React.createElement('input', { type: 'checkbox', value: type, key: i });
-	      })
+	      React.createElement(
+	        'label',
+	        null,
+	        'Full Leases'
+	      ),
+	      React.createElement('input', {
+	        type: 'checkbox',
+	        onClick: this.leaseTypeChanged }),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Sublets'
+	      ),
+	      React.createElement('input', {
+	        type: 'checkbox',
+	        onClick: this.subletTypeChanged })
 	    );
 	  }
 	});
@@ -31420,7 +31468,12 @@
 	
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'listing-index' },
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Listings'
+	      ),
 	      React.createElement(
 	        'ul',
 	        null,

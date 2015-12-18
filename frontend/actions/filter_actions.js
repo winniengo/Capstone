@@ -58,11 +58,17 @@ var FilterActions = {
     });
   },
 
-  updateLeaseType: function(bool) {
+  updateLeaseType: function() {
     console.log("update lease type");
     AppDispatcher.dispatch({
       actionType: FilterConstants.LEASE_TYPE_RECEIVED,
-      lease_type: bool
+    })
+  },
+
+  updateSubletType: function() {
+    console.log("update sublet type");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.SUBLET_TYPE_RECEIVED,
     })
   }
 };

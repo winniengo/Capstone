@@ -4,7 +4,7 @@ var React = require('react'),
 var listingTypes = ['lease', 'sublet'];
 
 var Filters = React.createClass({
-  minRentChanged: function (e) {
+  minRentChanged: function(e) {
     FilterActions.updateMinRent(e.target.value);
   },
 
@@ -12,7 +12,7 @@ var Filters = React.createClass({
     FilterActions.updateMaxRent(e.target.value);
   },
 
-  minBedroomsChanged: function (e) {
+  minBedroomsChanged: function(e) {
     FilterActions.updateMinBedrooms(e.target.value);
   },
 
@@ -20,7 +20,7 @@ var Filters = React.createClass({
     FilterActions.updateMaxBedrooms(e.target.value);
   },
 
-  minBathroomsChanged: function (e) {
+  minBathroomsChanged: function(e) {
     FilterActions.updateMinBathrooms(e.target.value);
   },
 
@@ -28,58 +28,71 @@ var Filters = React.createClass({
     FilterActions.updateMaxBathrooms(e.target.value);
   },
 
+  leaseTypeChanged: function() {
+    FilterActions.updateLeaseType();
+  },
+
+  subletTypeChanged: function() {
+    FilterActions.updateSubletType();
+  },
+
   render: function() {
     return (
-      <div>
+      <div className="filters">
         <h3>Rent</h3>
-        <label>Min: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.rent.min}
-          onChange={this.minRentChanged}
-        />
+          <label>Min:</label>
+          <input
+            type="number"
+            value={this.props.filterParams.rent.min}
+            onChange={this.minRentChanged}
+          />
 
-        <label>Max: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.rent.max}
-          onChange={this.maxRentChanged}
-        />
+          <label>Max:</label>
+          <input
+            type="number"
+            value={this.props.filterParams.rent.max}
+            onChange={this.maxRentChanged}
+          />
 
-      <h3>Bedrooms</h3>
-        <label>Min: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.bedrooms.min}
-          onChange={this.minBedroomsChanged}
-        />
+        <h3>Bedrooms</h3>
+          <label>Min:</label>
+          <input
+            type="number"
+            value={this.props.filterParams.bedrooms.min}
+            onChange={this.minBedroomsChanged}
+          />
 
-        <label>Max: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.bedrooms.max}
-          onChange={this.maxBedroomsChanged}
-        />
-      <h3>Bathrooms</h3>
-        <label>Min: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.bathrooms.min}
-          onChange={this.minBathroomsChanged}
-        />
+          <label>Max:</label>
+          <input
+            type="number"
+            value={this.props.filterParams.bedrooms.max}
+            onChange={this.maxBedroomsChanged}
+          />
 
-        <label>Max: </label>
-        <input
-          type="number"
-          value={this.props.filterParams.bathrooms.max}
-          onChange={this.maxBathroomsChanged}
-        />
-      <h3>Types</h3> // TODO
-        <label></label>
-        {listingTypes.map(function(type, i) {
-          console.log(type)
-          return <input type="checkbox" value={type} key={i}/>
-        })}
+          <h3>Bathrooms</h3>
+            <label>Min:</label>
+            <input
+              type="number"
+              value={this.props.filterParams.bathrooms.min}
+              onChange={this.minBathroomsChanged}
+            />
+
+            <label>Max:</label>
+            <input
+              type="number"
+              value={this.props.filterParams.bathrooms.max}
+              onChange={this.maxBathroomsChanged}
+            />
+
+          <h3>Types</h3>
+            <label>Full Leases</label>
+            <input
+              type="checkbox"
+              onClick={this.leaseTypeChanged}/>
+            <label>Sublets</label>
+            <input
+              type="checkbox"
+              onClick={this.subletTypeChanged}/>
       </div>
     )
   }
