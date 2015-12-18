@@ -76,6 +76,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 - Allow users to save search criteria and receive emails containing future matches
 - Complete JSON API (delete, update) for Listing
 - Sublets
+- Connect to Zac's [Crashmate][crashmate]
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
@@ -83,3 +84,4 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
 [phase-six]: ./docs/phases/phase6.md
+[crashmate]: https://github.com/therealzac/Crashmate

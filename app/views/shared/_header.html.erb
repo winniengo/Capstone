@@ -1,12 +1,17 @@
-<% if current_user %>
-  Hello, <%= current_user.name %><br>
-  <%= button_to "Sign Out", session_url, method: :delete %>
-<% else %>
-  <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><%= link_to "Home", root_url %></li>
-      <li><%= link_to "Sign In", new_session_url %></li>
-      <li><%= link_to "Register", new_user_url %></li>
-    </ul>
-  </nav>
-<% end %>
+<div id="cssmenu">
+
+  <ul>
+    <li class="greeting">
+      <% if current_user %>
+        Hello, <%= current_user.name %>
+    </li>
+    <li><a href='/session' rel="nofollow" data-method="delete">Sign Out</a></li>
+  </ul>
+  <% else %>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/session/new">Sign In</a></li>
+    <li><a href="/users/new">Register</a></li>
+  </ul>
+  <% end %>
+</div>
