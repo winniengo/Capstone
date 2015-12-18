@@ -40,16 +40,26 @@
  #cssmenu ul li a {
    color: white;
    text-transform: uppercase;
+   text-decoration: none;
    font-size: 14px;
    position: relative;
    padding: 10px 10px;
    display: block;
  }
 
+ #cssmenu ul li a:hover {
+   background: #406C7A;
+ }
+
+ .alight-right {
+   float: right;
+ }
+
  .greeting {
    position: relative;
+   text-transform: uppercase;
    font-size: 14px;
-   padding: 10px 10px;
+   padding: 10px 10px 10px 10px;
    display: block;
  }
 
