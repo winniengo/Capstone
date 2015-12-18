@@ -37,6 +37,9 @@ var Filters = React.createClass({
   },
 
   render: function() {
+    var leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
+        subletTypeChecked = this.props.filterParams.listing_type.sublet ? "checked" : "";
+
     return (
       <div className="filters">
         <h3>Rent</h3>
@@ -88,11 +91,13 @@ var Filters = React.createClass({
             <label>Full Leases</label>
             <input
               type="checkbox"
-              onClick={this.leaseTypeChanged}/>
+              onChange={this.leaseTypeChanged}
+              checked={leaseTypeChecked}/>
             <label>Sublets</label>
             <input
               type="checkbox"
-              onClick={this.subletTypeChanged}/>
+              onChange={this.subletTypeChanged}
+              checked={subletTypeChecked}/>
       </div>
     )
   }

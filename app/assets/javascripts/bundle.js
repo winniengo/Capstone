@@ -24766,8 +24766,8 @@
 	
 	var ApiUtil = {
 	  fetchListings: function () {
-	    var params = FilterParamsStore.all();
-	    console.log(params.listing_type);
+	    var params = FilterParamsStore.params();
+	
 	    $.get('api/listings', params, function (listings) {
 	      ApiActions.receiveAllListings(listings);
 	    });
@@ -24818,20 +24818,20 @@
 	  rent: { min: 0, max: 10000 },
 	  bathrooms: { min: 0, max: 10 },
 	  bedrooms: { min: 0, max: 10 },
-	  listing_type: { lease: false, sublet: false }
+	  listing_type: { lease: true, sublet: true }
 	};
 	
 	FilterParamsStore.all = function () {
-	  var params = Object.assign({}, _params);
+	  return Object.assign({}, _params);
+	};
+	
+	FilterParamsStore.params = function () {
+	  // controller params
+	  var params = this.all();
 	  params.listing_type = [];
 	
-	  if (_params.listing_type.lease) {
-	    params.listing_type.push('lease');
-	  }
-	
-	  if (_params.listing_type.sublet) {
-	    params.listing_type.push('sublet');
-	  }
+	  if (_params.listing_type.lease) params.listing_type.push('lease');
+	  if (_params.listing_type.sublet) params.listing_type.push('sublet');
 	
 	  return params;
 	};
@@ -31343,6 +31343,9 @@
 	  },
 	
 	  render: function () {
+	    var leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
+	        subletTypeChecked = this.props.filterParams.listing_type.sublet ? "checked" : "";
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'filters' },
@@ -31433,7 +31436,8 @@
 	      ),
 	      React.createElement('input', {
 	        type: 'checkbox',
-	        onClick: this.leaseTypeChanged }),
+	        onChange: this.leaseTypeChanged,
+	        checked: leaseTypeChecked }),
 	      React.createElement(
 	        'label',
 	        null,
@@ -31441,7 +31445,8 @@
 	      ),
 	      React.createElement('input', {
 	        type: 'checkbox',
-	        onClick: this.subletTypeChanged })
+	        onChange: this.subletTypeChanged,
+	        checked: subletTypeChecked })
 	    );
 	  }
 	});

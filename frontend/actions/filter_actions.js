@@ -70,7 +70,7 @@ var FilterActions = {
     AppDispatcher.dispatch({
       actionType: FilterConstants.SUBLET_TYPE_RECEIVED,
     })
-  }
+  },
 };
 
 module.exports = FilterActions;

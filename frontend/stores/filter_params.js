@@ -8,20 +8,19 @@ var FilterParamsStore = new Store(AppDispatcher),
       rent: {min: 0, max: 10000},
       bathrooms: {min: 0, max: 10},
       bedrooms: {min: 0, max: 10},
-      listing_type: {lease: false, sublet: false}
+      listing_type: {lease: true, sublet: true}
     };
 
 FilterParamsStore.all = function() {
-  var params = Object.assign({}, _params);
+  return Object.assign({}, _params);
+}
+
+FilterParamsStore.params = function() { // controller params
+  var params = this.all();
   params.listing_type = [];
 
-  if (_params.listing_type.lease) {
-    params.listing_type.push('lease');
-  }
-
-  if (_params.listing_type.sublet) {
-    params.listing_type.push('sublet');
-  }
+  if (_params.listing_type.lease) params.listing_type.push('lease');
+  if (_params.listing_type.sublet) params.listing_type.push('sublet');
 
   return params;
 };
