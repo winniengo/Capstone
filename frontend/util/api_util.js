@@ -4,7 +4,7 @@ var ApiActions = require('../actions/api_actions'),
 var ApiUtil = {
   fetchListings: function() {
     var params = FilterParamsStore.all();
-    
+    // console.log(params);
     $.get('api/listings', params, function(listings) {
       ApiActions.receiveAllListings(listings);
     });

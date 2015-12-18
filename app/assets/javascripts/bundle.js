@@ -24294,6 +24294,38 @@
 	      actionType: FilterConstants.MAX_RENT_RECEIVED,
 	      maxRent: maxRent
 	    });
+	  },
+	
+	  updateMinBedrooms: function (minBedrooms) {
+	    console.log("update min bedrooms");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MIN_BEDROOMS_RECEIVED,
+	      minBedrooms: minBedrooms
+	    });
+	  },
+	
+	  updateMaxBedrooms: function (maxBedrooms) {
+	    console.log("update max bedrooms");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MAX_BEDROOMS_RECEIVED,
+	      maxBedrooms: maxBedrooms
+	    });
+	  },
+	
+	  updateMinBathrooms: function (minBathrooms) {
+	    console.log("update min bedrooms");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MIN_BATHROOMS_RECEIVED,
+	      minBathrooms: minBathrooms
+	    });
+	  },
+	
+	  updateMaxBathrooms: function (maxBathrooms) {
+	    console.log("update max bedrooms");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MAX_BATHROOMS_RECEIVED,
+	      maxBathrooms: maxBathrooms
+	    });
 	  }
 	};
 	
@@ -24716,7 +24748,7 @@
 	var ApiUtil = {
 	  fetchListings: function () {
 	    var params = FilterParamsStore.all();
-	
+	    // console.log(params);
 	    $.get('api/listings', params, function (listings) {
 	      ApiActions.receiveAllListings(listings);
 	    });
@@ -24763,9 +24795,9 @@
 	
 	var FilterParamsStore = new Store(AppDispatcher),
 	    _params = {
-	  bounds: {},
+	  bounds: { northEast: { lat: 0, lng: 0 }, southWest: { lat: 0, lng: 0 } },
 	  rent: { min: 0, max: 10000 },
-	  bathrooms: { min: 0, max: 20 },
+	  bathrooms: { min: 0, max: 10 },
 	  bedrooms: { min: 0, max: 10 },
 	  listing_type: { lease: true, sublet: true }
 	};
@@ -24777,18 +24809,31 @@
 	FilterParamsStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
 	    case FilterConstants.BOUND_PARAMS_RECEIVED:
-	
 	      _params.bounds = payload.bounds;
 	      FilterParamsStore.__emitChange();
 	      break;
 	    case FilterConstants.MIN_RENT_RECEIVED:
-	
 	      _params.rent.min = payload.minRent;
 	      FilterParamsStore.__emitChange();
 	      break;
 	    case FilterConstants.MAX_RENT_RECEIVED:
-	
 	      _params.rent.max = payload.maxRent;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MIN_BEDROOMS_RECEIVED:
+	      _params.bedrooms.min = payload.minBedrooms;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MAX_BEDROOMS_RECEIVED:
+	      _params.bedrooms.max = payload.maxBedrooms;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MIN_BATHROOMS_RECEIVED:
+	      _params.bathrooms.min = payload.minBathrooms;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MAX_BATHROOMS_RECEIVED:
+	      _params.bathrooms.max = payload.maxBathrooms;
 	      FilterParamsStore.__emitChange();
 	      break;
 	  }
@@ -31222,16 +31267,10 @@
 	var React = __webpack_require__(1),
 	    FilterActions = __webpack_require__(210);
 	
+	var listingTypes = ['lease', 'sublet'];
+	
 	var Filters = React.createClass({
 	  displayName: 'Filters',
-	
-	  currentMinRent: function () {
-	    return this.props.filterParams.minRent;
-	  },
-	
-	  currentMaxRent: function () {
-	    return this.props.filterParams.maxRent;
-	  },
 	
 	  minRentChanged: function (e) {
 	    FilterActions.updateMinRent(e.target.value);
@@ -31239,6 +31278,22 @@
 	
 	  maxRentChanged: function (e) {
 	    FilterActions.updateMaxRent(e.target.value);
+	  },
+	
+	  minBedroomsChanged: function (e) {
+	    FilterActions.updateMinBedrooms(e.target.value);
+	  },
+	
+	  maxBedroomsChanged: function (e) {
+	    FilterActions.updateMaxBedrooms(e.target.value);
+	  },
+	
+	  minBathroomsChanged: function (e) {
+	    FilterActions.updateMinBathrooms(e.target.value);
+	  },
+	
+	  maxBathroomsChanged: function (e) {
+	    FilterActions.updateMaxBathrooms(e.target.value);
 	  },
 	
 	  render: function () {
@@ -31257,7 +31312,7 @@
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
-	        value: this.currentMinRent(),
+	        value: this.props.filterParams.rent.min,
 	        onChange: this.minRentChanged
 	      }),
 	      React.createElement(
@@ -31267,7 +31322,7 @@
 	      ),
 	      React.createElement('input', {
 	        type: 'number',
-	        value: this.currentMaxRent(),
+	        value: this.props.filterParams.rent.max,
 	        onChange: this.maxRentChanged
 	      }),
 	      React.createElement(
@@ -31276,15 +31331,61 @@
 	        'Bedrooms'
 	      ),
 	      React.createElement(
+	        'label',
+	        null,
+	        'Min: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.props.filterParams.bedrooms.min,
+	        onChange: this.minBedroomsChanged
+	      }),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Max: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.props.filterParams.bedrooms.max,
+	        onChange: this.maxBedroomsChanged
+	      }),
+	      React.createElement(
 	        'h3',
 	        null,
 	        'Bathrooms'
 	      ),
 	      React.createElement(
+	        'label',
+	        null,
+	        'Min: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.props.filterParams.bathrooms.min,
+	        onChange: this.minBathroomsChanged
+	      }),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Max: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.props.filterParams.bathrooms.max,
+	        onChange: this.maxBathroomsChanged
+	      }),
+	      React.createElement(
 	        'h3',
 	        null,
 	        'Types'
-	      )
+	      ),
+	      ' // TODO',
+	      React.createElement('label', null),
+	      listingTypes.map(function (type, i) {
+	        console.log(type);
+	        return React.createElement('input', { type: 'checkbox', value: type, key: i });
+	      })
 	    );
 	  }
 	});

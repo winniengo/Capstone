@@ -1,1 +1,10 @@
-json.extract! listing, :id, :description, :address, :lat, :lng, :placeId
+json.extract! listing,
+  :id,
+  :lat,
+  :lng,
+  :description,
+  :address,
+  :rent,
+  :bedrooms,
+  :bathrooms,
+  :listing_type

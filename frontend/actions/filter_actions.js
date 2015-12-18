@@ -24,7 +24,39 @@ var FilterActions = {
       actionType: FilterConstants.MAX_RENT_RECEIVED,
       maxRent: maxRent,
     });
-  }
+  },
+
+  updateMinBedrooms: function (minBedrooms){
+    console.log("update min bedrooms");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.MIN_BEDROOMS_RECEIVED,
+      minBedrooms: minBedrooms,
+    });
+  },
+
+  updateMaxBedrooms: function (maxBedrooms){
+    console.log("update max bedrooms");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.MAX_BEDROOMS_RECEIVED,
+      maxBedrooms: maxBedrooms,
+    });
+  },
+
+  updateMinBathrooms: function (minBathrooms){
+    console.log("update min bedrooms");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.MIN_BATHROOMS_RECEIVED,
+      minBathrooms: minBathrooms,
+    });
+  },
+
+  updateMaxBathrooms: function (maxBathrooms){
+    console.log("update max bedrooms");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.MAX_BATHROOMS_RECEIVED,
+      maxBathrooms: maxBathrooms,
+    });
+  },
 };
 
 module.exports = FilterActions;
