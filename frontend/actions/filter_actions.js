@@ -57,6 +57,14 @@ var FilterActions = {
       maxBathrooms: maxBathrooms,
     });
   },
+
+  updateLeaseType: function(bool) {
+    console.log("update lease type");
+    AppDispatcher.dispatch({
+      actionType: FilterConstants.LEASE_TYPE_RECEIVED,
+      lease_type: bool
+    })
+  }
 };
 
 module.exports = FilterActions;

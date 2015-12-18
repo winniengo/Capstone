@@ -1,24 +1,31 @@
-# Phase 3: Listing CRUD and JSON API (2 days)
+# Phase 3: FilterParams (1.5 days)
 
 ## Rails
 ### Models
 
 ### Controllers
-* Api::ListingsController (destroy, update)
 
 ### Views
 
 ## Flux
 ### Views (React Components)
-* ListingShow
+* Filters
+* Search
 
 ### Stores
+* FilterParams
 
 ### Actions
+* FilterActions.udpateBounds
+* FilterActions.updateMinRent
+* FilterActions.updateMaxRent
+* FilterActions.updateMinBedrooms
+* FilterActions.updateMaxBedrooms
+* FilterActions.updateMinBathrooms
+* FilterActions.updateMaxBathrooms
+* FilterActions.updateLeaseType
+* FilterActions.updateSubletType
 
 ### Util
 
 ## Gems/Libraries
-* [Figaro][figaro] (gem)
-
-[figaro]: https://github.com/laserlemon/figaro

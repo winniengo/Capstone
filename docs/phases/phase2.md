@@ -14,11 +14,9 @@
 
 ### Stores
 * Listing
-* FilterParams
 
 ### Actions
 * ApiActions.receiveAllListings
-* FilterActions.udpateBounds
 
 ### Util
 * ApiUtil.fetchListings

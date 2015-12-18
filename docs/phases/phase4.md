@@ -1,33 +1,26 @@
-# Phase 3: Listings and Searches
+# Phase 3: Listings (1.5 days)
 
 ## Rails
 ### Models
-* Search
 
 ### Controllers
-* Api::SearchesController (create, destroy, index, show, update)
+* Api::ListingsController (destroy, update)
 
 ### Views
 
 ## Flux
 ### Views (React Components)
-* SearchIndex
+* ListingIndexItem
+* ListingShow
+* Listing
 
 ### Stores
-* Search
 
 ### Actions
-* ApiActions.receiveSingleSearch
-* ApiActions.updateSearch
-* SearchActions.fetchSingleSearch
-* SearchActions.createSearch
-* SearchActions.editSearch
-* SearchActions.destroySearch
 
 ### Util
-* Util.fetchSingleSearch
-* Util.createSearch
-* Util.editSearch
-* Util.destroySearch
 
 ## Gems/Libraries
+* [Figaro][figaro] (gem)
+
+[figaro]: https://github.com/laserlemon/figaro

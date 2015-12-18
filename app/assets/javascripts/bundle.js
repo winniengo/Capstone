@@ -24326,6 +24326,14 @@
 	      actionType: FilterConstants.MAX_BATHROOMS_RECEIVED,
 	      maxBathrooms: maxBathrooms
 	    });
+	  },
+	
+	  updateLeaseType: function (bool) {
+	    console.log("update lease type");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.LEASE_TYPE_RECEIVED,
+	      lease_type: bool
+	    });
 	  }
 	};
 	

@@ -21,7 +21,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 
 ##Design Documents
 
-* [View Wireframes][view]
+<!-- * [View Wireframes][view] -->
 * [DB Schema][schema]
 
 [view]: ./docs/views.md
@@ -40,26 +40,23 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 ### Phase 2: Flux Architecture, Seeding, Bootstrap, and Listing CRUD (1 day)
 - Setup Flux, the React Router and the React view structure for the main application
 - Seed database with listings for testing
-- Setup Boootstrap
 - Implement Listing store and corresponding CRUD actions
-- Create FilterParams store and apply filters to Google Maps
 
 [Details][phase-two]
 
-### Phase 3: Listing CRUD, GoogleMaps API, JSON API, and Bootstrap (2 days)
-- Create views for Listing 'Index' and 'IndexItem'
+### Phase 3: FilterParams (1.5 days)
 - Implement search bar for Google Maps
-- Complete JSON API (delete, update) for Listing
-- Bootstrap project to-date
+- Create FilterParams store and apply filters to Google Maps
+- Allow users to input search filters and view results
 
 [Details][phase-three]
 
-### Phase 4: Listings and Searches (1.5 days)
-- Begin styling for Listing views
-- Allow users to input search filters and view results
+### Phase 4: Listings (1.5 days)
+- Create views for Listing 'Index', 'IndexItem', and 'Show'
 - Allow users to save and view favorite listings
+- Begin styling for Listing views and app
 
-<!-- [Details][phase-four] -->
+[Details][phase-four]
 
 ### Phase 5: Search Mailer and Show Nearby (1.5 day)
 - Allow users to show nearby restaurants, bars, shops, etc. on map
@@ -74,8 +71,10 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 <!-- [Details][phase-six] -->
 
 ### Bonus Features (TBD)
+- Additional filter params
 - Aggregate data from source sites and populate listings onto map
 - Allow users to save search criteria and receive emails containing future matches
+- Complete JSON API (delete, update) for Listing
 - Sublets
 
 [phase-one]: ./docs/phases/phase1.md
