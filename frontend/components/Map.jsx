@@ -1,10 +1,7 @@
 /* globals google */
 
 var React = require('react'),
-    ReactDOM = require('react-dom');
-
-var ListingStore = require('../stores/listing'),
-    ApiUtil = require('../util/api_util'),
+    ReactDOM = require('react-dom'),
     FilterActions = require('../actions/filter_actions');
 
 var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
@@ -18,6 +15,8 @@ function _getCoordsObj(latLng) {
 
 var Map = React.createClass({
   componentDidMount: function() {
+    console.log('map mounted');
+
     var map = ReactDOM.findDOMNode(this.refs.map),
         options = {
           center: mapCenter,
@@ -25,11 +24,11 @@ var Map = React.createClass({
         };
 
     this.map = new google.maps.Map(map, options);
-    this.listingListener = ListingStore.addListener(this._onChange);
-    this.listenForMove();
+    this.props.listings.forEach(this.addMarker);
+    this.registerListener();
     this.markers = [];
 
-    // center os United States
+    // center on United States
     // var geocoder = new google.maps.Geocoder();
     // geocoder.geocode({'address': 'US'}, function(results, status) {
     //   var northEast = results[0].geometry.viewport.getNorthEast();
@@ -44,11 +43,27 @@ var Map = React.createClass({
   },
 
   componentWillUnmount: function() {
-    this.listingListener.remove();
+    console.log('map unmounted');
+  },
+
+  registerListener: function() {
+    google.maps.event.addListener(this.map, 'idle', function() {
+      var mapBounds = this.map.getBounds();
+      var northEast = _getCoordsObj(mapBounds.getNorthEast());
+      var southWest = _getCoordsObj(mapBounds.getSouthWest());
+
+      var bounds = {
+        northEast: northEast,
+        southWest: southWest
+      };
+
+      FilterActions.updateBounds(bounds);
+    }.bind(this));
   },
 
   _onChange: function() {
-    var listings = ListingStore.all();
+    var listings = this.props.listings;
+
     var toAdd = [],
         toRemove = this.markers.slice(0);
 
@@ -82,8 +97,11 @@ var Map = React.createClass({
         listingId: listing.id
       });
 
+    marker.addListener('click', function() {
+      this.props.onMarkerClick(listing);
+    }.bind(this));
+
     this.markers.push(marker);
-    // marker.setListener('click', ) TODO
   },
 
   removeMarker: function(marker) {
@@ -94,22 +112,6 @@ var Map = React.createClass({
         break;
       }
     }
-  },
-
-  listenForMove: function() {
-    google.maps.event.addListener(this.map, 'idle', function() {
-      var mapBounds = this.map.getBounds();
-      var northEast = _getCoordsObj(mapBounds.getNorthEast());
-      var southWest = _getCoordsObj(mapBounds.getSouthWest());
-
-      var bounds = {
-        northEast: northEast,
-        southWest: southWest
-      };
-
-      FilterActions.updateBounds(bounds);
-      ApiUtil.fetchListings();
-    }.bind(this));
   },
 
   render: function() {

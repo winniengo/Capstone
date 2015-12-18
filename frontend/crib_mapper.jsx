@@ -5,17 +5,15 @@ var React = require('react'),
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute;
 
-var App = require('./components/App');
-
-var ListingStore = require('./stores/listing'),
-    ApiUtil = require('./util/api_util');
-
-window.ListingStore = ListingStore;
-window.ApiUtil = ApiUtil;
+var App = require('./components/App'),
+    Map = require('./components/Map'),
+    Search = require('./components/Search'),
+    ListingShow = require('./components/listing/Show');
 
 var routes = (
   <Route path="/" component={App}>
-
+    <IndexRoute component={Search}/>
+    <Route path="listings/:listingId" component={ListingShow}/>
   </Route>
 );
 

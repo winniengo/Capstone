@@ -16,4 +16,13 @@ class Listing < ActiveRecord::Base
         .where("lng > ?", bounds["southWest"]["lng"])
         .where("lng < ?", bounds["northEast"]["lng"])
   end
+
+  def self.filter(params)
+    self.where("lat < ?", params["bounds"]["northEast"]["lat"])
+        .where("lat > ?", params["bounds"]["southWest"]["lat"])
+        .where("lng > ?", params["bounds"]["southWest"]["lng"])
+        .where("lng < ?", params["bounds"]["northEast"]["lng"])
+        .where("rent >= ?", params["rent"]["min"].to_f)
+        .where("rent <= ?", params["rent"]["max"].to_f)
+  end
 end

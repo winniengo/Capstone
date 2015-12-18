@@ -51,23 +51,25 @@
 	    Route = ReactRouter.Route,
 	    IndexRoute = ReactRouter.IndexRoute;
 	
-	var App = __webpack_require__(208);
+	var App = __webpack_require__(208),
+	    Map = __webpack_require__(209),
+	    Search = __webpack_require__(216),
+	    ListingShow = __webpack_require__(241);
 	
-	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(232);
-	
-	window.ListingStore = ListingStore;
-	window.ApiUtil = ApiUtil;
-	
-	var routes = React.createElement(Route, { path: '/', component: App });
+	var routes = React.createElement(
+	  Route,
+	  { path: '/', component: App },
+	  React.createElement(IndexRoute, { component: Search }),
+	  React.createElement(Route, { path: 'listings/:listingId', component: ListingShow })
+	);
 	
 	document.addEventListener("DOMContentLoaded", function () {
-	    var content = document.querySelector('#content');
-	    ReactDOM.render(React.createElement(
-	        Router,
-	        null,
-	        routes
-	    ), content);
+	  var content = document.querySelector('#content');
+	  ReactDOM.render(React.createElement(
+	    Router,
+	    null,
+	    routes
+	  ), content);
 	});
 
 /***/ },
@@ -24108,27 +24110,22 @@
 
 	var React = __webpack_require__(1);
 	
-	var Map = __webpack_require__(209),
-	    Index = __webpack_require__(237);
-	
 	var App = React.createClass({
-	  displayName: 'App',
+	  displayName: "App",
 	
 	  render: function () {
 	    return React.createElement(
-	      'div',
-	      { className: 'app' },
+	      "div",
+	      { className: "app" },
 	      React.createElement(
-	        'header',
+	        "header",
 	        null,
 	        React.createElement(
-	          'h1',
+	          "h1",
 	          null,
-	          'CribMapper'
+	          "CribMapper"
 	        )
 	      ),
-	      React.createElement(Map, null),
-	      React.createElement(Index, null),
 	      this.props.children
 	    );
 	  }
@@ -24143,11 +24140,8 @@
 	/* globals google */
 	
 	var React = __webpack_require__(1),
-	    ReactDOM = __webpack_require__(158);
-	
-	var ListingStore = __webpack_require__(210),
-	    ApiUtil = __webpack_require__(232),
-	    FilterActions = __webpack_require__(236);
+	    ReactDOM = __webpack_require__(158),
+	    FilterActions = __webpack_require__(210);
 	
 	var mapCenter = { lat: 37.776112, lng: -122.433113 }; // Painted Ladies, San Francisco, CA
 	
@@ -24162,6 +24156,8 @@
 	  displayName: 'Map',
 	
 	  componentDidMount: function () {
+	    console.log('map mounted');
+	
 	    var map = ReactDOM.findDOMNode(this.refs.map),
 	        options = {
 	      center: mapCenter,
@@ -24169,11 +24165,11 @@
 	    };
 	
 	    this.map = new google.maps.Map(map, options);
-	    this.listingListener = ListingStore.addListener(this._onChange);
-	    this.listenForMove();
+	    this.props.listings.forEach(this.addMarker);
+	    this.registerListener();
 	    this.markers = [];
 	
-	    // center os United States
+	    // center on United States
 	    // var geocoder = new google.maps.Geocoder();
 	    // geocoder.geocode({'address': 'US'}, function(results, status) {
 	    //   var northEast = results[0].geometry.viewport.getNorthEast();
@@ -24188,11 +24184,27 @@
 	  },
 	
 	  componentWillUnmount: function () {
-	    this.listingListener.remove();
+	    console.log('map unmounted');
+	  },
+	
+	  registerListener: function () {
+	    google.maps.event.addListener(this.map, 'idle', (function () {
+	      var mapBounds = this.map.getBounds();
+	      var northEast = _getCoordsObj(mapBounds.getNorthEast());
+	      var southWest = _getCoordsObj(mapBounds.getSouthWest());
+	
+	      var bounds = {
+	        northEast: northEast,
+	        southWest: southWest
+	      };
+	
+	      FilterActions.updateBounds(bounds);
+	    }).bind(this));
 	  },
 	
 	  _onChange: function () {
-	    var listings = ListingStore.all();
+	    var listings = this.props.listings;
+	
 	    var toAdd = [],
 	        toRemove = this.markers.slice(0);
 	
@@ -24228,8 +24240,11 @@
 	      listingId: listing.id
 	    });
 	
+	    marker.addListener('click', (function () {
+	      this.props.onMarkerClick(listing);
+	    }).bind(this));
+	
 	    this.markers.push(marker);
-	    // marker.setListener('click', ) TODO
 	  },
 	
 	  removeMarker: function (marker) {
@@ -24240,22 +24255,6 @@
 	        break;
 	      }
 	    }
-	  },
-	
-	  listenForMove: function () {
-	    google.maps.event.addListener(this.map, 'idle', (function () {
-	      var mapBounds = this.map.getBounds();
-	      var northEast = _getCoordsObj(mapBounds.getNorthEast());
-	      var southWest = _getCoordsObj(mapBounds.getSouthWest());
-	
-	      var bounds = {
-	        northEast: northEast,
-	        southWest: southWest
-	      };
-	
-	      FilterActions.updateBounds(bounds);
-	      ApiUtil.fetchListings();
-	    }).bind(this));
 	  },
 	
 	  render: function () {
@@ -24269,34 +24268,46 @@
 /* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Store = __webpack_require__(211).Store,
-	    AppDispatcher = __webpack_require__(228),
-	    ListingConstants = __webpack_require__(231);
+	var AppDispatcher = __webpack_require__(211),
+	    FilterConstants = __webpack_require__(215);
 	
-	var ListingStore = new Store(AppDispatcher),
-	    _listings = [];
+	var FilterActions = {
+	  updateBounds: function (bounds) {
+	    console.log("update bounds");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.BOUND_PARAMS_RECEIVED,
+	      bounds: bounds
+	    });
+	  },
 	
-	var resetListings = function (listings) {
-	  _listings = listings;
-	};
+	  updateMinRent: function (minRent) {
+	    console.log("update min rent");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MIN_RENT_RECEIVED,
+	      minRent: minRent
+	    });
+	  },
 	
-	ListingStore.all = function () {
-	  return _listings.slice(0);
-	};
-	
-	ListingStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case ListingConstants.LISTINGS_RECEIVED:
-	      resetListings(payload.listings);
-	      ListingStore.__emitChange();
-	      break;
+	  updateMaxRent: function (maxRent) {
+	    console.log("update max rent");
+	    AppDispatcher.dispatch({
+	      actionType: FilterConstants.MAX_RENT_RECEIVED,
+	      maxRent: maxRent
+	    });
 	  }
 	};
 	
-	module.exports = ListingStore;
+	module.exports = FilterActions;
 
 /***/ },
 /* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Dispatcher = __webpack_require__(212).Dispatcher;
+	module.exports = new Dispatcher();
+
+/***/ },
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24308,15 +24319,505 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 	
-	module.exports.Container = __webpack_require__(212);
-	module.exports.MapStore = __webpack_require__(216);
-	module.exports.Mixin = __webpack_require__(227);
-	module.exports.ReduceStore = __webpack_require__(217);
-	module.exports.Store = __webpack_require__(218);
+	module.exports.Dispatcher = __webpack_require__(213);
 
 
 /***/ },
-/* 212 */
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule Dispatcher
+	 * 
+	 * @preventMunge
+	 */
+	
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var invariant = __webpack_require__(214);
+	
+	var _prefix = 'ID_';
+	
+	/**
+	 * Dispatcher is used to broadcast payloads to registered callbacks. This is
+	 * different from generic pub-sub systems in two ways:
+	 *
+	 *   1) Callbacks are not subscribed to particular events. Every payload is
+	 *      dispatched to every registered callback.
+	 *   2) Callbacks can be deferred in whole or part until other callbacks have
+	 *      been executed.
+	 *
+	 * For example, consider this hypothetical flight destination form, which
+	 * selects a default city when a country is selected:
+	 *
+	 *   var flightDispatcher = new Dispatcher();
+	 *
+	 *   // Keeps track of which country is selected
+	 *   var CountryStore = {country: null};
+	 *
+	 *   // Keeps track of which city is selected
+	 *   var CityStore = {city: null};
+	 *
+	 *   // Keeps track of the base flight price of the selected city
+	 *   var FlightPriceStore = {price: null}
+	 *
+	 * When a user changes the selected city, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'city-update',
+	 *     selectedCity: 'paris'
+	 *   });
+	 *
+	 * This payload is digested by `CityStore`:
+	 *
+	 *   flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'city-update') {
+	 *       CityStore.city = payload.selectedCity;
+	 *     }
+	 *   });
+	 *
+	 * When the user selects a country, we dispatch the payload:
+	 *
+	 *   flightDispatcher.dispatch({
+	 *     actionType: 'country-update',
+	 *     selectedCountry: 'australia'
+	 *   });
+	 *
+	 * This payload is digested by both stores:
+	 *
+	 *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       CountryStore.country = payload.selectedCountry;
+	 *     }
+	 *   });
+	 *
+	 * When the callback to update `CountryStore` is registered, we save a reference
+	 * to the returned token. Using this token with `waitFor()`, we can guarantee
+	 * that `CountryStore` is updated before the callback that updates `CityStore`
+	 * needs to query its data.
+	 *
+	 *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
+	 *     if (payload.actionType === 'country-update') {
+	 *       // `CountryStore.country` may not be updated.
+	 *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
+	 *       // `CountryStore.country` is now guaranteed to be updated.
+	 *
+	 *       // Select the default city for the new country
+	 *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
+	 *     }
+	 *   });
+	 *
+	 * The usage of `waitFor()` can be chained, for example:
+	 *
+	 *   FlightPriceStore.dispatchToken =
+	 *     flightDispatcher.register(function(payload) {
+	 *       switch (payload.actionType) {
+	 *         case 'country-update':
+	 *         case 'city-update':
+	 *           flightDispatcher.waitFor([CityStore.dispatchToken]);
+	 *           FlightPriceStore.price =
+	 *             getFlightPriceStore(CountryStore.country, CityStore.city);
+	 *           break;
+	 *     }
+	 *   });
+	 *
+	 * The `country-update` payload will be guaranteed to invoke the stores'
+	 * registered callbacks in order: `CountryStore`, `CityStore`, then
+	 * `FlightPriceStore`.
+	 */
+	
+	var Dispatcher = (function () {
+	  function Dispatcher() {
+	    _classCallCheck(this, Dispatcher);
+	
+	    this._callbacks = {};
+	    this._isDispatching = false;
+	    this._isHandled = {};
+	    this._isPending = {};
+	    this._lastID = 1;
+	  }
+	
+	  /**
+	   * Registers a callback to be invoked with every dispatched payload. Returns
+	   * a token that can be used with `waitFor()`.
+	   */
+	
+	  Dispatcher.prototype.register = function register(callback) {
+	    var id = _prefix + this._lastID++;
+	    this._callbacks[id] = callback;
+	    return id;
+	  };
+	
+	  /**
+	   * Removes a callback based on its token.
+	   */
+	
+	  Dispatcher.prototype.unregister = function unregister(id) {
+	    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	    delete this._callbacks[id];
+	  };
+	
+	  /**
+	   * Waits for the callbacks specified to be invoked before continuing execution
+	   * of the current callback. This method should only be used by a callback in
+	   * response to a dispatched payload.
+	   */
+	
+	  Dispatcher.prototype.waitFor = function waitFor(ids) {
+	    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;
+	    for (var ii = 0; ii < ids.length; ii++) {
+	      var id = ids[ii];
+	      if (this._isPending[id]) {
+	        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;
+	        continue;
+	      }
+	      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
+	      this._invokeCallback(id);
+	    }
+	  };
+	
+	  /**
+	   * Dispatches a payload to all registered callbacks.
+	   */
+	
+	  Dispatcher.prototype.dispatch = function dispatch(payload) {
+	    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;
+	    this._startDispatching(payload);
+	    try {
+	      for (var id in this._callbacks) {
+	        if (this._isPending[id]) {
+	          continue;
+	        }
+	        this._invokeCallback(id);
+	      }
+	    } finally {
+	      this._stopDispatching();
+	    }
+	  };
+	
+	  /**
+	   * Is this Dispatcher currently dispatching.
+	   */
+	
+	  Dispatcher.prototype.isDispatching = function isDispatching() {
+	    return this._isDispatching;
+	  };
+	
+	  /**
+	   * Call the callback stored with the given id. Also do some internal
+	   * bookkeeping.
+	   *
+	   * @internal
+	   */
+	
+	  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {
+	    this._isPending[id] = true;
+	    this._callbacks[id](this._pendingPayload);
+	    this._isHandled[id] = true;
+	  };
+	
+	  /**
+	   * Set up bookkeeping needed when dispatching.
+	   *
+	   * @internal
+	   */
+	
+	  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {
+	    for (var id in this._callbacks) {
+	      this._isPending[id] = false;
+	      this._isHandled[id] = false;
+	    }
+	    this._pendingPayload = payload;
+	    this._isDispatching = true;
+	  };
+	
+	  /**
+	   * Clear bookkeeping used for dispatching.
+	   *
+	   * @internal
+	   */
+	
+	  Dispatcher.prototype._stopDispatching = function _stopDispatching() {
+	    delete this._pendingPayload;
+	    this._isDispatching = false;
+	  };
+	
+	  return Dispatcher;
+	})();
+	
+	module.exports = Dispatcher;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule invariant
+	 */
+	
+	"use strict";
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var invariant = function (condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+	
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 215 */
+/***/ function(module, exports) {
+
+	var FilterConstants = {
+	  BOUND_PARAMS_RECEIVED: "BOUND_PARAMS_RECEIVED",
+	  MIN_RENT_RECEIVED: "MIN_RENT_RECEIVED",
+	  MAX_RENT_RECEIVED: "MAX_RENT_RECEIVED",
+	  MIN_BATHROOMS_RECEIVED: "MIN_BATHROOMS_RECEIVED",
+	  MAX_BATHROOMS_RECEIVED: "MAX_BATHROOMS_RECEIVED",
+	  MIN_BEDROOMS_RECEIVED: "MIN_BEDROOMS_RECEIVED",
+	  MAX_BEDROOMS_RECEIVED: "MAX_BEDROOMS_RECEIVED",
+	  LISTING_PARAMS_RECEIVED: "LISTING_PARAMS_RECEIVED"
+	};
+	
+	module.exports = FilterConstants;
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ApiUtil = __webpack_require__(217),
+	    ListingStore = __webpack_require__(237),
+	    FilterParamsStore = __webpack_require__(220),
+	    Filters = __webpack_require__(238),
+	    Map = __webpack_require__(209),
+	    ListingIndex = __webpack_require__(239);
+	
+	var Search = React.createClass({
+	  displayName: 'Search',
+	
+	  contextTypes: {
+	    router: React.PropTypes.func
+	  },
+	
+	  getInitialState: function () {
+	    return {
+	      listings: ListingStore.all(),
+	      filterParams: FilterParamsStore.all()
+	    };
+	  },
+	
+	  _listingsChanged: function () {
+	    this.setState({ listings: ListingStore.all() });
+	  },
+	
+	  _filterParamsChanged: function () {
+	    this.setState({ filterParams: FilterParamsStore.all() });
+	    ApiUtil.fetchListings();
+	  },
+	
+	  componentDidMount: function () {
+	    this.listingListener = ListingStore.addListener(this._listingsChanged);
+	    this.filterParamsListener = FilterParamsStore.addListener(this._filterParamsChanged);
+	    ApiUtil.fetchListings();
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listingListener.remove();
+	    this.filterParamsListener.remove();
+	  },
+	
+	  handleMarkerClick: function (listing) {
+	    console.log(listing.id + " marker clicked");
+	    this.props.history.pushState(null, "listings/" + listing.id);
+	  },
+	
+	  render: function () {
+	    var listings = this.state.listings;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'search' },
+	      React.createElement(Map, {
+	        listings: listings,
+	        onMarkerClick: this.handleMarkerClick
+	      }),
+	      React.createElement(Filters, {
+	        listings: listings,
+	        filterParams: this.state.filterParams
+	      }),
+	      React.createElement(ListingIndex, {
+	        listings: listings,
+	        history: this.props.history
+	      })
+	    );
+	  }
+	});
+	
+	module.exports = Search;
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var ApiActions = __webpack_require__(218),
+	    FilterParamsStore = __webpack_require__(220);
+	
+	var ApiUtil = {
+	  fetchListings: function () {
+	    var params = FilterParamsStore.all();
+	
+	    $.get('api/listings', params, function (listings) {
+	      ApiActions.receiveAllListings(listings);
+	    });
+	  }
+	};
+	
+	module.exports = ApiUtil;
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AppDispatcher = __webpack_require__(211),
+	    ListingConstants = __webpack_require__(219);
+	
+	var ApiActions = {
+	  receiveAllListings: function (listings) {
+	    AppDispatcher.dispatch({
+	      actionType: ListingConstants.LISTINGS_RECEIVED,
+	      listings: listings
+	    });
+	  }
+	};
+	
+	module.exports = ApiActions;
+
+/***/ },
+/* 219 */
+/***/ function(module, exports) {
+
+	var ListingConstants = {
+	  LISTINGS_RECEIVED: "LISTINGS_RECEIVED"
+	};
+	
+	module.exports = ListingConstants;
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(221).Store,
+	    AppDispatcher = __webpack_require__(211),
+	    FilterConstants = __webpack_require__(215);
+	
+	var FilterParamsStore = new Store(AppDispatcher),
+	    _params = {
+	  bounds: {},
+	  rent: { min: 0, max: 10000 },
+	  bathrooms: { min: 0, max: 20 },
+	  bedrooms: { min: 0, max: 10 },
+	  listing_type: { lease: true, sublet: true }
+	};
+	
+	FilterParamsStore.all = function () {
+	  return Object.assign({}, _params);
+	};
+	
+	FilterParamsStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case FilterConstants.BOUND_PARAMS_RECEIVED:
+	
+	      _params.bounds = payload.bounds;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MIN_RENT_RECEIVED:
+	
+	      _params.rent.min = payload.minRent;
+	      FilterParamsStore.__emitChange();
+	      break;
+	    case FilterConstants.MAX_RENT_RECEIVED:
+	
+	      _params.rent.max = payload.maxRent;
+	      FilterParamsStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = FilterParamsStore;
+
+/***/ },
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	module.exports.Container = __webpack_require__(222);
+	module.exports.MapStore = __webpack_require__(225);
+	module.exports.Mixin = __webpack_require__(236);
+	module.exports.ReduceStore = __webpack_require__(226);
+	module.exports.Store = __webpack_require__(227);
+
+
+/***/ },
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24338,10 +24839,10 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var FluxStoreGroup = __webpack_require__(213);
+	var FluxStoreGroup = __webpack_require__(223);
 	
 	var invariant = __webpack_require__(214);
-	var shallowEqual = __webpack_require__(215);
+	var shallowEqual = __webpack_require__(224);
 	
 	var DEFAULT_OPTIONS = {
 	  pure: true,
@@ -24499,7 +25000,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 213 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24580,62 +25081,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 214 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright 2013-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule invariant
-	 */
-	
-	"use strict";
-	
-	/**
-	 * Use invariant() to assert state which your program assumes to be true.
-	 *
-	 * Provide sprintf-style format (only %s is supported) and arguments
-	 * to provide information about what broke and what you were
-	 * expecting.
-	 *
-	 * The invariant message will be stripped in production, but the invariant
-	 * will remain to ensure logic does not differ in production.
-	 */
-	
-	var invariant = function (condition, format, a, b, c, d, e, f) {
-	  if (process.env.NODE_ENV !== 'production') {
-	    if (format === undefined) {
-	      throw new Error('invariant requires an error message argument');
-	    }
-	  }
-	
-	  if (!condition) {
-	    var error;
-	    if (format === undefined) {
-	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-	    } else {
-	      var args = [a, b, c, d, e, f];
-	      var argIndex = 0;
-	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
-	        return args[argIndex++];
-	      }));
-	    }
-	
-	    error.framesToPop = 1; // we don't care about invariant's own frame
-	    throw error;
-	  }
-	};
-	
-	module.exports = invariant;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 215 */
+/* 224 */
 /***/ function(module, exports) {
 
 	/**
@@ -24690,7 +25136,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 216 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24711,8 +25157,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var FluxReduceStore = __webpack_require__(217);
-	var Immutable = __webpack_require__(226);
+	var FluxReduceStore = __webpack_require__(226);
+	var Immutable = __webpack_require__(235);
 	
 	var invariant = __webpack_require__(214);
 	
@@ -24840,7 +25286,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 217 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24861,9 +25307,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var FluxStore = __webpack_require__(218);
+	var FluxStore = __webpack_require__(227);
 	
-	var abstractMethod = __webpack_require__(225);
+	var abstractMethod = __webpack_require__(234);
 	var invariant = __webpack_require__(214);
 	
 	var FluxReduceStore = (function (_FluxStore) {
@@ -24947,7 +25393,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 218 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -24966,7 +25412,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var _require = __webpack_require__(219);
+	var _require = __webpack_require__(228);
 	
 	var EventEmitter = _require.EventEmitter;
 	
@@ -25130,7 +25576,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 219 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25143,14 +25589,14 @@
 	 */
 	
 	var fbemitter = {
-	  EventEmitter: __webpack_require__(220)
+	  EventEmitter: __webpack_require__(229)
 	};
 	
 	module.exports = fbemitter;
 
 
 /***/ },
-/* 220 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25169,10 +25615,10 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var EmitterSubscription = __webpack_require__(221);
-	var EventSubscriptionVendor = __webpack_require__(223);
+	var EmitterSubscription = __webpack_require__(230);
+	var EventSubscriptionVendor = __webpack_require__(232);
 	
-	var emptyFunction = __webpack_require__(224);
+	var emptyFunction = __webpack_require__(233);
 	var invariant = __webpack_require__(214);
 	
 	/**
@@ -25347,7 +25793,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 221 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25368,7 +25814,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var EventSubscription = __webpack_require__(222);
+	var EventSubscription = __webpack_require__(231);
 	
 	/**
 	 * EmitterSubscription represents a subscription with listener and context data.
@@ -25400,7 +25846,7 @@
 	module.exports = EmitterSubscription;
 
 /***/ },
-/* 222 */
+/* 231 */
 /***/ function(module, exports) {
 
 	/**
@@ -25451,7 +25897,7 @@
 	module.exports = EventSubscription;
 
 /***/ },
-/* 223 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25560,7 +26006,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 224 */
+/* 233 */
 /***/ function(module, exports) {
 
 	/**
@@ -25603,7 +26049,7 @@
 	module.exports = emptyFunction;
 
 /***/ },
-/* 225 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25630,7 +26076,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 226 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -30617,7 +31063,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30634,7 +31080,7 @@
 	
 	'use strict';
 	
-	var FluxStoreGroup = __webpack_require__(213);
+	var FluxStoreGroup = __webpack_require__(223);
 	
 	var invariant = __webpack_require__(214);
 	
@@ -30740,399 +31186,59 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 228 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Dispatcher = __webpack_require__(229).Dispatcher;
-	module.exports = new Dispatcher();
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2014-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 */
+	var Store = __webpack_require__(221).Store,
+	    AppDispatcher = __webpack_require__(211),
+	    ListingConstants = __webpack_require__(219);
 	
-	module.exports.Dispatcher = __webpack_require__(230);
-
-
-/***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2014-2015, Facebook, Inc.
-	 * All rights reserved.
-	 *
-	 * This source code is licensed under the BSD-style license found in the
-	 * LICENSE file in the root directory of this source tree. An additional grant
-	 * of patent rights can be found in the PATENTS file in the same directory.
-	 *
-	 * @providesModule Dispatcher
-	 * 
-	 * @preventMunge
-	 */
+	var ListingStore = new Store(AppDispatcher),
+	    _listings = [];
 	
-	'use strict';
-	
-	exports.__esModule = true;
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-	
-	var invariant = __webpack_require__(214);
-	
-	var _prefix = 'ID_';
-	
-	/**
-	 * Dispatcher is used to broadcast payloads to registered callbacks. This is
-	 * different from generic pub-sub systems in two ways:
-	 *
-	 *   1) Callbacks are not subscribed to particular events. Every payload is
-	 *      dispatched to every registered callback.
-	 *   2) Callbacks can be deferred in whole or part until other callbacks have
-	 *      been executed.
-	 *
-	 * For example, consider this hypothetical flight destination form, which
-	 * selects a default city when a country is selected:
-	 *
-	 *   var flightDispatcher = new Dispatcher();
-	 *
-	 *   // Keeps track of which country is selected
-	 *   var CountryStore = {country: null};
-	 *
-	 *   // Keeps track of which city is selected
-	 *   var CityStore = {city: null};
-	 *
-	 *   // Keeps track of the base flight price of the selected city
-	 *   var FlightPriceStore = {price: null}
-	 *
-	 * When a user changes the selected city, we dispatch the payload:
-	 *
-	 *   flightDispatcher.dispatch({
-	 *     actionType: 'city-update',
-	 *     selectedCity: 'paris'
-	 *   });
-	 *
-	 * This payload is digested by `CityStore`:
-	 *
-	 *   flightDispatcher.register(function(payload) {
-	 *     if (payload.actionType === 'city-update') {
-	 *       CityStore.city = payload.selectedCity;
-	 *     }
-	 *   });
-	 *
-	 * When the user selects a country, we dispatch the payload:
-	 *
-	 *   flightDispatcher.dispatch({
-	 *     actionType: 'country-update',
-	 *     selectedCountry: 'australia'
-	 *   });
-	 *
-	 * This payload is digested by both stores:
-	 *
-	 *   CountryStore.dispatchToken = flightDispatcher.register(function(payload) {
-	 *     if (payload.actionType === 'country-update') {
-	 *       CountryStore.country = payload.selectedCountry;
-	 *     }
-	 *   });
-	 *
-	 * When the callback to update `CountryStore` is registered, we save a reference
-	 * to the returned token. Using this token with `waitFor()`, we can guarantee
-	 * that `CountryStore` is updated before the callback that updates `CityStore`
-	 * needs to query its data.
-	 *
-	 *   CityStore.dispatchToken = flightDispatcher.register(function(payload) {
-	 *     if (payload.actionType === 'country-update') {
-	 *       // `CountryStore.country` may not be updated.
-	 *       flightDispatcher.waitFor([CountryStore.dispatchToken]);
-	 *       // `CountryStore.country` is now guaranteed to be updated.
-	 *
-	 *       // Select the default city for the new country
-	 *       CityStore.city = getDefaultCityForCountry(CountryStore.country);
-	 *     }
-	 *   });
-	 *
-	 * The usage of `waitFor()` can be chained, for example:
-	 *
-	 *   FlightPriceStore.dispatchToken =
-	 *     flightDispatcher.register(function(payload) {
-	 *       switch (payload.actionType) {
-	 *         case 'country-update':
-	 *         case 'city-update':
-	 *           flightDispatcher.waitFor([CityStore.dispatchToken]);
-	 *           FlightPriceStore.price =
-	 *             getFlightPriceStore(CountryStore.country, CityStore.city);
-	 *           break;
-	 *     }
-	 *   });
-	 *
-	 * The `country-update` payload will be guaranteed to invoke the stores'
-	 * registered callbacks in order: `CountryStore`, `CityStore`, then
-	 * `FlightPriceStore`.
-	 */
-	
-	var Dispatcher = (function () {
-	  function Dispatcher() {
-	    _classCallCheck(this, Dispatcher);
-	
-	    this._callbacks = {};
-	    this._isDispatching = false;
-	    this._isHandled = {};
-	    this._isPending = {};
-	    this._lastID = 1;
-	  }
-	
-	  /**
-	   * Registers a callback to be invoked with every dispatched payload. Returns
-	   * a token that can be used with `waitFor()`.
-	   */
-	
-	  Dispatcher.prototype.register = function register(callback) {
-	    var id = _prefix + this._lastID++;
-	    this._callbacks[id] = callback;
-	    return id;
-	  };
-	
-	  /**
-	   * Removes a callback based on its token.
-	   */
-	
-	  Dispatcher.prototype.unregister = function unregister(id) {
-	    !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.unregister(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
-	    delete this._callbacks[id];
-	  };
-	
-	  /**
-	   * Waits for the callbacks specified to be invoked before continuing execution
-	   * of the current callback. This method should only be used by a callback in
-	   * response to a dispatched payload.
-	   */
-	
-	  Dispatcher.prototype.waitFor = function waitFor(ids) {
-	    !this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Must be invoked while dispatching.') : invariant(false) : undefined;
-	    for (var ii = 0; ii < ids.length; ii++) {
-	      var id = ids[ii];
-	      if (this._isPending[id]) {
-	        !this._isHandled[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): Circular dependency detected while ' + 'waiting for `%s`.', id) : invariant(false) : undefined;
-	        continue;
-	      }
-	      !this._callbacks[id] ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatcher.waitFor(...): `%s` does not map to a registered callback.', id) : invariant(false) : undefined;
-	      this._invokeCallback(id);
-	    }
-	  };
-	
-	  /**
-	   * Dispatches a payload to all registered callbacks.
-	   */
-	
-	  Dispatcher.prototype.dispatch = function dispatch(payload) {
-	    !!this._isDispatching ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Dispatch.dispatch(...): Cannot dispatch in the middle of a dispatch.') : invariant(false) : undefined;
-	    this._startDispatching(payload);
-	    try {
-	      for (var id in this._callbacks) {
-	        if (this._isPending[id]) {
-	          continue;
-	        }
-	        this._invokeCallback(id);
-	      }
-	    } finally {
-	      this._stopDispatching();
-	    }
-	  };
-	
-	  /**
-	   * Is this Dispatcher currently dispatching.
-	   */
-	
-	  Dispatcher.prototype.isDispatching = function isDispatching() {
-	    return this._isDispatching;
-	  };
-	
-	  /**
-	   * Call the callback stored with the given id. Also do some internal
-	   * bookkeeping.
-	   *
-	   * @internal
-	   */
-	
-	  Dispatcher.prototype._invokeCallback = function _invokeCallback(id) {
-	    this._isPending[id] = true;
-	    this._callbacks[id](this._pendingPayload);
-	    this._isHandled[id] = true;
-	  };
-	
-	  /**
-	   * Set up bookkeeping needed when dispatching.
-	   *
-	   * @internal
-	   */
-	
-	  Dispatcher.prototype._startDispatching = function _startDispatching(payload) {
-	    for (var id in this._callbacks) {
-	      this._isPending[id] = false;
-	      this._isHandled[id] = false;
-	    }
-	    this._pendingPayload = payload;
-	    this._isDispatching = true;
-	  };
-	
-	  /**
-	   * Clear bookkeeping used for dispatching.
-	   *
-	   * @internal
-	   */
-	
-	  Dispatcher.prototype._stopDispatching = function _stopDispatching() {
-	    delete this._pendingPayload;
-	    this._isDispatching = false;
-	  };
-	
-	  return Dispatcher;
-	})();
-	
-	module.exports = Dispatcher;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 231 */
-/***/ function(module, exports) {
-
-	var ListingConstants = {
-	  LISTINGS_RECEIVED: "LISTINGS_RECEIVED"
+	var resetListings = function (listings) {
+	  _listings = listings.slice(0);
 	};
 	
-	module.exports = ListingConstants;
-
-/***/ },
-/* 232 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var ApiActions = __webpack_require__(233),
-	    FilterParamsStore = __webpack_require__(234);
-	
-	var ApiUtil = {
-	  fetchListings: function () {
-	    var params = FilterParamsStore.all();
-	    $.get('api/listings', params, function (listings) {
-	      ApiActions.receiveAllListings(listings);
-	    });
-	  }
+	ListingStore.all = function () {
+	  return _listings.slice(0);
 	};
 	
-	module.exports = ApiUtil;
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var AppDispatcher = __webpack_require__(228),
-	    ListingConstants = __webpack_require__(231);
-	
-	var ApiActions = {
-	  receiveAllListings: function (listings) {
-	    AppDispatcher.dispatch({
-	      actionType: ListingConstants.LISTINGS_RECEIVED,
-	      listings: listings
-	    });
-	  }
-	};
-	
-	module.exports = ApiActions;
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(211).Store,
-	    AppDispatcher = __webpack_require__(228),
-	    FilterConstants = __webpack_require__(235);
-	
-	var FilterParamsStore = new Store(AppDispatcher);
-	var _params = { bounds: {} };
-	
-	FilterParamsStore.all = function () {
-	  return Object.assign({}, _params);
-	};
-	
-	var updateBoundFilter = function (bounds) {
-	  _params.bounds = bounds;
-	};
-	
-	FilterParamsStore.__onDispatch = function (payload) {
+	ListingStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
-	    case FilterConstants.BOUND_PARAMS_RECEIVED:
-	      updateBoundFilter(payload.bounds);
-	      FilterParamsStore.__emitChange();
+	    case ListingConstants.LISTINGS_RECEIVED:
+	      resetListings(payload.listings);
+	      ListingStore.__emitChange();
 	      break;
 	  }
 	};
 	
-	module.exports = FilterParamsStore;
+	module.exports = ListingStore;
 
 /***/ },
-/* 235 */
-/***/ function(module, exports) {
-
-	var FilterConstants = {
-	  BOUND_PARAMS_RECEIVED: "BOUND_PARAMS_RECEIVED"
-	};
-	
-	module.exports = FilterConstants;
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var AppDispatcher = __webpack_require__(228),
-	    FilterConstants = __webpack_require__(235);
-	
-	var FilterActions = {
-	  updateBounds: function (bounds) {
-	    AppDispatcher.dispatch({
-	      actionType: FilterConstants.BOUND_PARAMS_RECEIVED,
-	      bounds: bounds
-	    });
-	  }
-	};
-	
-	module.exports = FilterActions;
-
-/***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
-	    ListingStore = __webpack_require__(210);
+	    FilterActions = __webpack_require__(210);
 	
-	var Index = React.createClass({
-	  displayName: 'Index',
+	var Filters = React.createClass({
+	  displayName: 'Filters',
 	
-	  getInitialState: function () {
-	    return {
-	      listings: ListingStore.all()
-	    };
+	  currentMinRent: function () {
+	    return this.props.filterParams.minRent;
 	  },
 	
-	  componentDidMount: function () {
-	    this.listingListener = ListingStore.addListener(this._onChange);
+	  currentMaxRent: function () {
+	    return this.props.filterParams.maxRent;
 	  },
 	
-	  componentWillUnmount: function () {
-	    this.listingListener.remove();
+	  minRentChanged: function (e) {
+	    FilterActions.updateMinRent(e.target.value);
 	  },
 	
-	  _onChange: function () {
-	    this.setState({ listings: ListingStore.all() });
-	  },
-	
-	  handleItemClick: function (listing) {
-	    // this.props.history.pushState(null, "listings/" + listing.id);
+	  maxRentChanged: function (e) {
+	    FilterActions.updateMaxRent(e.target.value);
 	  },
 	
 	  render: function () {
@@ -31140,21 +31246,188 @@
 	      'div',
 	      null,
 	      React.createElement(
+	        'h3',
+	        null,
+	        'Rent'
+	      ),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Min: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.currentMinRent(),
+	        onChange: this.minRentChanged
+	      }),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Max: '
+	      ),
+	      React.createElement('input', {
+	        type: 'number',
+	        value: this.currentMaxRent(),
+	        onChange: this.maxRentChanged
+	      }),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Bedrooms'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Bathrooms'
+	      ),
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Types'
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Filters;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ListingIndexItem = __webpack_require__(240);
+	
+	var ListingIndex = React.createClass({
+	  displayName: 'ListingIndex',
+	
+	  handleItemClick: function (listing) {
+	    console.log(listing.id + "clicked");
+	    this.props.history.pushState(null, "listings/" + listing.id);
+	  },
+	
+	  render: function () {
+	    var handleItemClick = this.handleItemClick;
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
 	        'ul',
 	        null,
-	        this.state.listings.map(function (listing, i) {
-	          return React.createElement(
-	            'div',
-	            { key: i },
-	            listing.description
-	          );
+	        this.props.listings.map(function (listing) {
+	          var onClick = handleItemClick.bind(null, listing);
+	
+	          return React.createElement(ListingIndexItem, {
+	            key: listing.id,
+	            onClick: onClick,
+	            listing: listing });
 	        })
 	      )
 	    );
 	  }
 	});
 	
-	module.exports = Index;
+	module.exports = ListingIndex;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ReactRouter = __webpack_require__(159);
+	
+	var ListingIndexItem = React.createClass({
+	  displayName: 'ListingIndexItem',
+	
+	  mixins: [ReactRouter.history],
+	
+	  render: function () {
+	    var listing = this.props.listing;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'listing-index-item', onClick: this.props.onClick },
+	      listing.description,
+	      React.createElement('br', null),
+	      '$',
+	      listing.rent
+	    );
+	  }
+	});
+	
+	module.exports = ListingIndexItem;
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ReactRouter = __webpack_require__(159),
+	    ApiUtil = __webpack_require__(217),
+	    ListingStore = __webpack_require__(237),
+	    Map = __webpack_require__(209);
+	
+	var ListingShow = React.createClass({
+	  displayName: 'ListingShow',
+	
+	  getInitialState: function () {
+	    var listingId = this.props.params.listingId;
+	    var listing = this._findListingById(listingId);
+	
+	    return { listing: listing };
+	  },
+	
+	  _findListingById: function (id) {
+	    ListingStore.all().forEach(function (listing) {
+	      if (id === listing.id) {
+	        return listing;
+	      }
+	    });
+	
+	    return {};
+	  },
+	
+	  componentDidMount: function () {
+	    this.listingListener = ListingStore.addListener(this._onChange);
+	    ApiUtil.fetchListings();
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listingListener.remove();
+	  },
+	
+	  _onChange: function () {
+	    var listingId = this.props.params.listingId;
+	    var listing = this._findBenchById(listingId);
+	
+	    this.setState({ listing: listing });
+	  },
+	
+	  render: function () {
+	    var listings = [];
+	
+	    if (this.state.listing) {
+	      listings.push(this.state.listing);
+	    }
+	
+	    var Link = ReactRouter.Link;
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        Link,
+	        { to: '/' },
+	        'Home'
+	      ),
+	      's',
+	      React.createElement(Listing, { listing: this.state.listing, className: 'listing' })
+	    );
+	  }
+	});
+	
+	module.exports = ListingShow;
 
 /***/ }
 /******/ ]);
