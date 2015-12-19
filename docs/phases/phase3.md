@@ -29,3 +29,8 @@
 ### Util
 
 ## Gems/Libraries
+[noUiSlider][no_ui_slider] (npm)
+[wNumb][wnumb]
+
+[no_ui_slider]: https://www.npmjs.com/package/react-nouislider
+[wnumb]: http://refreshless.com/wnumb/

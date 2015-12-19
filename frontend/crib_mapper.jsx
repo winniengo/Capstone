@@ -17,6 +17,8 @@ var routes = (
   </Route>
 );
 
+var handlesSlider = document.getElementById('slider-handles');
+
 document.addEventListener("DOMContentLoaded", function () {
   var content = document.querySelector('#content');
   ReactDOM.render(<Router>{routes}</Router>, content);

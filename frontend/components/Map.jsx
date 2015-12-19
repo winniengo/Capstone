@@ -24,7 +24,6 @@ var Map = React.createClass({
         };
 
     this.map = new google.maps.Map(map, options);
-    this.props.listings.forEach(this.addMarker);
     this.registerListener();
     this.markers = [];
 

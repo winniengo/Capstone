@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require wNumb
 //= require bundle
 //= require bootstrap
