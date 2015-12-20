@@ -31355,12 +31355,12 @@
 	      React.createElement(
 	        'div',
 	        { className: 'filter-label' },
-	        'Rent'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'filter-range', id: 'slider-snap-value-range' },
-	        rentRange
+	        'Rent',
+	        React.createElement(
+	          'div',
+	          { className: 'filter-range', id: 'slider-snap-value-range' },
+	          rentRange
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -31435,17 +31435,16 @@
 	      React.createElement(
 	        'div',
 	        { className: 'filter-checkbox' },
-	        'Full Leases:',
+	        "Full Leases: ",
 	        React.createElement('input', {
 	          type: 'checkbox',
 	          onChange: this.leaseTypeChanged,
 	          checked: leaseTypeChecked })
 	      ),
-	      React.createElement('br', null),
 	      React.createElement(
 	        'div',
 	        { className: 'filter-checkbox' },
-	        'Sublets:',
+	        "Sublets: ",
 	        React.createElement('input', {
 	          type: 'checkbox',
 	          onChange: this.subletTypeChanged,

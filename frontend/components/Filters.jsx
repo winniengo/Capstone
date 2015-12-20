@@ -44,10 +44,11 @@ var Filters = React.createClass({
 
     return (
       <div className="filter-container">
-        <div className="filter-label">Rent</div>
+        <div className="filter-label">Rent
           <div className= "filter-range" id="slider-snap-value-range">
             {rentRange}
           </div>
+        </div>
           <div className="filter-slider">
             <div className="noUi-target noUi-ltr noUi-horizontal noUi-background">
               <Nouislider
@@ -94,15 +95,14 @@ var Filters = React.createClass({
 
           <div className="filter-label">Types</div>
             <div className="filter-checkbox">
-              Full Leases:
+              {"Full Leases: "}
               <input
                 type="checkbox"
                 onChange={this.leaseTypeChanged}
                 checked={leaseTypeChecked}/>
             </div>
-            <br/>
             <div className="filter-checkbox">
-            Sublets:
+            {"Sublets: "}
             <input
               type="checkbox"
               onChange={this.subletTypeChanged}
