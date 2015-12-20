@@ -17,12 +17,12 @@
  @import "bootstrap";
  @import "bootstrap-sprockets";
 
- #cssmenu {
+ #navbar {
    background: #7ca6bd;
    width: auto;
  }
 
- #cssmenu ul {
+ #navbar ul {
    list-style-type: none;
    margin: 0;
    padding: 0;
@@ -31,13 +31,13 @@
    zoom: 1;
  }
 
- #cssmenu ul li {
+ #navbar ul li {
    display: inline-block;
    padding: 0;
    margin: 0;
  }
 
- #cssmenu ul li a {
+ #navbar ul li a {
    color: white;
    text-transform: uppercase;
    text-decoration: none;
@@ -47,7 +47,7 @@
    display: block;
  }
 
- #cssmenu ul li a:hover {
+ #navbar ul li a:hover {
    background: #406C7A;
  }
 
@@ -66,7 +66,6 @@
 .map {
   max-width: 700px;
   height: 500px;
-  // margin: 0 auto;
 }
 
 .half {
@@ -88,7 +87,24 @@
 
 }
 
+.filter-container {
+
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filter-range {
+
+}
+
 .filter-slider {
   position: relative;
   padding: 10px 30px;
+}
+
+.filter-checkbox {
+
 }

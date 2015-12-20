@@ -54,7 +54,7 @@
 	var App = __webpack_require__(208),
 	    Map = __webpack_require__(209),
 	    Search = __webpack_require__(216),
-	    ListingShow = __webpack_require__(241);
+	    ListingShow = __webpack_require__(243);
 	
 	var routes = React.createElement(
 	  Route,
@@ -24689,7 +24689,7 @@
 	    FilterParamsStore = __webpack_require__(220),
 	    Filters = __webpack_require__(238),
 	    Map = __webpack_require__(209),
-	    ListingIndex = __webpack_require__(239);
+	    ListingIndex = __webpack_require__(241);
 	
 	var Search = React.createClass({
 	  displayName: 'Search',
@@ -31303,47 +31303,12 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* globals wNumb */
 	var React = __webpack_require__(1),
-	    Nouislider = __webpack_require__(242),
+	    Nouislider = __webpack_require__(239),
 	    FilterActions = __webpack_require__(210);
-	
-	var listingTypes = ['lease', 'sublet'];
 	
 	var Filters = React.createClass({
 	  displayName: 'Filters',
-	
-	  minRentChanged: function (e) {
-	    FilterActions.updateMinRent(e.target.value);
-	  },
-	
-	  maxRentChanged: function (e) {
-	    FilterActions.updateMaxRent(e.target.value);
-	  },
-	
-	  minBedroomsChanged: function (e) {
-	    FilterActions.updateMinBedrooms(e.target.value);
-	  },
-	
-	  maxBedroomsChanged: function (e) {
-	    FilterActions.updateMaxBedrooms(e.target.value);
-	  },
-	
-	  minBathroomsChanged: function (e) {
-	    FilterActions.updateMinBathrooms(e.target.value);
-	  },
-	
-	  maxBathroomsChanged: function (e) {
-	    FilterActions.updateMaxBathrooms(e.target.value);
-	  },
-	
-	  leaseTypeChanged: function () {
-	    FilterActions.updateLeaseType();
-	  },
-	
-	  subletTypeChanged: function () {
-	    FilterActions.updateSubletType();
-	  },
 	
 	  rentSliderChange: function (values, handle) {
 	    if (handle === 0) {
@@ -31354,7 +31319,6 @@
 	  },
 	
 	  bedroomsSliderChange: function (values, handle) {
-	    console.log(values, handle);
 	    if (handle === 0) {
 	      FilterActions.updateMinBedrooms(parseInt(values[0]));
 	    } else {
@@ -31370,17 +31334,33 @@
 	    }
 	  },
 	
+	  leaseTypeChanged: function () {
+	    FilterActions.updateLeaseType();
+	  },
+	
+	  subletTypeChanged: function () {
+	    FilterActions.updateSubletType();
+	  },
+	
 	  render: function () {
-	    var leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
+	    var rentRange = "$" + this.props.filterParams.rent.min + " - " + this.props.filterParams.rent.max,
+	        bedroomsRange = this.props.filterParams.bedrooms.min + " - " + this.props.filterParams.bedrooms.max + "+",
+	        bathroomsRange = this.props.filterParams.bathrooms.min + " - " + this.props.filterParams.bathrooms.max + "+",
+	        leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
 	        subletTypeChecked = this.props.filterParams.listing_type.sublet ? "checked" : "";
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'filters' },
+	      { className: 'filter-container' },
 	      React.createElement(
-	        'h3',
-	        null,
+	        'div',
+	        { className: 'filter-label' },
 	        'Rent'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'filter-range', id: 'slider-snap-value-range' },
+	        rentRange
 	      ),
 	      React.createElement(
 	        'div',
@@ -31399,18 +31379,13 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { id: 'slider-snap-value-range' },
-	        'Min: ',
-	        this.props.filterParams.rent.min,
-	        ' ',
-	        React.createElement('br', null),
-	        'Max: ',
-	        this.props.filterParams.rent.max
+	        { className: 'filter-label' },
+	        'Bedrooms'
 	      ),
 	      React.createElement(
-	        'h3',
-	        null,
-	        'Bedrooms'
+	        'div',
+	        { className: 'filter-range', id: 'slider-snap-value-range' },
+	        bedroomsRange
 	      ),
 	      React.createElement(
 	        'div',
@@ -31429,18 +31404,13 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { id: 'slider-snap-value-range' },
-	        'Min: ',
-	        this.props.filterParams.bedrooms.min,
-	        ' ',
-	        React.createElement('br', null),
-	        'Max: ',
-	        this.props.filterParams.bedrooms.max
+	        { className: 'filter-label' },
+	        'Bathrooms'
 	      ),
 	      React.createElement(
-	        'h3',
-	        null,
-	        'Bathrooms'
+	        'div',
+	        { className: 'filter-range', id: 'slider-snap-value-range' },
+	        bathroomsRange
 	      ),
 	      React.createElement(
 	        'div',
@@ -31459,37 +31429,28 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { id: 'slider-snap-value-range' },
-	        'Min: ',
-	        this.props.filterParams.bathrooms.min,
-	        ' ',
-	        React.createElement('br', null),
-	        'Max: ',
-	        this.props.filterParams.bathrooms.max
-	      ),
-	      React.createElement(
-	        'h3',
-	        null,
+	        { className: 'filter-label' },
 	        'Types'
 	      ),
 	      React.createElement(
-	        'label',
-	        null,
-	        'Full Leases'
+	        'div',
+	        { className: 'filter-checkbox' },
+	        'Full Leases:',
+	        React.createElement('input', {
+	          type: 'checkbox',
+	          onChange: this.leaseTypeChanged,
+	          checked: leaseTypeChecked })
 	      ),
-	      React.createElement('input', {
-	        type: 'checkbox',
-	        onChange: this.leaseTypeChanged,
-	        checked: leaseTypeChecked }),
+	      React.createElement('br', null),
 	      React.createElement(
-	        'label',
-	        null,
-	        'Sublets'
-	      ),
-	      React.createElement('input', {
-	        type: 'checkbox',
-	        onChange: this.subletTypeChanged,
-	        checked: subletTypeChecked })
+	        'div',
+	        { className: 'filter-checkbox' },
+	        'Sublets:',
+	        React.createElement('input', {
+	          type: 'checkbox',
+	          onChange: this.subletTypeChanged,
+	          checked: subletTypeChecked })
+	      )
 	    );
 	  }
 	});
@@ -31498,149 +31459,6 @@
 
 /***/ },
 /* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    ListingIndexItem = __webpack_require__(240);
-	
-	var ListingIndex = React.createClass({
-	  displayName: 'ListingIndex',
-	
-	  handleItemClick: function (listing) {
-	    console.log(listing.id + "clicked");
-	    this.props.history.pushState(null, "listings/" + listing.id);
-	  },
-	
-	  render: function () {
-	    var handleItemClick = this.handleItemClick;
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'listing-index' },
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Listings'
-	      ),
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.props.listings.map(function (listing) {
-	          var onClick = handleItemClick.bind(null, listing);
-	
-	          return React.createElement(ListingIndexItem, {
-	            key: listing.id,
-	            onClick: onClick,
-	            listing: listing });
-	        })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = ListingIndex;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    ReactRouter = __webpack_require__(159);
-	
-	var ListingIndexItem = React.createClass({
-	  displayName: 'ListingIndexItem',
-	
-	  mixins: [ReactRouter.history],
-	
-	  render: function () {
-	    var listing = this.props.listing;
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'listing-index-item', onClick: this.props.onClick },
-	      listing.description,
-	      React.createElement('br', null),
-	      '$',
-	      listing.rent
-	    );
-	  }
-	});
-	
-	module.exports = ListingIndexItem;
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    ReactRouter = __webpack_require__(159),
-	    ApiUtil = __webpack_require__(217),
-	    ListingStore = __webpack_require__(237),
-	    Map = __webpack_require__(209);
-	
-	var ListingShow = React.createClass({
-	  displayName: 'ListingShow',
-	
-	  getInitialState: function () {
-	    var listingId = this.props.params.listingId;
-	    var listing = this._findListingById(listingId);
-	
-	    return { listing: listing };
-	  },
-	
-	  _findListingById: function (id) {
-	    ListingStore.all().forEach(function (listing) {
-	      if (id === listing.id) {
-	        return listing;
-	      }
-	    });
-	
-	    return {};
-	  },
-	
-	  componentDidMount: function () {
-	    this.listingListener = ListingStore.addListener(this._onChange);
-	    ApiUtil.fetchListings();
-	  },
-	
-	  componentWillUnmount: function () {
-	    this.listingListener.remove();
-	  },
-	
-	  _onChange: function () {
-	    var listingId = this.props.params.listingId;
-	    var listing = this._findBenchById(listingId);
-	
-	    this.setState({ listing: listing });
-	  },
-	
-	  render: function () {
-	    var listings = [];
-	
-	    if (this.state.listing) {
-	      listings.push(this.state.listing);
-	    }
-	
-	    var Link = ReactRouter.Link;
-	
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        Link,
-	        { to: '/' },
-	        'Home'
-	      ),
-	      's',
-	      React.createElement(Listing, { listing: this.state.listing, className: 'listing' })
-	    );
-	  }
-	});
-	
-	module.exports = ListingShow;
-
-/***/ },
-/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31661,7 +31479,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _nouisliderAlgoliaFork = __webpack_require__(243);
+	var _nouisliderAlgoliaFork = __webpack_require__(240);
 	
 	var _nouisliderAlgoliaFork2 = _interopRequireDefault(_nouisliderAlgoliaFork);
 	
@@ -31752,7 +31570,7 @@
 
 
 /***/ },
-/* 243 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! nouislider-algolia-fork - 8.1.2 - 2015-11-19 21:55:49 */
@@ -33523,6 +33341,149 @@
 		};
 	
 	}));
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ListingIndexItem = __webpack_require__(242);
+	
+	var ListingIndex = React.createClass({
+	  displayName: 'ListingIndex',
+	
+	  handleItemClick: function (listing) {
+	    console.log(listing.id + "clicked");
+	    this.props.history.pushState(null, "listings/" + listing.id);
+	  },
+	
+	  render: function () {
+	    var handleItemClick = this.handleItemClick;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'listing-index' },
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Listings'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.props.listings.map(function (listing) {
+	          var onClick = handleItemClick.bind(null, listing);
+	
+	          return React.createElement(ListingIndexItem, {
+	            key: listing.id,
+	            onClick: onClick,
+	            listing: listing });
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = ListingIndex;
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ReactRouter = __webpack_require__(159);
+	
+	var ListingIndexItem = React.createClass({
+	  displayName: 'ListingIndexItem',
+	
+	  mixins: [ReactRouter.history],
+	
+	  render: function () {
+	    var listing = this.props.listing;
+	
+	    return React.createElement(
+	      'div',
+	      { className: 'listing-index-item', onClick: this.props.onClick },
+	      listing.description,
+	      React.createElement('br', null),
+	      '$',
+	      listing.rent
+	    );
+	  }
+	});
+	
+	module.exports = ListingIndexItem;
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ReactRouter = __webpack_require__(159),
+	    ApiUtil = __webpack_require__(217),
+	    ListingStore = __webpack_require__(237),
+	    Map = __webpack_require__(209);
+	
+	var ListingShow = React.createClass({
+	  displayName: 'ListingShow',
+	
+	  getInitialState: function () {
+	    var listingId = this.props.params.listingId;
+	    var listing = this._findListingById(listingId);
+	
+	    return { listing: listing };
+	  },
+	
+	  _findListingById: function (id) {
+	    ListingStore.all().forEach(function (listing) {
+	      if (id === listing.id) {
+	        return listing;
+	      }
+	    });
+	
+	    return {};
+	  },
+	
+	  componentDidMount: function () {
+	    this.listingListener = ListingStore.addListener(this._onChange);
+	    ApiUtil.fetchListings();
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listingListener.remove();
+	  },
+	
+	  _onChange: function () {
+	    var listingId = this.props.params.listingId;
+	    var listing = this._findBenchById(listingId);
+	
+	    this.setState({ listing: listing });
+	  },
+	
+	  render: function () {
+	    var listings = [];
+	
+	    if (this.state.listing) {
+	      listings.push(this.state.listing);
+	    }
+	
+	    var Link = ReactRouter.Link;
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        Link,
+	        { to: '/' },
+	        'Home'
+	      ),
+	      's',
+	      React.createElement(Listing, { listing: this.state.listing, className: 'listing' })
+	    );
+	  }
+	});
+	
+	module.exports = ListingShow;
 
 /***/ }
 /******/ ]);
