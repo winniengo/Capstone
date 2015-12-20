@@ -44,7 +44,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 
 [Details][phase-two]
 
-### Phase 3: FilterParams (1.5 days)
+### Phase 3: FilterParams (1 day)
 - Implement search bar for Google Maps
 - Create FilterParams store and apply filters to Google Maps
 - Allow users to input search filters and view results
@@ -52,7 +52,7 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [Details][phase-three]
 
 ### Phase 4: Listings (1.5 days)
-- Create views for Listing 'Index', 'IndexItem', and 'Show'
+- Create views for Listing 'Show'
 - Allow users to save and view favorite listings
 - Begin styling for Listing views and app
 
@@ -71,12 +71,10 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 <!-- [Details][phase-six] -->
 
 ### Bonus Features (TBD)
+- Listing: Sublets, Min. Lease, Parking, Deposit, Broker Fee
 - Additional filter params
 - Aggregate data from source sites and populate listings onto map
 - Allow users to save search criteria and receive emails containing future matches
-- Complete JSON API (delete, update) for Listing
-- Sublets
-- Connect to Zac's [Crashmate][crashmate]
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

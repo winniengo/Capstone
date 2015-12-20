@@ -77,16 +77,57 @@
   overflow: hidden;
 }
 
-
-
 .listing-index {
   width: 200px;
   float: left;
 }
 
 .listing {
-
+  margin: 20px;
 }
+
+.listing-header {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.listing-address {
+  font-weight: 400;
+}
+
+.listing-description {
+  font-weight: 300;
+}
+
+.listing-details {
+  font-size: 16px;
+  font-weight: 400;
+  width: auto;
+}
+
+.listing-details ul {
+  list-style-type: none;
+  padding: 5px 0px;
+}
+
+.listing-details ul li {
+  padding: 5px;
+  font-size: 10px;
+  font-weight: 300;
+  background-color: #f1f1f1;
+  text-align: right;
+}
+
+.listing-details li.even {
+  background-color: #fafafa;
+}
+
+.listing-details li .header {
+  display: inline;
+  float: left;
+  font-weight: 400;
+}
+
 
 .filter-container {
   margin: 20px;
@@ -96,7 +137,7 @@
 
 .filter-label {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .filter-range {

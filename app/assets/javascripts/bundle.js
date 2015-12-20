@@ -24184,9 +24184,7 @@
 	    this._onChange();
 	  },
 	
-	  componentWillUnmount: function () {
-	    console.log('map unmounted');
-	  },
+	  componentWillUnmount: function () {},
 	
 	  registerListener: function () {
 	    google.maps.event.addListener(this.map, 'idle', (function () {
@@ -24726,7 +24724,7 @@
 	  },
 	
 	  handleMarkerClick: function (listing) {
-	    console.log(listing.id + " marker clicked");
+	    console.log("marker " + listing.id + " clicked");
 	    this.props.history.pushState(null, "listings/" + listing.id);
 	  },
 	
@@ -33419,33 +33417,41 @@
 
 	var React = __webpack_require__(1),
 	    ReactRouter = __webpack_require__(159),
+	    Link = ReactRouter.Link,
 	    ApiUtil = __webpack_require__(217),
 	    ListingStore = __webpack_require__(237),
+	    Listing = __webpack_require__(244),
 	    Map = __webpack_require__(209);
 	
 	var ListingShow = React.createClass({
 	  displayName: 'ListingShow',
 	
+	  contextTypes: {
+	    router: React.PropTypes.func
+	  },
+	
 	  getInitialState: function () {
-	    var listingId = this.props.params.listingId;
+	    var listingId = parseInt(this.props.params.listingId);
 	    var listing = this._findListingById(listingId);
 	
 	    return { listing: listing };
 	  },
 	
-	  _findListingById: function (id) {
+	  _findListingById: function (listingId) {
+	    var ret;
 	    ListingStore.all().forEach(function (listing) {
-	      if (id === listing.id) {
-	        return listing;
+	      if (listingId === listing.id) {
+	        ret = listing;
 	      }
 	    });
 	
-	    return {};
+	    return ret || {};
 	  },
 	
 	  componentDidMount: function () {
+	    console.log("listing mounted");
 	    this.listingListener = ListingStore.addListener(this._onChange);
-	    ApiUtil.fetchListings();
+	    // ApiUtil.fetchListings();
 	  },
 	
 	  componentWillUnmount: function () {
@@ -33454,35 +33460,150 @@
 	
 	  _onChange: function () {
 	    var listingId = this.props.params.listingId;
-	    var listing = this._findBenchById(listingId);
+	    var listing = this._findListingById(listingId);
 	
 	    this.setState({ listing: listing });
 	  },
 	
 	  render: function () {
-	    var listings = [];
-	
-	    if (this.state.listing) {
-	      listings.push(this.state.listing);
-	    }
-	
-	    var Link = ReactRouter.Link;
-	
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        Link,
-	        { to: '/' },
-	        'Home'
-	      ),
-	      's',
-	      React.createElement(Listing, { listing: this.state.listing, className: 'listing' })
+	      React.createElement(Listing, { listing: this.state.listing })
 	    );
 	  }
 	});
 	
 	module.exports = ListingShow;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ReactRouter = __webpack_require__(159);
+	
+	var Listing = React.createClass({
+	  displayName: 'Listing',
+	
+	  render: function () {
+	    var listingHeader = "$" + this.props.listing.rent + " - " + this.props.listing.bedrooms + " Bed / " + this.props.listing.bathrooms + " Bath";
+	    console.log(listingHeader);
+	    return React.createElement(
+	      'div',
+	      { className: 'listing' },
+	      React.createElement(
+	        'div',
+	        { className: 'listing-header' },
+	        listingHeader
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'listing-address' },
+	        this.props.listing.address
+	      ),
+	      '!!!IMAGE SLIDESHOW!!!',
+	      React.createElement(
+	        'div',
+	        { className: 'listing-description' },
+	        this.props.listing.description
+	      ),
+	      '!!!EXPLORE NEARBY MAP!!!',
+	      React.createElement(
+	        'div',
+	        { className: 'listing-details' },
+	        'Details',
+	        React.createElement(
+	          'ul',
+	          null,
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Rent'
+	            ),
+	            '$',
+	            this.props.listing.rent
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Bedrooms'
+	            ),
+	            this.props.listing.bedrooms
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Bathrooms'
+	            ),
+	            this.props.listing.bathrooms
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Available'
+	            ),
+	            'Now'
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Min. Lease'
+	            ),
+	            'TODO'
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Parking'
+	            ),
+	            'TODO'
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Deposit'
+	            ),
+	            'TODO'
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Broker Fee'
+	            ),
+	            'TODO'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Listing;
 
 /***/ }
 /******/ ]);

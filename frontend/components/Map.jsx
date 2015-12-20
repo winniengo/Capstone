@@ -42,7 +42,6 @@ var Map = React.createClass({
   },
 
   componentWillUnmount: function() {
-    console.log('map unmounted');
   },
 
   registerListener: function() {

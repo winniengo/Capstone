@@ -1,30 +1,38 @@
 var React = require('react'),
     ReactRouter = require('react-router'),
+    Link = ReactRouter.Link,
     ApiUtil = require('../../util/api_util'),
     ListingStore = require('../../stores/listing'),
+    Listing = require('./Listing'),
     Map = require('../Map');
 
 var ListingShow = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
+
   getInitialState: function() {
-    var listingId = this.props.params.listingId;
+    var listingId = parseInt(this.props.params.listingId);
     var listing = this._findListingById(listingId);
 
     return {listing: listing};
   },
 
-  _findListingById: function(id) {
+  _findListingById: function(listingId) {
+    var ret;
     ListingStore.all().forEach(function(listing) {
-      if (id === listing.id) {
-        return listing;
+      if (listingId === listing.id) {
+        ret = listing;
       }
     });
 
-    return {};
+    return ret || {};
   },
 
   componentDidMount: function() {
+    console.log("listing mounted");
     this.listingListener = ListingStore.addListener(this._onChange);
-    ApiUtil.fetchListings();
+    // ApiUtil.fetchListings();
   },
 
   componentWillUnmount: function() {
@@ -33,24 +41,15 @@ var ListingShow = React.createClass({
 
   _onChange: function() {
     var listingId = this.props.params.listingId;
-    var listing = this._findBenchById(listingId);
+    var listing = this._findListingById(listingId);
 
     this.setState({listing: listing});
   },
 
   render: function() {
-    var listings = [];
-
-    if (this.state.listing) {
-      listings.push(this.state.listing);
-    }
-
-    var Link = ReactRouter.Link;
-
     return (
       <div>
-        <Link to="/">Home</Link>s
-        <Listing listing={this.state.listing} className="listing"/>
+        <Listing listing={this.state.listing}/>
       </div>
     );
   }
