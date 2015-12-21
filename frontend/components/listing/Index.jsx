@@ -3,7 +3,6 @@ var React = require('react'),
 
 var ListingIndex = React.createClass({
   handleItemClick: function(listing) {
-    console.log(listing.id + "clicked");
     this.props.history.pushState(null, "listings/" + listing.id);
   },
 

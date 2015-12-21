@@ -1,8 +1,7 @@
-# Phase 5: Search Mailer and Show Nearby
+# Phase 5:
 
 ## Rails
 ### Models
-UserMailer
 
 ### Controllers
 
@@ -10,19 +9,16 @@ UserMailer
 
 ## Flux
 ### Views (React Components)
-* UserEmailForm
 
 ### Stores
-* UserEmail
 
 ### Actions
-* EmailActions.createEmail
-* EmailActions.destroyEmail
+* ApiActions.receiveListing
 
 ### Util
-* Util.createEmail
-* Util.destroyEmail
+* ApiUtil.fetchListing
 
 ## Gems/Libraries
-Action Mailer
-LetterOpener (gem)
+* [nuka-carousel][nuka-carousel]
+
+[nuka-carousel]: https://www.npmjs.com/package/nuka-carousel

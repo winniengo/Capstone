@@ -17,56 +17,59 @@
  @import "bootstrap";
  @import "bootstrap-sprockets";
 
- .clearfix {
-   overflow: auto;
- }
+.clearfix {
+ overflow: auto;
+}
 
- #navbar {
-   background: #7ca6bd;
-   width: auto;
- }
+/*************************************/
+#navbar {
+  overflow: auto;
+  background: #7ca6bd;
+  width: auto;
+}
 
- #navbar ul {
-   list-style-type: none;
-   margin: 0;
-   padding: 0;
-   line-height: 1;
-   display: block;
-   zoom: 1;
- }
+#navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  zoom: 1;
+}
 
- #navbar ul li {
-   display: inline-block;
-   padding: 0;
-   margin: 0;
- }
+#navbar ul li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
 
- #navbar ul li a {
-   color: white;
-   text-transform: uppercase;
-   text-decoration: none;
-   font-size: 14px;
-   position: relative;
-   padding: 10px 10px;
-   display: block;
- }
+#navbar ul li a {
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+  padding: 10px 10px;
+  display: block;
+}
 
- #navbar ul li a:hover {
-   background: #406C7A;
- }
+#navbar ul li a:hover {
+  background: #406C7A;
+}
 
- .align-right {
-   float: right;
- }
+#navbar ul li.align-right {
+  float: right;
+}
 
- .greeting {
-   position: relative;
-   text-transform: uppercase;
-   font-size: 14px;
-   padding: 10px 10px 10px 10px;
-   display: block;
- }
+#navbar ul li.greeting {
+  color: #406C7A;
+  text-transform: uppercase;
+  position: relative;
+  font-weight: 600;
+  padding: 10px;
+}
 
+/*************************************/
 .app {
   width: 100%;
 }
