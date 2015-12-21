@@ -33515,24 +33515,28 @@
 	    console.log(listingHeader);
 	    return React.createElement(
 	      'div',
-	      { className: 'listing' },
+	      { className: 'listing-show clearfix' },
 	      React.createElement(
 	        'div',
-	        { className: 'listing-header' },
-	        listingHeader
+	        { className: 'listing-main' },
+	        React.createElement(
+	          'div',
+	          { className: 'listing-header' },
+	          listingHeader
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'listing-address' },
+	          this.props.listing.address
+	        ),
+	        '!!!IMAGE SLIDESHOW!!!',
+	        React.createElement(
+	          'div',
+	          { className: 'listing-description' },
+	          this.props.listing.description
+	        ),
+	        '!!!EXPLORE NEARBY MAP!!!'
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'listing-address' },
-	        this.props.listing.address
-	      ),
-	      '!!!IMAGE SLIDESHOW!!!',
-	      React.createElement(
-	        'div',
-	        { className: 'listing-description' },
-	        this.props.listing.description
-	      ),
-	      '!!!EXPLORE NEARBY MAP!!!',
 	      React.createElement(
 	        'div',
 	        { className: 'listing-details' },

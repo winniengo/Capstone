@@ -17,6 +17,10 @@
  @import "bootstrap";
  @import "bootstrap-sprockets";
 
+ .clearfix {
+   overflow: auto;
+ }
+
  #navbar {
    background: #7ca6bd;
    width: auto;
@@ -51,7 +55,7 @@
    background: #406C7A;
  }
 
- .alight-right {
+ .align-right {
    float: right;
  }
 
@@ -77,13 +81,20 @@
   overflow: hidden;
 }
 
+/*************************************/
 .listing-index {
   width: 200px;
   float: left;
 }
 
-.listing {
+.listing-show {
   margin: 20px;
+}
+
+.listing-main {
+  float:left;
+  width: calc(100% - 340px);
+  margin: 10px;
 }
 
 .listing-header {
@@ -100,18 +111,20 @@
 }
 
 .listing-details {
+  margin: 10px;
+  float: right;
   font-size: 16px;
   font-weight: 400;
-  width: auto;
+  width: 300px;
 }
 
 .listing-details ul {
   list-style-type: none;
-  padding: 5px 0px;
+  padding: 10px 0px;
 }
 
 .listing-details ul li {
-  padding: 5px;
+  padding: 10px;
   font-size: 12px;
   font-weight: 300;
   background-color: #f1f1f1;
@@ -128,7 +141,7 @@
   font-weight: 400;
 }
 
-
+/*************************************/
 .filter-container {
   margin: 20px;
   width: 300px;
@@ -156,3 +169,5 @@
   font-weight: 300;
   margin: 2px;
 }
+
+/*************************************/
