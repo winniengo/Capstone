@@ -98,7 +98,7 @@ var Map = React.createClass({
       });
 
     marker.addListener('click', function() {
-      // this.props.onMarkerClick(listing);
+      this.props.onMarkerClick(listing);
     }.bind(this));
 
     this.markers.push(marker);
