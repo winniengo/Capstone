@@ -19,6 +19,11 @@ ListingStore.__onDispatch = function(payload) {
       resetListings(payload.listings);
       ListingStore.__emitChange();
       break;
+
+    case ListingConstants.LISTING_RECEIVED:
+      resetListings([payload.listing]);
+      ListingStore.__emitChange();
+      break;
   }
 };
 

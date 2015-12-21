@@ -7,7 +7,14 @@ var ApiActions = {
       actionType: ListingConstants.LISTINGS_RECEIVED,
       listings: listings
     });
-  }
+  },
+
+  receiveListing: function(listing) {
+    AppDispatcher.dispatch({
+      actionType: ListingConstants.LISTING_RECEIVED,
+      listing: listing
+    });
+  },
 }
 
 module.exports = ApiActions;

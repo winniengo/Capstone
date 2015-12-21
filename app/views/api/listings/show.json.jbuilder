@@ -1,5 +1,6 @@
 json.extract! @listing,
-  :description, 
+  :id,
+  :description,
   :address,
   :rent,
   :bedrooms,

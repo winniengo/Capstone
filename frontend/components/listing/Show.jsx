@@ -20,6 +20,7 @@ var ListingShow = React.createClass({
 
   _findListingById: function(listingId) {
     var ret;
+
     ListingStore.all().forEach(function(listing) {
       if (listingId === listing.id) {
         ret = listing;
@@ -32,7 +33,7 @@ var ListingShow = React.createClass({
   componentDidMount: function() {
     console.log("listing mounted");
     this.listingListener = ListingStore.addListener(this._onChange);
-    // ApiUtil.fetchListings();
+    ApiUtil.fetchListing(this.props.params.listingId);
   },
 
   componentWillUnmount: function() {
@@ -40,7 +41,7 @@ var ListingShow = React.createClass({
   },
 
   _onChange: function() {
-    var listingId = this.props.params.listingId;
+    var listingId = parseInt(this.props.params.listingId);
     var listing = this._findListingById(listingId);
 
     this.setState({listing: listing});
