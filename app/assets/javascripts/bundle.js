@@ -24176,7 +24176,7 @@
 	    var map = ReactDOM.findDOMNode(this.refs.map),
 	        options = {
 	      center: mapCenter,
-	      zoom: 13
+	      zoom: 10
 	    };
 	
 	    this.map = new google.maps.Map(map, options);
@@ -24255,7 +24255,7 @@
 	    });
 	
 	    marker.addListener('click', (function () {
-	      this.props.onMarkerClick(listing);
+	      // this.props.onMarkerClick(listing);
 	    }).bind(this));
 	
 	    this.markers.push(marker);
@@ -24759,10 +24759,6 @@
 	        React.createElement(Filters, {
 	          listings: listings,
 	          filterParams: this.state.filterParams
-	        }),
-	        React.createElement(ListingIndex, {
-	          listings: listings,
-	          history: this.props.history
 	        })
 	      )
 	    );

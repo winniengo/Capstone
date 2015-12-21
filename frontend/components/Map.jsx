@@ -20,7 +20,7 @@ var Map = React.createClass({
     var map = ReactDOM.findDOMNode(this.refs.map),
         options = {
           center: mapCenter,
-          zoom: 13
+          zoom: 10
         };
 
     this.map = new google.maps.Map(map, options);
@@ -98,7 +98,7 @@ var Map = React.createClass({
       });
 
     marker.addListener('click', function() {
-      this.props.onMarkerClick(listing);
+      // this.props.onMarkerClick(listing);
     }.bind(this));
 
     this.markers.push(marker);

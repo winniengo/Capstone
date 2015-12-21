@@ -57,10 +57,7 @@ var Search = React.createClass({
             listings={listings}
             filterParams={this.state.filterParams}
             />
-          <ListingIndex
-            listings={listings}
-            history={this.props.history}
-            />
+        
         </div>
       </div>
     )
