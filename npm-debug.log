@@ -2,395 +2,425 @@
 1 verbose cli [ '/usr/local/Cellar/node/4.2.1/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'react-nouislider',
-1 verbose cli   '--save' ]
+1 verbose cli   '--save',
+1 verbose cli   'react-nouislider' ]
 2 info using npm@2.14.7
 3 info using node@v4.2.1
-4 verbose install initial load of /Users/appacademy/Desktop/CribMapper/package.json
-5 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/babel-core/package.json
-6 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/babel-loader/package.json
-7 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/babel-preset-react/package.json
-8 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/flux/package.json
-9 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/history/package.json
-10 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/jquery/package.json
-11 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/react/package.json
-12 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/react-addons-linked-state-mixin/package.json
-13 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/react-dom/package.json
-14 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/package.json
-15 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/react-router/package.json
-16 verbose installManyTop reading scoped package data from /Users/appacademy/Desktop/CribMapper/node_modules/webpack/package.json
-17 info package.json jquery@2.1.4 No license field.
-18 verbose readDependencies loading dependencies from /Users/appacademy/Desktop/CribMapper/package.json
-19 verbose install react-nouislider is installed as 1.6.0
-20 silly cache add args [ 'react-nouislider', null ]
-21 verbose cache add spec react-nouislider
-22 silly cache add parsed spec Result {
-22 silly cache add   raw: 'react-nouislider',
-22 silly cache add   scope: null,
-22 silly cache add   name: 'react-nouislider',
-22 silly cache add   rawSpec: '',
-22 silly cache add   spec: '*',
-22 silly cache add   type: 'range' }
-23 silly addNamed react-nouislider@*
-24 verbose addNamed "*" is a valid semver range for react-nouislider
-25 silly addNameRange { name: 'react-nouislider', range: '*', hasData: false }
-26 silly mapToRegistry name react-nouislider
-27 silly mapToRegistry using default registry
-28 silly mapToRegistry registry https://registry.npmjs.org/
-29 silly mapToRegistry uri https://registry.npmjs.org/react-nouislider
-30 verbose addNameRange registry:https://registry.npmjs.org/react-nouislider not in flight; fetching
-31 verbose request uri https://registry.npmjs.org/react-nouislider
-32 verbose request no auth needed
-33 info attempt registry request try #1 at 2:51:34 PM
-34 verbose request id d827eaccf2aa2852
-35 verbose etag "BQP1O3MAFPX8WZ460NBWRRFQ7"
-36 http request GET https://registry.npmjs.org/react-nouislider
-37 http 304 https://registry.npmjs.org/react-nouislider
-38 verbose headers { date: 'Fri, 18 Dec 2015 22:51:35 GMT',
-38 verbose headers   via: '1.1 varnish',
-38 verbose headers   'cache-control': 'max-age=300',
-38 verbose headers   etag: '"BQP1O3MAFPX8WZ460NBWRRFQ7"',
-38 verbose headers   age: '17',
-38 verbose headers   connection: 'keep-alive',
-38 verbose headers   'x-served-by': 'cache-lax1424-LAX',
-38 verbose headers   'x-cache': 'HIT',
-38 verbose headers   'x-cache-hits': '1',
-38 verbose headers   'x-timer': 'S1450479095.114481,VS0,VE0',
-38 verbose headers   vary: 'Accept' }
-39 silly get cb [ 304,
-39 silly get   { date: 'Fri, 18 Dec 2015 22:51:35 GMT',
-39 silly get     via: '1.1 varnish',
-39 silly get     'cache-control': 'max-age=300',
-39 silly get     etag: '"BQP1O3MAFPX8WZ460NBWRRFQ7"',
-39 silly get     age: '17',
-39 silly get     connection: 'keep-alive',
-39 silly get     'x-served-by': 'cache-lax1424-LAX',
-39 silly get     'x-cache': 'HIT',
-39 silly get     'x-cache-hits': '1',
-39 silly get     'x-timer': 'S1450479095.114481,VS0,VE0',
-39 silly get     vary: 'Accept' } ]
-40 verbose etag https://registry.npmjs.org/react-nouislider from cache
-41 verbose get saving react-nouislider to /Users/appacademy/.npm/registry.npmjs.org/react-nouislider/.cache.json
-42 silly addNameRange number 2 { name: 'react-nouislider', range: '*', hasData: true }
-43 silly addNameRange versions [ 'react-nouislider',
-43 silly addNameRange   [ '1.0.0',
-43 silly addNameRange     '1.0.1',
-43 silly addNameRange     '1.1.0',
-43 silly addNameRange     '1.2.0',
-43 silly addNameRange     '1.2.1',
-43 silly addNameRange     '1.3.0',
-43 silly addNameRange     '1.4.0',
-43 silly addNameRange     '1.4.1',
-43 silly addNameRange     '1.4.2',
-43 silly addNameRange     '1.4.3',
-43 silly addNameRange     '1.5.0',
-43 silly addNameRange     '1.5.1',
-43 silly addNameRange     '1.5.2',
-43 silly addNameRange     '1.6.0' ] ]
-44 silly addNamed react-nouislider@1.6.0
-45 verbose addNamed "1.6.0" is a plain semver version for react-nouislider
-46 silly cache afterAdd react-nouislider@1.6.0
-47 verbose afterAdd /Users/appacademy/.npm/react-nouislider/1.6.0/package/package.json not in flight; writing
-48 verbose afterAdd /Users/appacademy/.npm/react-nouislider/1.6.0/package/package.json written
-49 silly install resolved [ { name: 'react-nouislider',
-49 silly install resolved     version: '1.6.0',
-49 silly install resolved     description: 'React component wrapping leongersen/noUiSlider',
-49 silly install resolved     main: 'dist/react-nouislider.common.js',
-49 silly install resolved     scripts:
-49 silly install resolved      { lint: 'eslint . --quiet',
-49 silly install resolved        test: 'npm run lint',
-49 silly install resolved        build: 'mkdir -p dist && babel index.js --out-file dist/react-nouislider.common.js',
-49 silly install resolved        watch: 'mkdir -p dist && babel index.js --watch --out-file dist/react-nouislider.common.js',
-49 silly install resolved        dev: 'webpack-dev-server --config webpack.example.config.js --hot --inline --no-info',
-49 silly install resolved        prepublish: 'npm run build',
-49 silly install resolved        shrinkwrap: 'npm-shrinkwrap --dev' },
-49 silly install resolved     repository:
-49 silly install resolved      { type: 'git',
-49 silly install resolved        url: 'git+https://github.com/algolia/react-nouislider.git' },
-49 silly install resolved     keywords:
-49 silly install resolved      [ 'react',
-49 silly install resolved        'nouislider',
-49 silly install resolved        'slider',
-49 silly install resolved        'component',
-49 silly install resolved        'reactjs',
-49 silly install resolved        'range',
-49 silly install resolved        'slider' ],
-49 silly install resolved     author: { name: 'Algolia', email: 'support@algolia.com' },
-49 silly install resolved     license: 'MIT',
-49 silly install resolved     bugs: { url: 'https://github.com/algolia/react-nouislider/issues' },
-49 silly install resolved     peerDependencies: { react: '^0.14.0' },
-49 silly install resolved     homepage: 'https://github.com/algolia/react-nouislider',
-49 silly install resolved     dependencies: { 'nouislider-algolia-fork': '^8.1.2' },
-49 silly install resolved     devDependencies:
-49 silly install resolved      { babel: '5.8.23',
-49 silly install resolved        'babel-core': '^5.8.29',
-49 silly install resolved        'babel-eslint': '^4.1.3',
-49 silly install resolved        'babel-loader': '^5.3.2',
-49 silly install resolved        eslint: '^1.6.0',
-49 silly install resolved        'eslint-config-airbnb': '^0.1.0',
-49 silly install resolved        'eslint-config-algolia': '^4.2.0',
-49 silly install resolved        'eslint-plugin-react': '^3.5.1',
-49 silly install resolved        'npm-shrinkwrap': '^200.4.0',
-49 silly install resolved        'react-dom': '^0.14.0',
-49 silly install resolved        webpack: '^1.12.2',
-49 silly install resolved        'webpack-dev-server': '^1.12.1' },
-49 silly install resolved     gitHead: '6cd1e151c521408e392cff8e54426bd3a5d76b15',
-49 silly install resolved     _id: 'react-nouislider@1.6.0',
-49 silly install resolved     _shasum: 'be47f5588f7fe68673b04b39c4b3533919728f60',
-49 silly install resolved     _from: 'react-nouislider@*',
-49 silly install resolved     _npmVersion: '2.14.8',
-49 silly install resolved     _nodeVersion: '4.1.1',
-49 silly install resolved     _npmUser: { name: 'vvo', email: 'vincent.voyer@gmail.com' },
-49 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
-49 silly install resolved     dist:
-49 silly install resolved      { shasum: 'be47f5588f7fe68673b04b39c4b3533919728f60',
-49 silly install resolved        tarball: 'http://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz' },
-49 silly install resolved     directories: {},
-49 silly install resolved     _resolved: 'https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz',
-49 silly install resolved     readme: 'ERROR: No README data found!' } ]
-50 info install react-nouislider@1.6.0 into /Users/appacademy/Desktop/CribMapper
-51 info installOne react-nouislider@1.6.0
-52 verbose installOne of react-nouislider to /Users/appacademy/Desktop/CribMapper not in flight; installing
-53 verbose lock using /Users/appacademy/.npm/_locks/react-nouislider-766a34884aba148b.lock for /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-54 silly install write writing react-nouislider 1.6.0 to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-55 verbose unbuild node_modules/react-nouislider
-56 info preuninstall react-nouislider@1.6.0
-57 info uninstall react-nouislider@1.6.0
-58 verbose unbuild rmStuff react-nouislider@1.6.0 from /Users/appacademy/Desktop/CribMapper/node_modules
-59 info postuninstall react-nouislider@1.6.0
-60 silly gentlyRm /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider is being purged from base /Users/appacademy/Desktop/CribMapper
-61 verbose gentlyRm don't care about contents; nuking /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-62 silly vacuum-fs purging /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-63 silly vacuum-fs quitting because other entries in /Users/appacademy/Desktop/CribMapper/node_modules
-64 verbose tar unpack /Users/appacademy/.npm/react-nouislider/1.6.0/package.tgz
-65 verbose tar unpacking to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-66 silly gentlyRm /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider is being purged
-67 verbose gentlyRm don't care about contents; nuking /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-68 silly gunzTarPerm modes [ '755', '644' ]
-69 silly gunzTarPerm extractEntry package.json
-70 silly gunzTarPerm extractEntry .npmignore
-71 silly gunzTarPerm extractEntry README.md
-72 silly gunzTarPerm extractEntry LICENSE
-73 silly gunzTarPerm extractEntry webpack.example.config.js
-74 silly gunzTarPerm extractEntry index.js
-75 silly gunzTarPerm extractEntry .eslintignore
-76 silly gunzTarPerm extractEntry .eslintrc
-77 silly gunzTarPerm extractEntry example/app.js
-78 silly gunzTarPerm extractEntry example/index.html
-79 silly gunzTarPerm extractEntry example/nouislider.css
-80 silly gunzTarPerm extractEntry example/style.css
-81 silly gunzTarPerm extractEntry .travis.yml
-82 silly gunzTarPerm extractEntry HISTORY.md
-83 silly gunzTarPerm extractEntry dist/react-nouislider.common.js
-84 verbose write writing to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/package.json
-85 info preinstall react-nouislider@1.6.0
-86 verbose readDependencies loading dependencies from /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/package.json
-87 silly prepareForInstallMany adding nouislider-algolia-fork@^8.1.2 from react-nouislider dependencies
-88 verbose readDependencies loading dependencies from /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/package.json
-89 silly cache add args [ 'nouislider-algolia-fork@^8.1.2', null ]
-90 verbose cache add spec nouislider-algolia-fork@^8.1.2
-91 silly cache add parsed spec Result {
-91 silly cache add   raw: 'nouislider-algolia-fork@^8.1.2',
-91 silly cache add   scope: null,
-91 silly cache add   name: 'nouislider-algolia-fork',
-91 silly cache add   rawSpec: '^8.1.2',
-91 silly cache add   spec: '>=8.1.2 <9.0.0',
-91 silly cache add   type: 'range' }
-92 silly addNamed nouislider-algolia-fork@>=8.1.2 <9.0.0
-93 verbose addNamed ">=8.1.2 <9.0.0" is a valid semver range for nouislider-algolia-fork
-94 silly addNameRange { name: 'nouislider-algolia-fork',
-94 silly addNameRange   range: '>=8.1.2 <9.0.0',
-94 silly addNameRange   hasData: false }
-95 silly mapToRegistry name nouislider-algolia-fork
-96 silly mapToRegistry using default registry
-97 silly mapToRegistry registry https://registry.npmjs.org/
-98 silly mapToRegistry uri https://registry.npmjs.org/nouislider-algolia-fork
-99 verbose addNameRange registry:https://registry.npmjs.org/nouislider-algolia-fork not in flight; fetching
-100 verbose request uri https://registry.npmjs.org/nouislider-algolia-fork
-101 verbose request no auth needed
-102 info attempt registry request try #1 at 2:51:35 PM
-103 verbose etag "9B3JKJ8GFQMOJH50QU3O6YOQQ"
-104 http request GET https://registry.npmjs.org/nouislider-algolia-fork
-105 http 304 https://registry.npmjs.org/nouislider-algolia-fork
-106 verbose headers { date: 'Fri, 18 Dec 2015 22:51:35 GMT',
-106 verbose headers   via: '1.1 varnish',
-106 verbose headers   'cache-control': 'max-age=300',
-106 verbose headers   etag: '"9B3JKJ8GFQMOJH50QU3O6YOQQ"',
-106 verbose headers   age: '17',
-106 verbose headers   connection: 'keep-alive',
-106 verbose headers   'x-served-by': 'cache-lax1422-LAX',
-106 verbose headers   'x-cache': 'HIT',
-106 verbose headers   'x-cache-hits': '1',
-106 verbose headers   'x-timer': 'S1450479095.358689,VS0,VE0',
-106 verbose headers   vary: 'Accept' }
-107 silly get cb [ 304,
-107 silly get   { date: 'Fri, 18 Dec 2015 22:51:35 GMT',
-107 silly get     via: '1.1 varnish',
-107 silly get     'cache-control': 'max-age=300',
-107 silly get     etag: '"9B3JKJ8GFQMOJH50QU3O6YOQQ"',
-107 silly get     age: '17',
-107 silly get     connection: 'keep-alive',
-107 silly get     'x-served-by': 'cache-lax1422-LAX',
-107 silly get     'x-cache': 'HIT',
-107 silly get     'x-cache-hits': '1',
-107 silly get     'x-timer': 'S1450479095.358689,VS0,VE0',
-107 silly get     vary: 'Accept' } ]
-108 verbose etag https://registry.npmjs.org/nouislider-algolia-fork from cache
-109 verbose get saving nouislider-algolia-fork to /Users/appacademy/.npm/registry.npmjs.org/nouislider-algolia-fork/.cache.json
-110 silly addNameRange number 2 { name: 'nouislider-algolia-fork',
-110 silly addNameRange   range: '>=8.1.2 <9.0.0',
-110 silly addNameRange   hasData: true }
-111 silly addNameRange versions [ 'nouislider-algolia-fork', [ '8.1.0', '8.1.1', '8.1.2' ] ]
-112 silly addNamed nouislider-algolia-fork@8.1.2
-113 verbose addNamed "8.1.2" is a plain semver version for nouislider-algolia-fork
-114 silly cache afterAdd nouislider-algolia-fork@8.1.2
-115 verbose afterAdd /Users/appacademy/.npm/nouislider-algolia-fork/8.1.2/package/package.json not in flight; writing
-116 verbose afterAdd /Users/appacademy/.npm/nouislider-algolia-fork/8.1.2/package/package.json written
-117 silly install resolved [ { name: 'nouislider-algolia-fork',
-117 silly install resolved     version: '8.1.2',
-117 silly install resolved     main: 'distribute/nouislider',
-117 silly install resolved     style: 'distribute/nouislider.min.css',
-117 silly install resolved     license: 'WTFPL',
-117 silly install resolved     scripts:
-117 silly install resolved      { build: 'grunt create',
-117 silly install resolved        'watch:js': 'npm run build && onchange \'src/js/*.js\' \'src/*.css\' -- npm run build',
-117 silly install resolved        'serve-tests': 'browser-sync start --server . --startPath tests/slider.html --files \'distribute/, tests/*.js\'',
-117 silly install resolved        test: 'grunt lint',
-117 silly install resolved        dev: './scripts/dev.sh' },
-117 silly install resolved     devDependencies:
-117 silly install resolved      { blanket: '1.1.7',
-117 silly install resolved        'browser-sync': '2.9.3',
-117 silly install resolved        grunt: '~0.4.1',
-117 silly install resolved        'grunt-cli': '0.1.13',
-117 silly install resolved        'grunt-contrib-compress': '^0.11.0',
-117 silly install resolved        'grunt-contrib-concat': '^0.5.0',
-117 silly install resolved        'grunt-contrib-copy': '^0.5.0',
-117 silly install resolved        'grunt-contrib-cssmin': '^0.10.0',
-117 silly install resolved        'grunt-contrib-jshint': '^0.10.0',
-117 silly install resolved        'grunt-contrib-uglify': '^0.5.1',
-117 silly install resolved        onchange: '2.0.0',
-117 silly install resolved        simulant: '0.1.5' },
-117 silly install resolved     repository:
-117 silly install resolved      { type: 'git',
-117 silly install resolved        url: 'git://github.com/leongersen/noUiSlider.git' },
-117 silly install resolved     gitHead: '9092557009c3b18621aacdee0674a04f66066c84',
-117 silly install resolved     description: 'WARNING! This is Algolia fork of [leongersen/noUiSlider](https://github.com/leongersen/noUiSlider), we use it as a way to easily build our features before they are merged back.',
-117 silly install resolved     bugs: { url: 'https://github.com/leongersen/noUiSlider/issues' },
-117 silly install resolved     homepage: 'https://github.com/leongersen/noUiSlider#readme',
-117 silly install resolved     _id: 'nouislider-algolia-fork@8.1.2',
-117 silly install resolved     _shasum: 'f30fab8beb82390759bfbe23337e97fcce299656',
-117 silly install resolved     _from: 'nouislider-algolia-fork@>=8.1.2 <9.0.0',
-117 silly install resolved     _npmVersion: '2.14.8',
-117 silly install resolved     _nodeVersion: '4.1.1',
-117 silly install resolved     _npmUser: { name: 'vvo', email: 'vincent.voyer@gmail.com' },
-117 silly install resolved     maintainers: [ [Object] ],
-117 silly install resolved     dist:
-117 silly install resolved      { shasum: 'f30fab8beb82390759bfbe23337e97fcce299656',
-117 silly install resolved        tarball: 'http://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz' },
-117 silly install resolved     directories: {},
-117 silly install resolved     _resolved: 'https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz',
-117 silly install resolved     readme: 'ERROR: No README data found!' } ]
-118 info install nouislider-algolia-fork@8.1.2 into /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-119 info installOne nouislider-algolia-fork@8.1.2
-120 verbose installOne of nouislider-algolia-fork to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider not in flight; installing
-121 verbose lock using /Users/appacademy/.npm/_locks/nouislider-algolia-fork-48448eb363c3f9aa.lock for /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-122 silly install write writing nouislider-algolia-fork 8.1.2 to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-123 verbose unbuild node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-124 silly gentlyRm /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork is being purged from base /Users/appacademy/Desktop/CribMapper
-125 verbose gentlyRm don't care about contents; nuking /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-126 verbose tar unpack /Users/appacademy/.npm/nouislider-algolia-fork/8.1.2/package.tgz
-127 verbose tar unpacking to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-128 silly gentlyRm /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork is being purged
-129 verbose gentlyRm don't care about contents; nuking /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-130 silly gunzTarPerm modes [ '755', '644' ]
-131 silly gunzTarPerm extractEntry package.json
-132 silly gunzTarPerm extractEntry .npmignore
-133 silly gunzTarPerm extractEntry README.md
-134 silly gunzTarPerm extractEntry Gruntfile.js
-135 silly gunzTarPerm extractEntry distribute/nouislider.js
-136 silly gunzTarPerm extractEntry distribute/nouislider.min.js
-137 silly gunzTarPerm extractEntry distribute/nouislider.min.css
-138 silly gunzTarPerm extractEntry bower.json
-139 silly gunzTarPerm extractEntry .gitattributes
-140 silly gunzTarPerm extractEntry src/js/constants.js
-141 silly gunzTarPerm extractEntry src/js/options.js
-142 silly gunzTarPerm extractEntry src/js/outro.js
-143 silly gunzTarPerm extractEntry src/js/pips.js
-144 silly gunzTarPerm extractEntry src/js/intro.js
-145 silly gunzTarPerm extractEntry src/js/scope.js
-146 silly gunzTarPerm extractEntry src/js/scope_end.js
-147 silly gunzTarPerm extractEntry src/js/scope_events.js
-148 silly gunzTarPerm extractEntry src/js/scope_helpers.js
-149 silly gunzTarPerm extractEntry src/js/scope_start.js
-150 silly gunzTarPerm extractEntry src/js/interface.js
-151 silly gunzTarPerm extractEntry src/js/structure.js
-152 silly gunzTarPerm extractEntry src/js/helpers.js
-153 silly gunzTarPerm extractEntry src/js/tooltips.js
-154 silly gunzTarPerm extractEntry src/js/range.js
-155 silly gunzTarPerm extractEntry src/nouislider.css
-156 silly gunzTarPerm extractEntry src/nouislider.pips.css
-157 silly gunzTarPerm extractEntry src/nouislider.tooltips.css
-158 silly gunzTarPerm extractEntry scripts/dev.sh
-159 silly gunzTarPerm extractEntry tests/addon_pips.js
-160 silly gunzTarPerm extractEntry tests/slider_binding.js
-161 silly gunzTarPerm extractEntry tests/slider_errors.js
-162 silly gunzTarPerm extractEntry tests/slider_get-step.js
-163 silly gunzTarPerm extractEntry tests/slider_limit.js
-164 silly gunzTarPerm extractEntry tests/slider_update.js
-165 silly gunzTarPerm extractEntry tests/slider_update-numbers.js
-166 silly gunzTarPerm extractEntry tests/slider_rtl2.js
-167 silly gunzTarPerm extractEntry tests/slider_setting-getting.js
-168 silly gunzTarPerm extractEntry tests/slider_step.js
-169 silly gunzTarPerm extractEntry tests/slider_unordered.js
-170 silly gunzTarPerm extractEntry tests/slider_non-linear-rtl.js
-171 silly gunzTarPerm extractEntry tests/slider_values.js
-172 silly gunzTarPerm extractEntry tests/slider_rtl.js
-173 silly gunzTarPerm extractEntry tests/range.html
-174 silly gunzTarPerm extractEntry tests/slider.html
-175 verbose write writing to /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
-176 info preinstall nouislider-algolia-fork@8.1.2
-177 verbose readDependencies loading dependencies from /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
-178 verbose readDependencies loading dependencies from /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
-179 silly install resolved []
-180 verbose about to build /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-181 info build /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-182 info linkStuff nouislider-algolia-fork@8.1.2
-183 silly linkStuff nouislider-algolia-fork@8.1.2 has /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules as its parent node_modules
-184 verbose linkBins nouislider-algolia-fork@8.1.2
-185 verbose linkMans nouislider-algolia-fork@8.1.2
-186 verbose rebuildBundles nouislider-algolia-fork@8.1.2
-187 info install nouislider-algolia-fork@8.1.2
-188 info postinstall nouislider-algolia-fork@8.1.2
-189 verbose unlock done using /Users/appacademy/.npm/_locks/nouislider-algolia-fork-48448eb363c3f9aa.lock for /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
-190 verbose about to build /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-191 info build /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-192 info linkStuff react-nouislider@1.6.0
-193 silly linkStuff react-nouislider@1.6.0 has /Users/appacademy/Desktop/CribMapper/node_modules as its parent node_modules
-194 verbose linkBins react-nouislider@1.6.0
-195 verbose linkMans react-nouislider@1.6.0
-196 verbose rebuildBundles react-nouislider@1.6.0
-197 verbose rebuildBundles [ 'nouislider-algolia-fork' ]
-198 info install react-nouislider@1.6.0
-199 info postinstall react-nouislider@1.6.0
-200 verbose unlock done using /Users/appacademy/.npm/_locks/react-nouislider-766a34884aba148b.lock for /Users/appacademy/Desktop/CribMapper/node_modules/react-nouislider
-201 verbose validateInstall loading /Users/appacademy/Desktop/CribMapper/package.json for validation
-202 verbose stack Error: The package history@1.16.0 does not satisfy its siblings' peerDependencies requirements!
-202 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
-202 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
-202 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
-202 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-202 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-202 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-202 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-202 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-202 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
-202 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
-203 verbose cwd /Users/appacademy/Desktop/CribMapper
-204 error Darwin 14.5.0
-205 error argv "/usr/local/Cellar/node/4.2.1/bin/node" "/usr/local/bin/npm" "install" "react-nouislider" "--save"
-206 error node v4.2.1
-207 error npm  v2.14.7
-208 error code EPEERINVALID
-209 error peerinvalid The package history@1.16.0 does not satisfy its siblings' peerDependencies requirements!
-209 error peerinvalid Peer react-router@1.0.2 wants history@1.13.x
-210 verbose exit [ 1, true ]
+4 verbose install initial load of /Users/winniengo/Desktop/CribMapper/package.json
+5 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/babel-core/package.json
+6 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/babel-loader/package.json
+7 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/babel-preset-react/package.json
+8 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/flux/package.json
+9 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/history/package.json
+10 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/jquery/package.json
+11 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/react/package.json
+12 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/react-addons-linked-state-mixin/package.json
+13 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/react-dom/package.json
+14 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/react-router/package.json
+15 verbose installManyTop reading scoped package data from /Users/winniengo/Desktop/CribMapper/node_modules/webpack/package.json
+16 info package.json jquery@2.1.4 No license field.
+17 verbose readDependencies loading dependencies from /Users/winniengo/Desktop/CribMapper/package.json
+18 silly cache add args [ 'react-nouislider', null ]
+19 verbose cache add spec react-nouislider
+20 silly cache add parsed spec Result {
+20 silly cache add   raw: 'react-nouislider',
+20 silly cache add   scope: null,
+20 silly cache add   name: 'react-nouislider',
+20 silly cache add   rawSpec: '',
+20 silly cache add   spec: '*',
+20 silly cache add   type: 'range' }
+21 silly addNamed react-nouislider@*
+22 verbose addNamed "*" is a valid semver range for react-nouislider
+23 silly addNameRange { name: 'react-nouislider', range: '*', hasData: false }
+24 silly mapToRegistry name react-nouislider
+25 silly mapToRegistry using default registry
+26 silly mapToRegistry registry https://registry.npmjs.org/
+27 silly mapToRegistry uri https://registry.npmjs.org/react-nouislider
+28 verbose addNameRange registry:https://registry.npmjs.org/react-nouislider not in flight; fetching
+29 verbose request uri https://registry.npmjs.org/react-nouislider
+30 verbose request no auth needed
+31 info attempt registry request try #1 at 11:17:10 PM
+32 verbose request id 4173c08b15f022c7
+33 http request GET https://registry.npmjs.org/react-nouislider
+34 http 200 https://registry.npmjs.org/react-nouislider
+35 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+35 verbose headers   etag: '"BQP1O3MAFPX8WZ460NBWRRFQ7"',
+35 verbose headers   'content-type': 'application/json',
+35 verbose headers   'cache-control': 'max-age=300',
+35 verbose headers   'content-length': '25919',
+35 verbose headers   'accept-ranges': 'bytes',
+35 verbose headers   date: 'Mon, 21 Dec 2015 07:17:12 GMT',
+35 verbose headers   via: '1.1 varnish',
+35 verbose headers   age: '0',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-served-by': 'cache-lax1420-LAX',
+35 verbose headers   'x-cache': 'MISS',
+35 verbose headers   'x-cache-hits': '0',
+35 verbose headers   'x-timer': 'S1450682231.868854,VS0,VE161',
+35 verbose headers   vary: 'Accept' }
+36 silly get cb [ 200,
+36 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+36 silly get     etag: '"BQP1O3MAFPX8WZ460NBWRRFQ7"',
+36 silly get     'content-type': 'application/json',
+36 silly get     'cache-control': 'max-age=300',
+36 silly get     'content-length': '25919',
+36 silly get     'accept-ranges': 'bytes',
+36 silly get     date: 'Mon, 21 Dec 2015 07:17:12 GMT',
+36 silly get     via: '1.1 varnish',
+36 silly get     age: '0',
+36 silly get     connection: 'keep-alive',
+36 silly get     'x-served-by': 'cache-lax1420-LAX',
+36 silly get     'x-cache': 'MISS',
+36 silly get     'x-cache-hits': '0',
+36 silly get     'x-timer': 'S1450682231.868854,VS0,VE161',
+36 silly get     vary: 'Accept' } ]
+37 verbose get saving react-nouislider to /Users/winniengo/.npm/registry.npmjs.org/react-nouislider/.cache.json
+38 silly addNameRange number 2 { name: 'react-nouislider', range: '*', hasData: true }
+39 silly addNameRange versions [ 'react-nouislider',
+39 silly addNameRange   [ '1.0.0',
+39 silly addNameRange     '1.0.1',
+39 silly addNameRange     '1.1.0',
+39 silly addNameRange     '1.2.0',
+39 silly addNameRange     '1.2.1',
+39 silly addNameRange     '1.3.0',
+39 silly addNameRange     '1.4.0',
+39 silly addNameRange     '1.4.1',
+39 silly addNameRange     '1.4.2',
+39 silly addNameRange     '1.4.3',
+39 silly addNameRange     '1.5.0',
+39 silly addNameRange     '1.5.1',
+39 silly addNameRange     '1.5.2',
+39 silly addNameRange     '1.6.0' ] ]
+40 silly addNamed react-nouislider@1.6.0
+41 verbose addNamed "1.6.0" is a plain semver version for react-nouislider
+42 silly mapToRegistry name react-nouislider
+43 silly mapToRegistry using default registry
+44 silly mapToRegistry registry https://registry.npmjs.org/
+45 silly mapToRegistry uri https://registry.npmjs.org/react-nouislider
+46 verbose addRemoteTarball https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz not in flight; adding
+47 verbose addRemoteTarball [ 'https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz',
+47 verbose addRemoteTarball   'be47f5588f7fe68673b04b39c4b3533919728f60' ]
+48 info retry fetch attempt 1 at 11:17:12 PM
+49 info attempt registry request try #1 at 11:17:12 PM
+50 http fetch GET https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz
+51 http fetch 200 https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz
+52 silly fetchAndShaCheck shasum be47f5588f7fe68673b04b39c4b3533919728f60
+53 verbose addTmpTarball /var/folders/k5/dbtnlrx56hz4hj2jbc1xs3nr0000gn/T/npm-4422-81a88b28/registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz not in flight; adding
+54 verbose addTmpTarball already have metadata; skipping unpack for react-nouislider@1.6.0
+55 silly cache afterAdd react-nouislider@1.6.0
+56 verbose afterAdd /Users/winniengo/.npm/react-nouislider/1.6.0/package/package.json not in flight; writing
+57 verbose afterAdd /Users/winniengo/.npm/react-nouislider/1.6.0/package/package.json written
+58 silly install resolved [ { name: 'react-nouislider',
+58 silly install resolved     version: '1.6.0',
+58 silly install resolved     description: 'React component wrapping leongersen/noUiSlider',
+58 silly install resolved     main: 'dist/react-nouislider.common.js',
+58 silly install resolved     scripts:
+58 silly install resolved      { lint: 'eslint . --quiet',
+58 silly install resolved        test: 'npm run lint',
+58 silly install resolved        build: 'mkdir -p dist && babel index.js --out-file dist/react-nouislider.common.js',
+58 silly install resolved        watch: 'mkdir -p dist && babel index.js --watch --out-file dist/react-nouislider.common.js',
+58 silly install resolved        dev: 'webpack-dev-server --config webpack.example.config.js --hot --inline --no-info',
+58 silly install resolved        prepublish: 'npm run build',
+58 silly install resolved        shrinkwrap: 'npm-shrinkwrap --dev' },
+58 silly install resolved     repository:
+58 silly install resolved      { type: 'git',
+58 silly install resolved        url: 'git+https://github.com/algolia/react-nouislider.git' },
+58 silly install resolved     keywords:
+58 silly install resolved      [ 'react',
+58 silly install resolved        'nouislider',
+58 silly install resolved        'slider',
+58 silly install resolved        'component',
+58 silly install resolved        'reactjs',
+58 silly install resolved        'range',
+58 silly install resolved        'slider' ],
+58 silly install resolved     author: { name: 'Algolia', email: 'support@algolia.com' },
+58 silly install resolved     license: 'MIT',
+58 silly install resolved     bugs: { url: 'https://github.com/algolia/react-nouislider/issues' },
+58 silly install resolved     peerDependencies: { react: '^0.14.0' },
+58 silly install resolved     homepage: 'https://github.com/algolia/react-nouislider',
+58 silly install resolved     dependencies: { 'nouislider-algolia-fork': '^8.1.2' },
+58 silly install resolved     devDependencies:
+58 silly install resolved      { babel: '5.8.23',
+58 silly install resolved        'babel-core': '^5.8.29',
+58 silly install resolved        'babel-eslint': '^4.1.3',
+58 silly install resolved        'babel-loader': '^5.3.2',
+58 silly install resolved        eslint: '^1.6.0',
+58 silly install resolved        'eslint-config-airbnb': '^0.1.0',
+58 silly install resolved        'eslint-config-algolia': '^4.2.0',
+58 silly install resolved        'eslint-plugin-react': '^3.5.1',
+58 silly install resolved        'npm-shrinkwrap': '^200.4.0',
+58 silly install resolved        'react-dom': '^0.14.0',
+58 silly install resolved        webpack: '^1.12.2',
+58 silly install resolved        'webpack-dev-server': '^1.12.1' },
+58 silly install resolved     gitHead: '6cd1e151c521408e392cff8e54426bd3a5d76b15',
+58 silly install resolved     _id: 'react-nouislider@1.6.0',
+58 silly install resolved     _shasum: 'be47f5588f7fe68673b04b39c4b3533919728f60',
+58 silly install resolved     _from: 'react-nouislider@*',
+58 silly install resolved     _npmVersion: '2.14.8',
+58 silly install resolved     _nodeVersion: '4.1.1',
+58 silly install resolved     _npmUser: { name: 'vvo', email: 'vincent.voyer@gmail.com' },
+58 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
+58 silly install resolved     dist:
+58 silly install resolved      { shasum: 'be47f5588f7fe68673b04b39c4b3533919728f60',
+58 silly install resolved        tarball: 'http://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz' },
+58 silly install resolved     directories: {},
+58 silly install resolved     _resolved: 'https://registry.npmjs.org/react-nouislider/-/react-nouislider-1.6.0.tgz' } ]
+59 info install react-nouislider@1.6.0 into /Users/winniengo/Desktop/CribMapper
+60 info installOne react-nouislider@1.6.0
+61 verbose installOne of react-nouislider to /Users/winniengo/Desktop/CribMapper not in flight; installing
+62 verbose lock using /Users/winniengo/.npm/_locks/react-nouislider-f106262e30cac1bb.lock for /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+63 silly install write writing react-nouislider 1.6.0 to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+64 verbose unbuild node_modules/react-nouislider
+65 silly gentlyRm /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider is being purged from base /Users/winniengo/Desktop/CribMapper
+66 verbose gentlyRm don't care about contents; nuking /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+67 verbose tar unpack /Users/winniengo/.npm/react-nouislider/1.6.0/package.tgz
+68 verbose tar unpacking to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+69 silly gentlyRm /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider is being purged
+70 verbose gentlyRm don't care about contents; nuking /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+71 silly gunzTarPerm modes [ '755', '644' ]
+72 silly gunzTarPerm extractEntry package.json
+73 silly gunzTarPerm extractEntry .npmignore
+74 silly gunzTarPerm extractEntry README.md
+75 silly gunzTarPerm extractEntry LICENSE
+76 silly gunzTarPerm extractEntry webpack.example.config.js
+77 silly gunzTarPerm extractEntry index.js
+78 silly gunzTarPerm extractEntry .eslintignore
+79 silly gunzTarPerm extractEntry .eslintrc
+80 silly gunzTarPerm extractEntry example/app.js
+81 silly gunzTarPerm extractEntry example/index.html
+82 silly gunzTarPerm extractEntry example/nouislider.css
+83 silly gunzTarPerm extractEntry example/style.css
+84 silly gunzTarPerm extractEntry .travis.yml
+85 silly gunzTarPerm extractEntry HISTORY.md
+86 silly gunzTarPerm extractEntry dist/react-nouislider.common.js
+87 verbose write writing to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/package.json
+88 info preinstall react-nouislider@1.6.0
+89 verbose readDependencies loading dependencies from /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/package.json
+90 silly prepareForInstallMany adding nouislider-algolia-fork@^8.1.2 from react-nouislider dependencies
+91 verbose readDependencies loading dependencies from /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/package.json
+92 silly cache add args [ 'nouislider-algolia-fork@^8.1.2', null ]
+93 verbose cache add spec nouislider-algolia-fork@^8.1.2
+94 silly cache add parsed spec Result {
+94 silly cache add   raw: 'nouislider-algolia-fork@^8.1.2',
+94 silly cache add   scope: null,
+94 silly cache add   name: 'nouislider-algolia-fork',
+94 silly cache add   rawSpec: '^8.1.2',
+94 silly cache add   spec: '>=8.1.2 <9.0.0',
+94 silly cache add   type: 'range' }
+95 silly addNamed nouislider-algolia-fork@>=8.1.2 <9.0.0
+96 verbose addNamed ">=8.1.2 <9.0.0" is a valid semver range for nouislider-algolia-fork
+97 silly addNameRange { name: 'nouislider-algolia-fork',
+97 silly addNameRange   range: '>=8.1.2 <9.0.0',
+97 silly addNameRange   hasData: false }
+98 silly mapToRegistry name nouislider-algolia-fork
+99 silly mapToRegistry using default registry
+100 silly mapToRegistry registry https://registry.npmjs.org/
+101 silly mapToRegistry uri https://registry.npmjs.org/nouislider-algolia-fork
+102 verbose addNameRange registry:https://registry.npmjs.org/nouislider-algolia-fork not in flight; fetching
+103 verbose request uri https://registry.npmjs.org/nouislider-algolia-fork
+104 verbose request no auth needed
+105 info attempt registry request try #1 at 11:17:12 PM
+106 http request GET https://registry.npmjs.org/nouislider-algolia-fork
+107 http 200 https://registry.npmjs.org/nouislider-algolia-fork
+108 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+108 verbose headers   etag: '"9B3JKJ8GFQMOJH50QU3O6YOQQ"',
+108 verbose headers   'content-type': 'application/json',
+108 verbose headers   'cache-control': 'max-age=300',
+108 verbose headers   'content-length': '9203',
+108 verbose headers   'accept-ranges': 'bytes',
+108 verbose headers   date: 'Mon, 21 Dec 2015 07:17:12 GMT',
+108 verbose headers   via: '1.1 varnish',
+108 verbose headers   age: '0',
+108 verbose headers   connection: 'keep-alive',
+108 verbose headers   'x-served-by': 'cache-lax1428-LAX',
+108 verbose headers   'x-cache': 'MISS',
+108 verbose headers   'x-cache-hits': '0',
+108 verbose headers   'x-timer': 'S1450682232.472217,VS0,VE80',
+108 verbose headers   vary: 'Accept' }
+109 silly get cb [ 200,
+109 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+109 silly get     etag: '"9B3JKJ8GFQMOJH50QU3O6YOQQ"',
+109 silly get     'content-type': 'application/json',
+109 silly get     'cache-control': 'max-age=300',
+109 silly get     'content-length': '9203',
+109 silly get     'accept-ranges': 'bytes',
+109 silly get     date: 'Mon, 21 Dec 2015 07:17:12 GMT',
+109 silly get     via: '1.1 varnish',
+109 silly get     age: '0',
+109 silly get     connection: 'keep-alive',
+109 silly get     'x-served-by': 'cache-lax1428-LAX',
+109 silly get     'x-cache': 'MISS',
+109 silly get     'x-cache-hits': '0',
+109 silly get     'x-timer': 'S1450682232.472217,VS0,VE80',
+109 silly get     vary: 'Accept' } ]
+110 verbose get saving nouislider-algolia-fork to /Users/winniengo/.npm/registry.npmjs.org/nouislider-algolia-fork/.cache.json
+111 silly addNameRange number 2 { name: 'nouislider-algolia-fork',
+111 silly addNameRange   range: '>=8.1.2 <9.0.0',
+111 silly addNameRange   hasData: true }
+112 silly addNameRange versions [ 'nouislider-algolia-fork', [ '8.1.0', '8.1.1', '8.1.2' ] ]
+113 silly addNamed nouislider-algolia-fork@8.1.2
+114 verbose addNamed "8.1.2" is a plain semver version for nouislider-algolia-fork
+115 silly mapToRegistry name nouislider-algolia-fork
+116 silly mapToRegistry using default registry
+117 silly mapToRegistry registry https://registry.npmjs.org/
+118 silly mapToRegistry uri https://registry.npmjs.org/nouislider-algolia-fork
+119 verbose addRemoteTarball https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz not in flight; adding
+120 verbose addRemoteTarball [ 'https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz',
+120 verbose addRemoteTarball   'f30fab8beb82390759bfbe23337e97fcce299656' ]
+121 info retry fetch attempt 1 at 11:17:12 PM
+122 info attempt registry request try #1 at 11:17:12 PM
+123 http fetch GET https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz
+124 http fetch 200 https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz
+125 silly fetchAndShaCheck shasum f30fab8beb82390759bfbe23337e97fcce299656
+126 verbose addTmpTarball /var/folders/k5/dbtnlrx56hz4hj2jbc1xs3nr0000gn/T/npm-4422-81a88b28/registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz not in flight; adding
+127 verbose addTmpTarball already have metadata; skipping unpack for nouislider-algolia-fork@8.1.2
+128 silly cache afterAdd nouislider-algolia-fork@8.1.2
+129 verbose afterAdd /Users/winniengo/.npm/nouislider-algolia-fork/8.1.2/package/package.json not in flight; writing
+130 verbose afterAdd /Users/winniengo/.npm/nouislider-algolia-fork/8.1.2/package/package.json written
+131 silly install resolved [ { name: 'nouislider-algolia-fork',
+131 silly install resolved     version: '8.1.2',
+131 silly install resolved     main: 'distribute/nouislider',
+131 silly install resolved     style: 'distribute/nouislider.min.css',
+131 silly install resolved     license: 'WTFPL',
+131 silly install resolved     scripts:
+131 silly install resolved      { build: 'grunt create',
+131 silly install resolved        'watch:js': 'npm run build && onchange \'src/js/*.js\' \'src/*.css\' -- npm run build',
+131 silly install resolved        'serve-tests': 'browser-sync start --server . --startPath tests/slider.html --files \'distribute/, tests/*.js\'',
+131 silly install resolved        test: 'grunt lint',
+131 silly install resolved        dev: './scripts/dev.sh' },
+131 silly install resolved     devDependencies:
+131 silly install resolved      { blanket: '1.1.7',
+131 silly install resolved        'browser-sync': '2.9.3',
+131 silly install resolved        grunt: '~0.4.1',
+131 silly install resolved        'grunt-cli': '0.1.13',
+131 silly install resolved        'grunt-contrib-compress': '^0.11.0',
+131 silly install resolved        'grunt-contrib-concat': '^0.5.0',
+131 silly install resolved        'grunt-contrib-copy': '^0.5.0',
+131 silly install resolved        'grunt-contrib-cssmin': '^0.10.0',
+131 silly install resolved        'grunt-contrib-jshint': '^0.10.0',
+131 silly install resolved        'grunt-contrib-uglify': '^0.5.1',
+131 silly install resolved        onchange: '2.0.0',
+131 silly install resolved        simulant: '0.1.5' },
+131 silly install resolved     repository:
+131 silly install resolved      { type: 'git',
+131 silly install resolved        url: 'git://github.com/leongersen/noUiSlider.git' },
+131 silly install resolved     gitHead: '9092557009c3b18621aacdee0674a04f66066c84',
+131 silly install resolved     description: 'WARNING! This is Algolia fork of [leongersen/noUiSlider](https://github.com/leongersen/noUiSlider), we use it as a way to easily build our features before they are merged back.',
+131 silly install resolved     bugs: { url: 'https://github.com/leongersen/noUiSlider/issues' },
+131 silly install resolved     homepage: 'https://github.com/leongersen/noUiSlider#readme',
+131 silly install resolved     _id: 'nouislider-algolia-fork@8.1.2',
+131 silly install resolved     _shasum: 'f30fab8beb82390759bfbe23337e97fcce299656',
+131 silly install resolved     _from: 'nouislider-algolia-fork@>=8.1.2 <9.0.0',
+131 silly install resolved     _npmVersion: '2.14.8',
+131 silly install resolved     _nodeVersion: '4.1.1',
+131 silly install resolved     _npmUser: { name: 'vvo', email: 'vincent.voyer@gmail.com' },
+131 silly install resolved     maintainers: [ [Object] ],
+131 silly install resolved     dist:
+131 silly install resolved      { shasum: 'f30fab8beb82390759bfbe23337e97fcce299656',
+131 silly install resolved        tarball: 'http://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz' },
+131 silly install resolved     directories: {},
+131 silly install resolved     _resolved: 'https://registry.npmjs.org/nouislider-algolia-fork/-/nouislider-algolia-fork-8.1.2.tgz' } ]
+132 info install nouislider-algolia-fork@8.1.2 into /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+133 info installOne nouislider-algolia-fork@8.1.2
+134 verbose installOne of nouislider-algolia-fork to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider not in flight; installing
+135 verbose lock using /Users/winniengo/.npm/_locks/nouislider-algolia-fork-73f51ef74475a48e.lock for /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+136 silly install write writing nouislider-algolia-fork 8.1.2 to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+137 verbose unbuild node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+138 silly gentlyRm /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork is being purged from base /Users/winniengo/Desktop/CribMapper
+139 verbose gentlyRm don't care about contents; nuking /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+140 verbose tar unpack /Users/winniengo/.npm/nouislider-algolia-fork/8.1.2/package.tgz
+141 verbose tar unpacking to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+142 silly gentlyRm /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork is being purged
+143 verbose gentlyRm don't care about contents; nuking /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+144 silly gunzTarPerm modes [ '755', '644' ]
+145 silly gunzTarPerm extractEntry package.json
+146 silly gunzTarPerm extractEntry .npmignore
+147 silly gunzTarPerm extractEntry README.md
+148 silly gunzTarPerm extractEntry Gruntfile.js
+149 silly gunzTarPerm extractEntry distribute/nouislider.js
+150 silly gunzTarPerm extractEntry distribute/nouislider.min.js
+151 silly gunzTarPerm extractEntry distribute/nouislider.min.css
+152 silly gunzTarPerm extractEntry bower.json
+153 silly gunzTarPerm extractEntry .gitattributes
+154 silly gunzTarPerm extractEntry src/js/constants.js
+155 silly gunzTarPerm extractEntry src/js/options.js
+156 silly gunzTarPerm extractEntry src/js/outro.js
+157 silly gunzTarPerm extractEntry src/js/pips.js
+158 silly gunzTarPerm extractEntry src/js/intro.js
+159 silly gunzTarPerm extractEntry src/js/scope.js
+160 silly gunzTarPerm extractEntry src/js/scope_end.js
+161 silly gunzTarPerm extractEntry src/js/scope_events.js
+162 silly gunzTarPerm extractEntry src/js/scope_helpers.js
+163 silly gunzTarPerm extractEntry src/js/scope_start.js
+164 silly gunzTarPerm extractEntry src/js/interface.js
+165 silly gunzTarPerm extractEntry src/js/structure.js
+166 silly gunzTarPerm extractEntry src/js/helpers.js
+167 silly gunzTarPerm extractEntry src/js/tooltips.js
+168 silly gunzTarPerm extractEntry src/js/range.js
+169 silly gunzTarPerm extractEntry src/nouislider.css
+170 silly gunzTarPerm extractEntry src/nouislider.pips.css
+171 silly gunzTarPerm extractEntry src/nouislider.tooltips.css
+172 silly gunzTarPerm extractEntry scripts/dev.sh
+173 silly gunzTarPerm extractEntry tests/addon_pips.js
+174 silly gunzTarPerm extractEntry tests/slider_binding.js
+175 silly gunzTarPerm extractEntry tests/slider_errors.js
+176 silly gunzTarPerm extractEntry tests/slider_get-step.js
+177 silly gunzTarPerm extractEntry tests/slider_limit.js
+178 silly gunzTarPerm extractEntry tests/slider_update.js
+179 silly gunzTarPerm extractEntry tests/slider_update-numbers.js
+180 silly gunzTarPerm extractEntry tests/slider_rtl2.js
+181 silly gunzTarPerm extractEntry tests/slider_setting-getting.js
+182 silly gunzTarPerm extractEntry tests/slider_step.js
+183 silly gunzTarPerm extractEntry tests/slider_unordered.js
+184 silly gunzTarPerm extractEntry tests/slider_non-linear-rtl.js
+185 silly gunzTarPerm extractEntry tests/slider_values.js
+186 silly gunzTarPerm extractEntry tests/slider_rtl.js
+187 silly gunzTarPerm extractEntry tests/range.html
+188 silly gunzTarPerm extractEntry tests/slider.html
+189 verbose write writing to /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
+190 info preinstall nouislider-algolia-fork@8.1.2
+191 verbose readDependencies loading dependencies from /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
+192 verbose readDependencies loading dependencies from /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork/package.json
+193 silly install resolved []
+194 verbose about to build /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+195 info build /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+196 info linkStuff nouislider-algolia-fork@8.1.2
+197 silly linkStuff nouislider-algolia-fork@8.1.2 has /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules as its parent node_modules
+198 verbose linkBins nouislider-algolia-fork@8.1.2
+199 verbose linkMans nouislider-algolia-fork@8.1.2
+200 verbose rebuildBundles nouislider-algolia-fork@8.1.2
+201 info install nouislider-algolia-fork@8.1.2
+202 info postinstall nouislider-algolia-fork@8.1.2
+203 verbose unlock done using /Users/winniengo/.npm/_locks/nouislider-algolia-fork-73f51ef74475a48e.lock for /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider/node_modules/nouislider-algolia-fork
+204 verbose about to build /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+205 info build /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+206 info linkStuff react-nouislider@1.6.0
+207 silly linkStuff react-nouislider@1.6.0 has /Users/winniengo/Desktop/CribMapper/node_modules as its parent node_modules
+208 verbose linkBins react-nouislider@1.6.0
+209 verbose linkMans react-nouislider@1.6.0
+210 verbose rebuildBundles react-nouislider@1.6.0
+211 verbose rebuildBundles [ 'nouislider-algolia-fork' ]
+212 info install react-nouislider@1.6.0
+213 info postinstall react-nouislider@1.6.0
+214 verbose unlock done using /Users/winniengo/.npm/_locks/react-nouislider-f106262e30cac1bb.lock for /Users/winniengo/Desktop/CribMapper/node_modules/react-nouislider
+215 verbose validateInstall loading /Users/winniengo/Desktop/CribMapper/package.json for validation
+216 verbose stack Error: The package history@1.17.0 does not satisfy its siblings' peerDependencies requirements!
+216 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+216 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
+216 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+216 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+216 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+216 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+216 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+216 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+216 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+216 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+217 verbose cwd /Users/winniengo/Desktop/CribMapper
+218 error Darwin 14.5.0
+219 error argv "/usr/local/Cellar/node/4.2.1/bin/node" "/usr/local/bin/npm" "install" "--save" "react-nouislider"
+220 error node v4.2.1
+221 error npm  v2.14.7
+222 error code EPEERINVALID
+223 error peerinvalid The package history@1.17.0 does not satisfy its siblings' peerDependencies requirements!
+223 error peerinvalid Peer react-router@1.0.2 wants history@1.13.x
+224 verbose exit [ 1, true ]
