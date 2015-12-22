@@ -1,37 +1,36 @@
 var React = require('react'),
     ReactRouter = require('react-router'),
-    ImageCarousel = require('./ImageCarousel');
+    ImageCarousel = require('./ImageCarousel'),
+    ExploreNearby = require('./ExploreNearby');
 
 var Listing = React.createClass({
   render: function() {
-    var listingHeader = (
-      "$" + this.props.listing.rent + " - " +
-      this.props.listing.bedrooms + " Bed / " +
-      this.props.listing.bathrooms + " Bath");
+    var listing = this.props.listing;
+    var header = "$" + listing.rent + " - " + listing.bedrooms + " Bed / " + listing.bathrooms + " Bath";
 
     return (
       <div className="listing-show clearfix">
         <div className="listing-main">
-          <div className="listing-header">{listingHeader}</div>
-          <div className="listing-address">{this.props.listing.address}</div>
-          <ImageCarousel images={this.props.listing.images}/>
-          <div className="listing-description">{this.props.listing.description}</div>
-         !!!EXPLORE NEARBY MAP!!!
+          <div className="listing-header">{header}</div>
+          <div className="listing-address">{listing.address}</div>
+          <ImageCarousel images={listing.images}/>
+          <div className="listing-description">{listing.description}</div>
+          <ExploreNearby lat={listing.lat} lng={listing.lng}/>
        </div>
         <div className="listing-details">
           Details
           <ul>
             <li>
               <div className="header">Rent</div>
-              ${this.props.listing.rent}
+              ${listing.rent}
             </li>
             <li className="even">
               <div className="header">Bedrooms</div>
-              {this.props.listing.bedrooms}
+              {listing.bedrooms}
             </li>
             <li>
               <div className="header">Bathrooms</div>
-              {this.props.listing.bathrooms}
+              {listing.bathrooms}
             </li>
             <li className="even">
               <div className="header">Available</div>

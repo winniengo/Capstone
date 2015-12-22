@@ -31,7 +31,6 @@ var ListingShow = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log("listing mounted");
     this.listingListener = ListingStore.addListener(this._onChange);
     ApiUtil.fetchListing(this.props.params.listingId);
   },

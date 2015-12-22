@@ -33722,7 +33722,6 @@
 	  },
 	
 	  componentDidMount: function () {
-	    console.log("listing mounted");
 	    this.listingListener = ListingStore.addListener(this._onChange);
 	    ApiUtil.fetchListing(this.props.params.listingId);
 	  },
@@ -33755,13 +33754,15 @@
 
 	var React = __webpack_require__(1),
 	    ReactRouter = __webpack_require__(159),
-	    ImageCarousel = __webpack_require__(245);
+	    ImageCarousel = __webpack_require__(245),
+	    ExploreNearby = __webpack_require__(252);
 	
 	var Listing = React.createClass({
 	  displayName: 'Listing',
 	
 	  render: function () {
-	    var listingHeader = "$" + this.props.listing.rent + " - " + this.props.listing.bedrooms + " Bed / " + this.props.listing.bathrooms + " Bath";
+	    var listing = this.props.listing;
+	    var header = "$" + listing.rent + " - " + listing.bedrooms + " Bed / " + listing.bathrooms + " Bath";
 	
 	    return React.createElement(
 	      'div',
@@ -33772,20 +33773,20 @@
 	        React.createElement(
 	          'div',
 	          { className: 'listing-header' },
-	          listingHeader
+	          header
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'listing-address' },
-	          this.props.listing.address
+	          listing.address
 	        ),
-	        React.createElement(ImageCarousel, { images: this.props.listing.images }),
+	        React.createElement(ImageCarousel, { images: listing.images }),
 	        React.createElement(
 	          'div',
 	          { className: 'listing-description' },
-	          this.props.listing.description
+	          listing.description
 	        ),
-	        '!!!EXPLORE NEARBY MAP!!!'
+	        React.createElement(ExploreNearby, { lat: listing.lat, lng: listing.lng })
 	      ),
 	      React.createElement(
 	        'div',
@@ -33803,7 +33804,7 @@
 	              'Rent'
 	            ),
 	            '$',
-	            this.props.listing.rent
+	            listing.rent
 	          ),
 	          React.createElement(
 	            'li',
@@ -33813,7 +33814,7 @@
 	              { className: 'header' },
 	              'Bedrooms'
 	            ),
-	            this.props.listing.bedrooms
+	            listing.bedrooms
 	          ),
 	          React.createElement(
 	            'li',
@@ -33823,7 +33824,7 @@
 	              { className: 'header' },
 	              'Bathrooms'
 	            ),
-	            this.props.listing.bathrooms
+	            listing.bathrooms
 	          ),
 	          React.createElement(
 	            'li',
@@ -34906,6 +34907,50 @@
 	
 	}());
 
+
+/***/ },
+/* 252 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* globals google */
+	
+	var React = __webpack_require__(1),
+	    ReactDOM = __webpack_require__(158);
+	
+	var center = { lat: 37.776112, lng: -122.433113 };
+	
+	var ExploreNearby = React.createClass({
+	  displayName: 'ExploreNearby',
+	
+	  componentDidMount: function () {
+	    var map = ReactDOM.findDOMNode(this.refs.exploreNearby),
+	        options = {
+	      center: center,
+	      zoom: 13
+	    };
+	
+	    this.map = new google.maps.Map(map, options);
+	  },
+	
+	  componentDidUpdate: function () {
+	    var position = new google.maps.LatLng(this.props.lat, this.props.lng);
+	    this.map.setCenter(position);
+	    this.addMarker(position);
+	  },
+	
+	  addMarker: function (position) {
+	    this.marker = new google.maps.Marker({
+	      position: position,
+	      map: this.map
+	    });
+	  },
+	
+	  render: function () {
+	    return React.createElement('div', { className: 'listing-explore-nearby', ref: 'exploreNearby' });
+	  }
+	});
+	
+	module.exports = ExploreNearby;
 
 /***/ }
 /******/ ]);
