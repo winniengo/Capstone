@@ -36,6 +36,22 @@ var Listing = React.createClass({
               <div className="header">Available</div>
               Now
             </li>
+            <li>
+              <div className="header">Min. Lease</div>
+              12 Months
+            </li>
+            <li className="even">
+              <div className="header">Parking</div>
+              No
+            </li>
+            <li>
+              <div className="header">Deposit</div>
+              $5000
+            </li>
+            <li className="even">
+              <div className="header">Broker Fee</div>
+              None
+            </li>
           </ul>
         </div>
         <ExploreNearby lat={listing.lat} lng={listing.lng}/>

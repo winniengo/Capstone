@@ -33834,6 +33834,46 @@
 	              'Available'
 	            ),
 	            'Now'
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Min. Lease'
+	            ),
+	            '12 Months'
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Parking'
+	            ),
+	            'No'
+	          ),
+	          React.createElement(
+	            'li',
+	            null,
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Deposit'
+	            ),
+	            '$5000'
+	          ),
+	          React.createElement(
+	            'li',
+	            { className: 'even' },
+	            React.createElement(
+	              'div',
+	              { className: 'header' },
+	              'Broker Fee'
+	            ),
+	            'None'
 	          )
 	        )
 	      ),
