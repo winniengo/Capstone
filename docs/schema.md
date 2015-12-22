@@ -9,12 +9,6 @@ name            | string    | not null
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 
-## saved_listings
-column name     | data type | details
-----------------|-----------|-----------------------
-id              | integer   | not null, primary key
-user_id         | integer   | not null, foreign key (references users), indexed
-listing_id      | integer   | not null, foreign key (references listings), indexed
 
 ## listings
 column name     | data type | details
@@ -35,9 +29,15 @@ date_posted     | date      | not null, indexed
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-source_url      | string    | not null,
+source          | string    | not null,
 listing_id      | integer   | not null, foreign key (references listings), indexed
 
+<!-- ## saved_listings
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+user_id         | integer   | not null, foreign key (references users), indexed
+listing_id      | integer   | not null, foreign key (references listings), indexed
 
 ## saved_searches
 column name     | data type | details
@@ -87,4 +87,4 @@ pad_lister      | boolean   | not null
 apartment_search | boolean   | not null
 air_bnb          | boolean   | not null
 for_rent        | boolean   | not null
-others          | boolean   | not null
+others          | boolean   | not null -->

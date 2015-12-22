@@ -6,4 +6,5 @@ json.extract! @listing,
   :bedrooms,
   :bathrooms,
   :listing_type,
-  :date_posted
+  :date_posted,
+  :images

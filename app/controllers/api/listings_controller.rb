@@ -1,6 +1,6 @@
 class Api::ListingsController < ApplicationController
   def index
-    @listings = Listing.filter(params)
+    @listings = Listing.filter(params).includes(:images)
   end
 
   def show

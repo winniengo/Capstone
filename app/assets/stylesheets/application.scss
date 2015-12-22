@@ -14,6 +14,8 @@
  *= require_self
  */
 
+ // width: calc(100% - 340px);
+
  @import "bootstrap";
  @import "bootstrap-sprockets";
 
@@ -90,13 +92,21 @@
   float: left;
 }
 
+.listing-container {
+  text-align: center;
+}
+
 .listing-show {
   margin: 20px;
+  max-width: 90%;
+  display: inline-block;
+  overflow: auto;
+  text-align: left;
 }
 
 .listing-main {
   float:left;
-  width: calc(100% - 340px);
+  max-width: 700px;
   margin: 10px;
 }
 
@@ -113,9 +123,13 @@
   font-weight: 300;
 }
 
+.listing-image-carousel {
+  margin: 20px 0 20px 0;
+}
+
 .listing-details {
   margin: 10px;
-  float: right;
+  float: left;
   font-size: 16px;
   font-weight: 400;
   width: 300px;

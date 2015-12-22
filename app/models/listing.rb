@@ -10,12 +10,8 @@ class Listing < ActiveRecord::Base
   validates :lat, uniqueness: { scope: :lng }
   validates :address, :placeId, uniqueness: true
 
-  # def self.in_bounds(bounds)
-  #   self.where("lat < ?", bounds["northEast"]["lat"])
-  #       .where("lat > ?", bounds["southWest"]["lat"])
-  #       .where("lng > ?", bounds["southWest"]["lng"])
-  #       .where("lng < ?", bounds["northEast"]["lng"])
-  # end
+  has_many :images,
+    dependent: :destroy
 
   def self.filter(params)
     self.where("lat < ?", params["bounds"]["northEast"]["lat"])

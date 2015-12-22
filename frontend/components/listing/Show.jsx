@@ -49,7 +49,7 @@ var ListingShow = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className="listing-container">
         <Listing listing={this.state.listing}/>
       </div>
     );

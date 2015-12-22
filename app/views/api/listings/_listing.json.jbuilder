@@ -7,4 +7,5 @@ json.extract! listing,
   :rent,
   :bedrooms,
   :bathrooms,
-  :listing_type
+  :listing_type,
+  :images

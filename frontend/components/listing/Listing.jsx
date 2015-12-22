@@ -1,5 +1,6 @@
 var React = require('react'),
-    ReactRouter = require('react-router');
+    ReactRouter = require('react-router'),
+    ImageCarousel = require('./ImageCarousel');
 
 var Listing = React.createClass({
   render: function() {
@@ -7,13 +8,13 @@ var Listing = React.createClass({
       "$" + this.props.listing.rent + " - " +
       this.props.listing.bedrooms + " Bed / " +
       this.props.listing.bathrooms + " Bath");
-      console.log(listingHeader);
+
     return (
       <div className="listing-show clearfix">
         <div className="listing-main">
           <div className="listing-header">{listingHeader}</div>
           <div className="listing-address">{this.props.listing.address}</div>
-          !!!IMAGE SLIDESHOW!!!
+          <ImageCarousel images={this.props.listing.images}/>
           <div className="listing-description">{this.props.listing.description}</div>
          !!!EXPLORE NEARBY MAP!!!
        </div>
