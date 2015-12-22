@@ -25008,9 +25008,8 @@
 	    ApiUtil = __webpack_require__(219),
 	    ListingStore = __webpack_require__(239),
 	    FilterParamsStore = __webpack_require__(222),
-	    Filters = __webpack_require__(240),
 	    Map = __webpack_require__(211),
-	    ListingIndex = __webpack_require__(243);
+	    Filters = __webpack_require__(240);
 	
 	var Search = React.createClass({
 	  displayName: 'Search',
@@ -25060,18 +25059,10 @@
 	        listings: listings,
 	        onMarkerClick: this.handleMarkerClick
 	      }),
-	      React.createElement(
-	        'div',
-	        { className: 'half' },
-	        React.createElement(Filters, {
-	          listings: listings,
-	          filterParams: this.state.filterParams
-	        }),
-	        React.createElement(ListingIndex, {
-	          listings: listings,
-	          history: this.props.history
-	        })
-	      )
+	      React.createElement(Filters, {
+	        listings: listings,
+	        filterParams: this.state.filterParams
+	      })
 	    );
 	  }
 	});
@@ -31682,7 +31673,7 @@
 	  },
 	
 	  render: function () {
-	    var rentRange = "$" + this.props.filterParams.rent.min + " - " + this.props.filterParams.rent.max,
+	    var rentRange = "$" + this.props.filterParams.rent.min + " - " + this.props.filterParams.rent.max + "+",
 	        bedroomsRange = this.props.filterParams.bedrooms.min + " - " + this.props.filterParams.bedrooms.max + "+",
 	        bathroomsRange = this.props.filterParams.bathrooms.min + " - " + this.props.filterParams.bathrooms.max + "+",
 	        leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
@@ -31694,10 +31685,14 @@
 	      React.createElement(
 	        'div',
 	        { className: 'filter-label' },
-	        'Rent',
 	        React.createElement(
 	          'div',
-	          { className: 'filter-range', id: 'slider-snap-value-range' },
+	          { className: 'filter-header' },
+	          'Rent'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'filter-range' },
 	          rentRange
 	        )
 	      ),
@@ -31719,12 +31714,16 @@
 	      React.createElement(
 	        'div',
 	        { className: 'filter-label' },
-	        'Bedrooms'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'filter-range', id: 'slider-snap-value-range' },
-	        bedroomsRange
+	        React.createElement(
+	          'div',
+	          { className: 'filter-header' },
+	          'Bedrooms'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'filter-range' },
+	          bedroomsRange
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -31744,12 +31743,16 @@
 	      React.createElement(
 	        'div',
 	        { className: 'filter-label' },
-	        'Bathrooms'
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'filter-range', id: 'slider-snap-value-range' },
-	        bathroomsRange
+	        React.createElement(
+	          'div',
+	          { className: 'filter-header' },
+	          'Bathrooms'
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'filter-range' },
+	          bathroomsRange
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -31768,7 +31771,7 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'filter-label' },
+	        { className: 'filter-label filter-header' },
 	        'Types'
 	      ),
 	      React.createElement(
@@ -33681,77 +33684,8 @@
 	}));
 
 /***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    ListingIndexItem = __webpack_require__(244);
-	
-	var ListingIndex = React.createClass({
-	  displayName: 'ListingIndex',
-	
-	  handleItemClick: function (listing) {
-	    this.props.history.pushState(null, "listings/" + listing.id);
-	  },
-	
-	  render: function () {
-	    var handleItemClick = this.handleItemClick;
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'listing-index' },
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Listings'
-	      ),
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.props.listings.map(function (listing) {
-	          var onClick = handleItemClick.bind(null, listing);
-	
-	          return React.createElement(ListingIndexItem, {
-	            key: listing.id,
-	            onClick: onClick,
-	            listing: listing });
-	        })
-	      )
-	    );
-	  }
-	});
-	
-	module.exports = ListingIndex;
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    ReactRouter = __webpack_require__(159);
-	
-	var ListingIndexItem = React.createClass({
-	  displayName: 'ListingIndexItem',
-	
-	  mixins: [ReactRouter.history],
-	
-	  render: function () {
-	    var listing = this.props.listing;
-	
-	    return React.createElement(
-	      'div',
-	      { className: 'listing-index-item', onClick: this.props.onClick },
-	      listing.description,
-	      React.createElement('br', null),
-	      '$',
-	      listing.rent
-	    );
-	  }
-	});
-	
-	module.exports = ListingIndexItem;
-
-/***/ },
+/* 243 */,
+/* 244 */,
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 

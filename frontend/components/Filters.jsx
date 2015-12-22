@@ -36,7 +36,7 @@ var Filters = React.createClass({
   },
 
   render: function() {
-    var rentRange = "$" + this.props.filterParams.rent.min + " - " + this.props.filterParams.rent.max,
+    var rentRange = "$" + this.props.filterParams.rent.min + " - " + this.props.filterParams.rent.max + "+",
         bedroomsRange = this.props.filterParams.bedrooms.min + " - " + this.props.filterParams.bedrooms.max + "+",
         bathroomsRange = this.props.filterParams.bathrooms.min + " - " + this.props.filterParams.bathrooms.max + "+",
         leaseTypeChecked = this.props.filterParams.listing_type.lease ? "checked" : "",
@@ -44,10 +44,9 @@ var Filters = React.createClass({
 
     return (
       <div className="filter-container">
-        <div className="filter-label">Rent
-          <div className= "filter-range" id="slider-snap-value-range">
-            {rentRange}
-          </div>
+        <div className="filter-label">
+          <div className="filter-header">Rent</div>
+          <div className= "filter-range">{rentRange}</div>
         </div>
           <div className="filter-slider">
             <div className="noUi-target noUi-ltr noUi-horizontal noUi-background">
@@ -61,9 +60,9 @@ var Filters = React.createClass({
             </div>
           </div>
 
-          <div className="filter-label">Bedrooms</div>
-            <div className= "filter-range" id="slider-snap-value-range">
-              {bedroomsRange}
+          <div className="filter-label">
+              <div className="filter-header">Bedrooms</div>
+              <div className= "filter-range">{bedroomsRange}</div>
             </div>
             <div className="filter-slider">
               <div className="noUi-target noUi-ltr noUi-horizontal noUi-background">
@@ -77,10 +76,10 @@ var Filters = React.createClass({
               </div>
             </div>
 
-          <div className="filter-label">Bathrooms</div>
-            <div className= "filter-range" id="slider-snap-value-range">
-              {bathroomsRange}
-            </div>
+            <div className="filter-label">
+                <div className="filter-header">Bathrooms</div>
+                <div className= "filter-range">{bathroomsRange}</div>
+              </div>
             <div className="filter-slider">
               <div className="noUi-target noUi-ltr noUi-horizontal noUi-background">
                 <Nouislider
@@ -93,7 +92,7 @@ var Filters = React.createClass({
               </div>
             </div>
 
-          <div className="filter-label">Types</div>
+          <div className="filter-label filter-header">Types</div>
             <div className="filter-checkbox">
               {"Full Leases: "}
               <input

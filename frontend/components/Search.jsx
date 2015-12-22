@@ -2,9 +2,8 @@ var React = require('react'),
     ApiUtil = require('../util/api_util'),
     ListingStore = require('../stores/listing'),
     FilterParamsStore = require('../stores/filter_params'),
-    Filters = require('./Filters'),
     Map = require('./Map'),
-    ListingIndex =require('./listing/Index');
+    Filters = require('./Filters');
 
 var Search = React.createClass({
   contextTypes: {
@@ -51,16 +50,10 @@ var Search = React.createClass({
           listings={listings}
           onMarkerClick={this.handleMarkerClick}
           />
-        <div className="half">
-          <Filters
-            listings={listings}
-            filterParams={this.state.filterParams}
-            />
-          <ListingIndex
-            listings={listings}
-            history={this.props.history}
-            />
-        </div>
+        <Filters
+          listings={listings}
+          filterParams={this.state.filterParams}
+          />
       </div>
     )
   }
