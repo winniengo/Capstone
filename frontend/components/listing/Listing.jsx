@@ -15,8 +15,8 @@ var Listing = React.createClass({
           <div className="listing-address">{listing.address}</div>
           <ImageCarousel images={listing.images}/>
           <div className="listing-description">{listing.description}</div>
-          <ExploreNearby lat={listing.lat} lng={listing.lng}/>
-       </div>
+
+        </div>
         <div className="listing-details">
           Details
           <ul>
@@ -36,24 +36,9 @@ var Listing = React.createClass({
               <div className="header">Available</div>
               Now
             </li>
-            <li>
-              <div className="header">Min. Lease</div>
-              TODO
-            </li>
-            <li className="even">
-              <div className="header">Parking</div>
-              TODO
-            </li>
-            <li>
-              <div className="header">Deposit</div>
-              TODO
-            </li>
-            <li className="even">
-              <div className="header">Broker Fee</div>
-              TODO
-            </li>
           </ul>
         </div>
+        <ExploreNearby lat={listing.lat} lng={listing.lng}/>
       </div>
     );
   }

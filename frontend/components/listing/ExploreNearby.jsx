@@ -31,7 +31,10 @@ var ExploreNearby = React.createClass({
 
   render: function() {
     return(
-      <div className="listing-explore-nearby" ref="exploreNearby"/>
+      <div className="listing-explore-nearby">
+        Explore
+        <div className="listing-map" ref="exploreNearby"/>
+      </div>
     );
   }
 });

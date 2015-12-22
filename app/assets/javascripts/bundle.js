@@ -33785,8 +33785,7 @@
 	          'div',
 	          { className: 'listing-description' },
 	          listing.description
-	        ),
-	        React.createElement(ExploreNearby, { lat: listing.lat, lng: listing.lng })
+	        )
 	      ),
 	      React.createElement(
 	        'div',
@@ -33835,49 +33834,10 @@
 	              'Available'
 	            ),
 	            'Now'
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Min. Lease'
-	            ),
-	            'TODO'
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Parking'
-	            ),
-	            'TODO'
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Deposit'
-	            ),
-	            'TODO'
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Broker Fee'
-	            ),
-	            'TODO'
 	          )
 	        )
-	      )
+	      ),
+	      React.createElement(ExploreNearby, { lat: listing.lat, lng: listing.lng })
 	    );
 	  }
 	});
@@ -34946,7 +34906,12 @@
 	  },
 	
 	  render: function () {
-	    return React.createElement('div', { className: 'listing-explore-nearby', ref: 'exploreNearby' });
+	    return React.createElement(
+	      'div',
+	      { className: 'listing-explore-nearby' },
+	      'Explore',
+	      React.createElement('div', { className: 'listing-map', ref: 'exploreNearby' })
+	    );
 	  }
 	});
 	
