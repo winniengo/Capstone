@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221224454) do
+ActiveRecord::Schema.define(version: 20151222024653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20151221224454) do
     t.string   "address",      null: false
     t.float    "lat",          null: false
     t.float    "lng",          null: false
-    t.string   "placeId",      null: false
     t.float    "rent",         null: false
     t.integer  "bedrooms",     null: false
     t.float    "bathrooms",    null: false
@@ -43,7 +42,6 @@ ActiveRecord::Schema.define(version: 20151221224454) do
   add_index "listings", ["address"], name: "index_listings_on_address", unique: true, using: :btree
   add_index "listings", ["date_posted"], name: "index_listings_on_date_posted", using: :btree
   add_index "listings", ["lat", "lng"], name: "index_listings_on_lat_and_lng", unique: true, using: :btree
-  add_index "listings", ["placeId"], name: "index_listings_on_placeId", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false

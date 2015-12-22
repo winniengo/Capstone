@@ -16,54 +16,123 @@ mireille = User.create({
     password: 'password'
   })
 
-l1 = Listing.create!({address: "1907 Golden Gate Ave, San Francisco, CA 94115, USA",
+l1 = Listing.create!({
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
     lat: 37.778104,
     lng: -122.442096,
-    placeId: "EjIxOTA3IEdvbGRlbiBHYXRlIEF2ZSwgU2FuIEZyYW5jaXNjbywgQ0EgOTQxMTUsIFVTQQ",
     rent: 7000.00,
     bedrooms: 7,
     bathrooms: 3,
-    description: "frat chateau",
+    description: Faker::Lorem.paragraph,
     listing_type: "lease",
     date_posted: '2015-12-1'
   })
 
 l2 = Listing.create({
-    address: '1558 Newcomb Ave, San Francisco, CA 94124, USA',
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
     lat: 37.734989,
     lng: -122.388824,
-    placeId: 'ChIJgejW6g9_j4ARdZftO09PuoE',
     rent: 4000.00,
     bedrooms: 3,
     bathrooms: 1,
-    description: "bae's house",
+    description: Faker::Lorem.paragraph,
     listing_type: 'lease',
     date_posted: '2015-12-10'
   })
 
 l3 = Listing.create({
-    address: '642 Jones St, San Francisco, CA 94102, USA',
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
     lat: 37.787364,
     lng: -122.413031,
-    placeId: 'ChIJ35kY4ZGAhYARlAv4LvlND3g',
     rent: 2000.00,
     bedrooms: 1,
     bathrooms: 1,
-    description: "schmellen's house",
+    description: Faker::Lorem.paragraph,
     listing_type: 'lease',
     date_posted: '2015-12-11'
   })
 
 l4 = Listing.create({
-    address: '734 Bush St, San Francisco, CA 94108, USA',
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
     lat: 37.790341,
-    placeId: 'ChIJBQiuNoyAhYARiXkkAgbDbHo',
     lng: -122.409499,
     rent: 3000.00,
     bedrooms: 2,
     bathrooms: 1,
-    description: "anna's house",
+    description: Faker::Lorem.paragraph,
     listing_type: 'lease',
+    date_posted: '2015-12-12'
+  })
+
+  l5 = Listing.create({
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
+    lat: 37.792542,
+    lng: -122.440472,
+    rent: 9500.00,
+    bedrooms: 5,
+    bathrooms: 3.5,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'lease',
+    date_posted: '2015-12-12'
+  })
+
+  l6 = Listing.create({
+    address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
+    lat: 37.801263,
+    lng: -122.433114,
+    rent: 3000.00,
+    bedrooms: 1,
+    bathrooms: 1,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'lease',
+    date_posted: '2015-12-12'
+  })
+
+  l7 = Listing.create({
+    address: Faker::Address.street_address + ', Oakland, CA 94606, USA',
+    lat: 37.801698,
+    lng: -122.252343,
+    rent: 2000.00,
+    bedrooms: 2,
+    bathrooms: 2,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'lease',
+    date_posted: '2015-12-12'
+  })
+
+  l8 = Listing.create({
+    address: Faker::Address.street_address + ', Piedmont, CA 94620, USA',
+    lat: 37.827783,
+    lng: -122.240446,
+    rent: 6500.00,
+    bedrooms: 4,
+    bathrooms: 2.5,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'sublet',
+    date_posted: '2015-12-12'
+  })
+
+  l9 = Listing.create({
+    address: Faker::Address.street_address + ', Berkeley, CA 94703, USA',
+    lat: 37.855967,
+    lng: -122.294102,
+    rent: 3000.00,
+    bedrooms: 2,
+    bathrooms: 1,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'sublet',
+    date_posted: '2015-12-12'
+  })
+
+  l10 = Listing.create({
+    address: Faker::Address.street_address + ', Piedmont, CA 94620, USA',
+    lat: 37.848429,
+    lng: -122.240249,
+    rent: 10000.00,
+    bedrooms: 8,
+    bathrooms: 5.5,
+    description: Faker::Lorem.paragraph,
+    listing_type: 'sublet',
     date_posted: '2015-12-12'
   })
 
