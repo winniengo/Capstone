@@ -39,6 +39,7 @@ var Search = React.createClass({
   },
 
   handleMarkerClick: function(listing) {
+    // debugger
     this.props.history.pushState(null, "listings/" + listing.id);
   },
 

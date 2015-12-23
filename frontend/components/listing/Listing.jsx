@@ -1,7 +1,8 @@
 var React = require('react'),
     ReactRouter = require('react-router'),
     ImageCarousel = require('./ImageCarousel'),
-    ExploreNearby = require('./ExploreNearby');
+    ExploreNearby = require('./ExploreNearby'),
+    Details = require('./Details');
 
 var Listing = React.createClass({
   render: function() {
@@ -15,45 +16,8 @@ var Listing = React.createClass({
           <div className="listing-address">{listing.address}</div>
           <ImageCarousel images={listing.images}/>
           <div className="listing-description">{listing.description}</div>
-
         </div>
-        <div className="listing-details">
-          Details
-          <ul>
-            <li>
-              <div className="header">Rent</div>
-              ${listing.rent}
-            </li>
-            <li className="even">
-              <div className="header">Bedrooms</div>
-              {listing.bedrooms}
-            </li>
-            <li>
-              <div className="header">Bathrooms</div>
-              {listing.bathrooms}
-            </li>
-            <li className="even">
-              <div className="header">Available</div>
-              Now
-            </li>
-            <li>
-              <div className="header">Min. Lease</div>
-              12 Months
-            </li>
-            <li className="even">
-              <div className="header">Parking</div>
-              No
-            </li>
-            <li>
-              <div className="header">Deposit</div>
-              $5000
-            </li>
-            <li className="even">
-              <div className="header">Broker Fee</div>
-              None
-            </li>
-          </ul>
-        </div>
+        <Details listing={listing}/>
         <ExploreNearby lat={listing.lat} lng={listing.lng}/>
       </div>
     );

@@ -25047,6 +25047,7 @@
 	  },
 	
 	  handleMarkerClick: function (listing) {
+	    // debugger
 	    this.props.history.pushState(null, "listings/" + listing.id);
 	  },
 	
@@ -33756,7 +33757,8 @@
 	var React = __webpack_require__(1),
 	    ReactRouter = __webpack_require__(159),
 	    ImageCarousel = __webpack_require__(245),
-	    ExploreNearby = __webpack_require__(252);
+	    ExploreNearby = __webpack_require__(252),
+	    Details = __webpack_require__(253);
 	
 	var Listing = React.createClass({
 	  displayName: 'Listing',
@@ -33788,96 +33790,7 @@
 	          listing.description
 	        )
 	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'listing-details' },
-	        'Details',
-	        React.createElement(
-	          'ul',
-	          null,
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Rent'
-	            ),
-	            '$',
-	            listing.rent
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Bedrooms'
-	            ),
-	            listing.bedrooms
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Bathrooms'
-	            ),
-	            listing.bathrooms
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Available'
-	            ),
-	            'Now'
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Min. Lease'
-	            ),
-	            '12 Months'
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Parking'
-	            ),
-	            'No'
-	          ),
-	          React.createElement(
-	            'li',
-	            null,
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Deposit'
-	            ),
-	            '$5000'
-	          ),
-	          React.createElement(
-	            'li',
-	            { className: 'even' },
-	            React.createElement(
-	              'div',
-	              { className: 'header' },
-	              'Broker Fee'
-	            ),
-	            'None'
-	          )
-	        )
-	      ),
+	      React.createElement(Details, { listing: listing }),
 	      React.createElement(ExploreNearby, { lat: listing.lat, lng: listing.lng })
 	    );
 	  }
@@ -34957,6 +34870,138 @@
 	});
 	
 	module.exports = ExploreNearby;
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Details = React.createClass({
+	  displayName: "Details",
+	
+	  render: function () {
+	    var listing = this.props.listing;
+	
+	    var parking = listing.parking ? "Garage" : "No";
+	    var fee = listing.fee ? "Yes" : "No";
+	    var pets;
+	    if (listing.cats && listing.dogs) {
+	      pets = "Both";
+	    } else if (listing.cats) {
+	      pets = "Cats Only";
+	    } else if (listing.dogs) {
+	      pets = "Dogs Only";
+	    } else {
+	      pets = "Neither";
+	    }
+	
+	    return React.createElement(
+	      "div",
+	      { className: "listing-details" },
+	      "Details",
+	      React.createElement(
+	        "ul",
+	        null,
+	        React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Rent"
+	          ),
+	          "$",
+	          listing.rent
+	        ),
+	        React.createElement(
+	          "li",
+	          { className: "even" },
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Bedrooms"
+	          ),
+	          listing.bedrooms
+	        ),
+	        React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Bathrooms"
+	          ),
+	          listing.bathrooms
+	        ),
+	        React.createElement(
+	          "li",
+	          { className: "even" },
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Available"
+	          ),
+	          "Now"
+	        ),
+	        React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Min. Lease"
+	          ),
+	          listing.min_lease,
+	          " Months"
+	        ),
+	        React.createElement(
+	          "li",
+	          { className: "even" },
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Deposit"
+	          ),
+	          "$",
+	          listing.deposit
+	        ),
+	        React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Broker Fee?"
+	          ),
+	          fee
+	        ),
+	        React.createElement(
+	          "li",
+	          { className: "even" },
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Parking?"
+	          ),
+	          parking
+	        ),
+	        React.createElement(
+	          "li",
+	          null,
+	          React.createElement(
+	            "div",
+	            { className: "header" },
+	            "Cats/Dogs Allowed?"
+	          ),
+	          pets
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Details;
 
 /***/ }
 /******/ ]);
