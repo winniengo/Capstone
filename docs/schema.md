@@ -17,12 +17,18 @@ id              | integer   | not null, primary key
 address         | string    | not null,
 lat             | float     | not null
 lng             | float     | not null
-placeId         | string    | not null
-rent            | float     | not null
+rent            | integer   | not null
 bedrooms        | integer   | not null
 bathrooms       | float     | not null
 description     | string    | not null
 listing_type    | string    | not null
+min_lease       | integer   | not null
+deposit         | integer   | not null
+fee             | boolean   | default false
+parking         | boolean   | default false
+cat             | boolean   | default false
+dog             | boolean   | default false
+contact_id      | integer   | not null, foreign key (references contacts), indexed
 date_posted     | date      | not null, indexed
 
 ## images
@@ -31,6 +37,15 @@ column name     | data type | details
 id              | integer   | not null, primary key
 source          | string    | not null,
 listing_id      | integer   | not null, foreign key (references listings), indexed
+
+## contacts
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+email           | string    | not null, indexed, unique
+phone           | string    | not null
+name            | string    |
+verified        | boolean   | default false
 
 <!-- ## saved_listings
 column name     | data type | details

@@ -1,17 +1,21 @@
 class Listing < ActiveRecord::Base
   validates :address, :lat, :lng, presence: true
   validates :rent, :bedrooms, :bathrooms, :description, :listing_type, :date_posted, presence: true
+  validates :min_lease, :deposit, :fee, :parking, :cats, :dogs, :contact_id, presence: true
 
-  validates :lat, :lng, :rent, :bathrooms, numericality: true
-  validates :bedrooms, numericality: { only_integer: true }
+  validates :lat, :lng, :bathrooms, numericality: true
+  validates :rent, :bedrooms, :min_lease, :deposit, numericality: { only_integer: true }
 
   validates :listing_type, inclusion: { in: ['lease', 'sublet'] }
 
   validates :lat, uniqueness: { scope: :lng }
   validates :address, uniqueness: true
 
+  belongs_to :contact
+
   has_many :images,
     dependent: :destroy
+
 
   def self.filter(params)
     self.where("lat < ?", params["bounds"]["northEast"]["lat"])

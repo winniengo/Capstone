@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222024653) do
+ActiveRecord::Schema.define(version: 20151223182431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "email",                      null: false
+    t.string   "phone",                      null: false
+    t.string   "name"
+    t.boolean  "verified",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "contacts", ["email"], name: "index_contacts_on_email", unique: true, using: :btree
 
   create_table "images", force: :cascade do |t|
     t.integer  "listing_id", null: false
@@ -26,20 +37,28 @@ ActiveRecord::Schema.define(version: 20151222024653) do
   add_index "images", ["listing_id"], name: "index_images_on_listing_id", using: :btree
 
   create_table "listings", force: :cascade do |t|
-    t.string   "address",      null: false
-    t.float    "lat",          null: false
-    t.float    "lng",          null: false
-    t.float    "rent",         null: false
-    t.integer  "bedrooms",     null: false
-    t.float    "bathrooms",    null: false
-    t.string   "description",  null: false
-    t.string   "listing_type", null: false
-    t.date     "date_posted",  null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "address",                      null: false
+    t.float    "lat",                          null: false
+    t.float    "lng",                          null: false
+    t.integer  "rent",                         null: false
+    t.integer  "bedrooms",                     null: false
+    t.float    "bathrooms",                    null: false
+    t.string   "description",                  null: false
+    t.string   "listing_type",                 null: false
+    t.date     "date_posted",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "min_lease",                    null: false
+    t.integer  "deposit",                      null: false
+    t.boolean  "fee",          default: false
+    t.boolean  "parking",      default: false
+    t.boolean  "cats",         default: false
+    t.boolean  "dogs",         default: false
+    t.integer  "contact_id",                   null: false
   end
 
   add_index "listings", ["address"], name: "index_listings_on_address", unique: true, using: :btree
+  add_index "listings", ["contact_id"], name: "index_listings_on_contact_id", using: :btree
   add_index "listings", ["date_posted"], name: "index_listings_on_date_posted", using: :btree
   add_index "listings", ["lat", "lng"], name: "index_listings_on_lat_and_lng", unique: true, using: :btree
 

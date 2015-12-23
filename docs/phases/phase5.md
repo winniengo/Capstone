@@ -20,5 +20,7 @@
 
 ## Gems/Libraries
 * [nuka-carousel][nuka-carousel]
+* [react-images][react-images]
 
 [nuka-carousel]: https://www.npmjs.com/package/nuka-carousel
+[react-images]: https://www.npmjs.com/package/react-images
