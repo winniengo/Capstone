@@ -19,6 +19,7 @@ var Search = React.createClass({
 
   _listingsChanged: function() {
     this.setState({listings: ListingStore.all()});
+    // console.log(this.state.listings);
   },
 
   _filterParamsChanged: function() {

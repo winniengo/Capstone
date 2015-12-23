@@ -1,7 +1,7 @@
 class Listing < ActiveRecord::Base
   validates :address, :lat, :lng, presence: true
   validates :rent, :bedrooms, :bathrooms, :description, :listing_type, :date_posted, presence: true
-  validates :min_lease, :deposit, :fee, :parking, :cats, :dogs, :contact_id, presence: true
+  validates :min_lease, :deposit, :contact_id, presence: true
 
   validates :lat, :lng, :bathrooms, numericality: true
   validates :rent, :bedrooms, :min_lease, :deposit, numericality: { only_integer: true }
@@ -15,7 +15,6 @@ class Listing < ActiveRecord::Base
 
   has_many :images,
     dependent: :destroy
-
 
   def self.filter(params)
     self.where("lat < ?", params["bounds"]["northEast"]["lat"])

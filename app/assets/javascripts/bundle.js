@@ -25027,6 +25027,7 @@
 	
 	  _listingsChanged: function () {
 	    this.setState({ listings: ListingStore.all() });
+	    // console.log(this.state.listings);
 	  },
 	
 	  _filterParamsChanged: function () {
@@ -25079,7 +25080,7 @@
 	var ApiUtil = {
 	  fetchListings: function () {
 	    var params = FilterParamsStore.params();
-	
+	    // console.log(params);
 	    $.get('api/listings', params, function (listings) {
 	      ApiActions.receiveAllListings(listings);
 	    });

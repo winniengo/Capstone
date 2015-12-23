@@ -46,7 +46,7 @@ c4 = Contact.create({
   })
 
 ###############################################################
-l1 = Listing.create!({
+l1 = Listing.create({
   address: Faker::Address.street_address + ', San Francisco, CA 94108, USA',
   lat: 37.778104,
   lng: -122.442096,
