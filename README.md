@@ -71,6 +71,14 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 <!-- [Details][phase-six] -->
 
 ### Bonus Features (TBD)
+- Toolitips for markings instead of directly taking you to page (less adrupt)
+- Mini gallery for photos
+- Text edit filter params
+- Contact
+- Reset filters
+- Padmapper Bar
+- Restrict Map
+- Missing home button for login
 - Listing: Sublets, Min. Lease, Parking, Deposit, Broker Fee
 - Additional filter params
 - Aggregate data from source sites and populate listings onto map
