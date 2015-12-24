@@ -91,3 +91,5 @@ CribMapper is a fullstack web application inspired by [PadMapper][padmapper] and
 [phase-five]: ./docs/phases/phase5.md
 [phase-six]: ./docs/phases/phase6.md
 [crashmate]: https://github.com/therealzac/Crashmate
+
+[react-slick]: https://github.com/akiran/react-slick

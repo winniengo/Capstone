@@ -33,8 +33,6 @@
     "react": "^0.14.2",
     "react-addons-linked-state-mixin": "^0.14.2",
     "react-dom": "^0.14.2",
-    "react-image-gallery": "^0.5.2",
-    "react-images": "^0.2.1",
     "react-nouislider": "^1.6.0",
     "react-router": "^1.0.0-rc4",
     "webpack": "^1.12.2"
