@@ -1,19 +1,20 @@
 <div id="navbar">
+  <ul>
+    <li><img src="http://res.cloudinary.com/dbgp4ftst/image/upload/c_scale,h_30/v1450984269/logo_lpmme1.png"></li>
+    <li class="app-header">Cribmapper</li>
 
-  <% if current_user %>
-  <ul>
-    <li class="greeting">
+    <% if current_user %>
+      <li class="align-right">
+        <a href='/session' rel="nofollow" data-method="delete">Sign Out</a></li>
+      <li class="align-right">
+        <a href="/">Home</a></li>
+      <li class="align-right greeting">
         Hello, <%= current_user.name %>
-    </li>
-    <li class="align-right">
-      <a href='/session' rel="nofollow" data-method="delete">Sign Out</a>
-    </li>
+      </li>
+    <% else %>
+      <li class="align-right"><a href="/users/new">Register</a></li>
+      <li class="align-right"><a href="/session/new">Sign In</a></li>
+      <li class="align-right"><a href="/">Home</a></li>
+    <% end %>
   </ul>
-  <% else %>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/session/new">Sign In</a></li>
-    <li><a href="/users/new">Register</a></li>
-  </ul>
-  <% end %>
 </div>

@@ -24440,15 +24440,6 @@
 	    return React.createElement(
 	      "div",
 	      { className: "app" },
-	      React.createElement(
-	        "header",
-	        null,
-	        React.createElement(
-	          "h1",
-	          null,
-	          "CribMapper"
-	        )
-	      ),
 	      this.props.children
 	    );
 	  }
@@ -24484,23 +24475,13 @@
 	    var map = ReactDOM.findDOMNode(this.refs.map),
 	        options = {
 	      center: mapCenter,
-	      zoom: 11
+	      zoom: 12
 	    };
 	
 	    this.map = new google.maps.Map(map, options);
 	    this.geocoder = new google.maps.Geocoder();
-	    this.infoWindow = new google.maps.InfoWindow();
 	    this.registerListener();
 	    this.markers = [];
-	
-	    // center on United States
-	    // var geocoder = new google.maps.Geocoder();
-	    // geocoder.geocode({'address': 'US'}, function(results, status) {
-	    //   var northEast = results[0].geometry.viewport.getNorthEast();
-	    //   var southWest = results[0].geometry.viewport.getSouthWest();
-	    //
-	    //   this.map.fitBounds(results[0].geometry.viewport);
-	    // }.bind(this));
 	  },
 	
 	  componentDidUpdate: function () {

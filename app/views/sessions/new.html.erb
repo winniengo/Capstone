@@ -1,22 +1,33 @@
+<div id="navbar">
+  <ul>
+    <li><img src="http://res.cloudinary.com/dbgp4ftst/image/upload/c_scale,h_30/v1450984269/logo_lpmme1.png"></li>
+    <li class="app-header">Cribmapper</li>
+    <li class="align-right"><a href="/users/new">Register</a></li>
+    <li class="align-right"><a href="/">Home</a></li>
+  </ul>
+</div>
+
+
 <div class="app">
   <div class="user-container">
-    <img src="http://res.cloudinary.com/dbgp4ftst/image/upload/v1450978526/logo_kox1si.png">
+    <img class="user-image" src="http://res.cloudinary.com/dbgp4ftst/image/upload/c_scale,h_90/v1450978526/logo_kox1si.png">
     <div class="user-header">Sign in to Cribmapper</div>
 
-    <form action="<%= session_url %>" method="post">
-        <%= render "shared/form_auth_token" %>
+    <div class="user-form">
+      <%= render "shared/errors" %>
+      <form action="<%= session_url %>" method="post">
+          <%= render "shared/form_auth_token" %>
 
-        <label>Email
-          <input type="text" name="user[email]" placeholder="Email address">
-        </label>
-        <br>
+          <label>Email</br>
+            <input type="text" name="user[email]">
+          </label>
 
-        <label>Password
-          <input type="password" name="user[password]">
-        </label>
-        <br>
+          <label>Password<br>
+            <input type="password" name="user[password]">
+          </label>
 
-        <input type="submit" value="Sign In">
-    </form>
+          <input class="button" type="submit" value="Sign In">
+      </form>
+    </div>
   </div>
 </div>
