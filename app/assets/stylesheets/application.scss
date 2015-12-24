@@ -107,12 +107,12 @@
   padding-right: 8px;
 }
 
-/*************************************/
 .listing-index {
   width: 200px;
   float: left;
 }
 
+/*************************************/
 .listing-container {
   text-align: center;
 }
@@ -128,7 +128,7 @@
 .listing-main {
   float:left;
   max-width: 700px;
-  margin: 10px;
+  margin-right: 10px;
 }
 
 .listing-header {
@@ -153,6 +153,7 @@
   font-size: 16px;
   font-weight: 400;
   width: 100%;
+  margin-top: 10px;
 }
 
 .listing-map{
@@ -161,12 +162,16 @@
   margin: 10px 0;
 }
 
-.listing-details {
-  margin: 10px;
+.listing-sidebar {
+  width: 300px;
   float: left;
+  margin: 10px;
+}
+
+.listing-details {
   font-size: 16px;
   font-weight: 400;
-  width: 300px;
+  width: 100%;
 }
 
 .listing-details ul {
@@ -191,6 +196,30 @@
   display: inline;
   float: left;
   font-weight: 400;
+}
+
+.listing-contact {
+  width: 100%;
+  display: inline-block;
+  overflow: auto;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.listing-contact-avator {
+  width: 100px;
+  float:left;
+  margin-right: 10px;
+}
+
+.listing-contact-info {
+  float:left;
+}
+
+.listing-contact-header {
+  font-weight: 400;
+  margin: 5px 0;
 }
 
 /*************************************/

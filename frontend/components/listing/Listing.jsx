@@ -2,7 +2,8 @@ var React = require('react'),
     ReactRouter = require('react-router'),
     ImageCarousel = require('./ImageCarousel'),
     ExploreNearby = require('./ExploreNearby'),
-    Details = require('./Details');
+    Details = require('./Details'),
+    Contact = require('./Contact');
 
 var Listing = React.createClass({
   render: function() {
@@ -17,7 +18,10 @@ var Listing = React.createClass({
           <ImageCarousel images={listing.images}/>
           <div className="listing-description">{listing.description}</div>
         </div>
-        <Details listing={listing}/>
+        <div className="listing-sidebar">
+          <Details listing={listing}/>
+          <Contact contact={listing.contact}/>
+        </div>
         <ExploreNearby lat={listing.lat} lng={listing.lng}/>
       </div>
     );

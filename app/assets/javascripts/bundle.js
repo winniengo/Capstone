@@ -33758,7 +33758,8 @@
 	    ReactRouter = __webpack_require__(159),
 	    ImageCarousel = __webpack_require__(245),
 	    ExploreNearby = __webpack_require__(252),
-	    Details = __webpack_require__(253);
+	    Details = __webpack_require__(253),
+	    Contact = __webpack_require__(254);
 	
 	var Listing = React.createClass({
 	  displayName: 'Listing',
@@ -33790,7 +33791,12 @@
 	          listing.description
 	        )
 	      ),
-	      React.createElement(Details, { listing: listing }),
+	      React.createElement(
+	        'div',
+	        { className: 'listing-sidebar' },
+	        React.createElement(Details, { listing: listing }),
+	        React.createElement(Contact, { contact: listing.contact })
+	      ),
 	      React.createElement(ExploreNearby, { lat: listing.lat, lng: listing.lng })
 	    );
 	  }
@@ -35002,6 +35008,50 @@
 	});
 	
 	module.exports = Details;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	var Contact = React.createClass({
+	  displayName: "Contact",
+	
+	  render: function () {
+	    var contact = this.props.contact ? this.props.contact : { name: "", phone: "", email: "" };
+	    return React.createElement(
+	      "div",
+	      { className: "listing-contact" },
+	      React.createElement(
+	        "div",
+	        { className: "listing-contact-avator" },
+	        React.createElement("img", { src: "http://res.cloudinary.com/dbgp4ftst/image/upload/c_scale,w_95/v1450914442/avatar_sees5m.png" })
+	      ),
+	      React.createElement(
+	        "div",
+	        { className: "listing-contact-info" },
+	        React.createElement(
+	          "div",
+	          { className: "listing-contact-header" },
+	          "Contact",
+	          React.createElement("br", null)
+	        ),
+	        contact.name,
+	        " ",
+	        React.createElement("br", null),
+	        contact.phone,
+	        " ",
+	        React.createElement("br", null),
+	        contact.email,
+	        " ",
+	        React.createElement("br", null)
+	      )
+	    );
+	  }
+	});
+	
+	module.exports = Contact;
 
 /***/ }
 /******/ ]);
